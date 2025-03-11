@@ -126,7 +126,7 @@
                     <span class="pq-copyright">
                         Copyright &copy; {{date('Y')}} Quick-Step Flooring Kenya - Decomagna Limited
                         . All Rights Reserved | Powered by
-                        <a href="https://designekta.com/" target="_blank" class="link">Designekta studios</a> | <a href="#" target="_blank" class="link">Sitemaps</a>
+                        <a href="https://designekta.com/" target="_blank" class="link">Designekta studios</a> | <a href="{{url('/')}}/sitemap.html" target="_blank" class="link">Sitemaps</a>
                     </span>
                     </div>
                 </div>
