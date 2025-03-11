@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://decomagna.com/</loc>
+  <lastmod>2024-03-27T13:38:10+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://decomagna.com/products/original-laminate-flooring</loc>
+  <lastmod>2024-03-27T13:38:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://decomagna.com/products/explore/elora-cabinets-and-doors</loc>
+  <lastmod>2024-03-27T13:38:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://decomagna.com/products/explore/quick-step-original-staircase</loc>
+  <lastmod>2024-03-27T13:38:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://decomagna.com/contact-us</loc>
+  <lastmod>2024-03-27T13:38:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://decomagna.com/uploads/files/QS-Laminate-Brochure-2016-Z2-english.pdf</loc>
+  <lastmod>2024-03-27T13:15:35+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://decomagna.com/portfolio/wadi-degla-clubs</loc>
+  <lastmod>2024-03-27T13:38:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://decomagna.com/portfolio/the-design-gallery</loc>
+  <lastmod>2024-03-27T13:38:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://decomagna.com/portfolio/karen-country-club</loc>
+  <lastmod>2024-03-27T13:38:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://decomagna.com/portfolio/novo-nordisk</loc>
+  <lastmod>2024-03-27T13:38:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://decomagna.com/portfolio/bamboo</loc>
+  <lastmod>2024-03-27T13:38:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://decomagna.com/products/color/original-laminate-flooring/Black</loc>
+  <lastmod>2024-03-27T13:38:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://decomagna.com/products/color/original-laminate-flooring/Brown</loc>
+  <lastmod>2024-03-27T13:38:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://decomagna.com/products/color/original-laminate-flooring/Gold</loc>
+  <lastmod>2024-03-27T13:38:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://decomagna.com/products/color/original-laminate-flooring/Gray</loc>
+  <lastmod>2024-03-27T13:38:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://decomagna.com/products/color/original-laminate-flooring/Red</loc>
+  <lastmod>2024-03-27T13:38:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://decomagna.com/products/color/original-laminate-flooring/White</loc>
+  <lastmod>2024-03-27T13:38:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://decomagna.com/clients</loc>
+  <lastmod>2024-03-27T13:38:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://decomagna.com/blogs/home-transformation-ideas-how-the-right-floor-can-change-a-house-into-a-home</loc>
+  <lastmod>2024-03-27T13:38:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://decomagna.com/blogs/we-won-the-first-prize-at-the-kicc-kenya-homes-expo-again</loc>
+  <lastmod>2024-03-27T13:38:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://decomagna.com/blogs/quick-step-question-answer-sheet</loc>
+  <lastmod>2024-03-27T13:38:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://decomagna.com/portfolio</loc>
+  <lastmod>2024-03-27T13:38:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://decomagna.com/products/elora-cabinets-and-doors</loc>
+  <lastmod>2024-03-27T13:38:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://decomagna.com/products/quick-step-original-staircase</loc>
+  <lastmod>2024-03-27T13:38:10+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://decomagna.com/products/explore/original-laminate-flooring</loc>
+  <lastmod>2024-03-27T13:38:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://decomagna.com/product/quick-step-laminate-impressive-1848-classic-oak-natural</loc>
+  <lastmod>2024-03-27T13:38:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://decomagna.com/product/quick-step-laminate-flooring-endurance-burley-oak-040</loc>
+  <lastmod>2024-03-27T13:38:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://decomagna.com/product/quick-step-laminate-flooring-endurance-325-bordeaux</loc>
+  <lastmod>2024-03-27T13:38:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://decomagna.com/product/quick-step-laminate-endurance-328-barn-oak</loc>
+  <lastmod>2024-03-27T13:38:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://decomagna.com/product/quick-step-laminate-endurance-venetian-oak-086</loc>
+  <lastmod>2024-03-27T13:38:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://decomagna.com/product/quick-step-laminate-loc-floor-merbau-070</loc>
+  <lastmod>2024-03-27T13:38:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://decomagna.com/product/quick-step-laminate-endurance-017-grey</loc>
+  <lastmod>2024-03-27T13:38:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://decomagna.com/product/quick-step-laminate-endurance-crack-light-brown-902</loc>
+  <lastmod>2024-03-27T13:38:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://decomagna.com/product/quick-step-laminate-endurance-544-select-walnut</loc>
+  <lastmod>2024-03-27T13:38:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://decomagna.com/product/quick-step-loc-floor-374-classic-oak-natural</loc>
+  <lastmod>2024-03-27T13:38:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://decomagna.com/product/quick-step-laminate-impressive-burned-planks-1862</loc>
+  <lastmod>2024-03-27T13:38:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://decomagna.com/product/quick-step-laminate-creo-virginia-oak-natural-3182</loc>
+  <lastmod>2024-03-27T13:38:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://decomagna.com/product/quick-step-laminate-flooring-loc-floor-grey-pebble-elm-368</loc>
+  <lastmod>2024-03-27T13:38:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://decomagna.com/product/quick-step-laminate-endurance-natural-varnish-oak-583</loc>
+  <lastmod>2024-03-27T13:38:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://decomagna.com/product/quick-step-laminate-cayote-oak-endurance-064</loc>
+  <lastmod>2024-03-27T13:38:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://decomagna.com/product/quick-step-laminate-endurance-white-oiled-oak-619</loc>
+  <lastmod>2024-03-27T13:38:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://decomagna.com/product/quick-step-laminate-flooring-country-oak-fermette-loc-290</loc>
+  <lastmod>2024-03-27T13:38:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://decomagna.com/product/quick-step-decomagna-loc-floor-smooth-brown-oak-loc-333</loc>
+  <lastmod>2024-03-27T13:38:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://decomagna.com/product/quick-step-laminate-flooring-blonde-oak-endurance-316</loc>
+  <lastmod>2024-03-27T13:38:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+
+<url>
+  <loc>https://decomagna.com/portfolio/lordship-africa-88-nairobi-showhouse</loc>
+  <lastmod>2024-03-27T13:38:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://decomagna.com/blogs/in-home-choose-a-light-floor-if-at-all-possible.html</loc>
+  <lastmod>2024-03-27T13:38:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+
+
+</urlset>
