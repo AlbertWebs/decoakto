@@ -8,7 +8,7 @@
 /vendor
 # /public/admin-theme
 /public/cache
-/public/ckeditor
+# /public/ckeditor
 /public/dashboards
 /public/decomagna
 /public/favicon
