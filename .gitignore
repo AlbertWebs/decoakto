@@ -6,9 +6,19 @@
 /storage/*.key
 /storage/pail
 /vendor
-/public/html
-/public/uploads
-/public/uploads.zip
+# /public/admin-theme
+# /public/cache
+# /public/ckeditor
+# /public/dashboards
+# /public/decomagna
+# /public/favicon
+# /public/html
+# /public/temp
+# /public/theme
+# /public/update
+# /public/uploads
+# /public/version
+# /public/uploads.zip
 .env
 .env.backup
 .env.production
