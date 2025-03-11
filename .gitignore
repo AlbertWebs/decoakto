@@ -6,10 +6,6 @@
 /storage/*.key
 /storage/pail
 /vendor
-/public/admin-theme
-/public/cache
-/public/ckeditor
-/public/dashboards
 /public/decomagna
 /public/favicon
 /public/html
