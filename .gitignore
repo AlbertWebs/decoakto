@@ -6,7 +6,7 @@
 /storage/*.key
 /storage/pail
 /vendor
-/public/admin-theme
+# /public/admin-theme
 /public/cache
 /public/ckeditor
 /public/dashboards
