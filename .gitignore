@@ -17,7 +17,7 @@
 # /public/theme
 # /public/update
 /public/uploads
-/public/version
+# /public/version
 /public/uploads.zip
 .env
 .env.backup
