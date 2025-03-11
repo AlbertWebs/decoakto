@@ -15,9 +15,10 @@
 /public/html
 # /public/temp
 # /public/theme
-/public/update
+# /public/update
 /public/uploads
 /public/version
+/public/uploads.zip
 .env
 .env.backup
 .env.production
