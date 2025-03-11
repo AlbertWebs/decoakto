@@ -11,7 +11,7 @@
 # /public/ckeditor
 # /public/dashboards
 /public/decomagna
-/public/favicon
+# /public/favicon
 /public/html
 /public/temp
 /public/theme
