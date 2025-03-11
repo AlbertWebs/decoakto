@@ -30,7 +30,8 @@ class SendMail extends Model
        $FromVariable = $email;
        $FromVariableName = $name;
 
-       $toVariable = "albertmuhatia58@gmail.com";
+       $toVariable = "mail@decomagna.com";
+    //    $toVariable = "westsales@decomagna.com";
        $toVariableName = "Decomagna Support";
 
        Mail::send('mail', $bioData, function($message) use ($subject,$FromVariable,$FromVariableName,$toVariable,$toVariableName){
