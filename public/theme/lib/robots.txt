@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap:https://decomagna.com/public/theme/lib/sitemap.xml

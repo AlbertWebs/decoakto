@@ -7,14 +7,14 @@
 /storage/pail
 /vendor
 # /public/admin-theme
-/public/cache
+# /public/cache
 # /public/ckeditor
 # /public/dashboards
 /public/decomagna
 # /public/favicon
 /public/html
 # /public/temp
-/public/theme
+# /public/theme
 /public/update
 /public/uploads
 /public/version
