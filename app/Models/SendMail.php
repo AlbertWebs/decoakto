@@ -25,7 +25,7 @@ class SendMail extends Model
             'msg' => $data['message'],
             'phone_number' => $data['phone_number'],
         );
-        // dd($bioData);
+        dd($bioData);
 
        $FromVariable = $email;
        $FromVariableName = $name;
