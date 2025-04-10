@@ -238,26 +238,32 @@ class HomeController extends Controller
 
 // create post request method for contact form
     public function contact_form(Request $request){
+        $message = $request->message;
         if($request->verify_contact == $request->verify_contact_input){
-            $name = $request->name;
-            $email = $request->email;
-            $subject = $request->subject;
-            $message = $request->message;
-            $phone_number = $request->phone_number;
+           if (preg_match('/https?:\/\/[^\s]+/', $message)) {
+                Session::flash('message', "Your Message Has Been Sent Successfully");
+                return back()->with('success', 'Your message has been sent successfully!');
+            }else{
+                $name = $request->name;
+                $email = $request->email;
+                $subject = $request->subject;
+                $message = $request->message;
+                $phone_number = $request->phone_number;
 
-            // send email
-            $data = array(
-                'name' => $name,
-                'email' => $email,
-                'subject' => $subject,
-                'message' => $message,
-                'phone_number' => $phone_number,
-            );
+                // send email
+                $data = array(
+                    'name' => $name,
+                    'email' => $email,
+                    'subject' => $subject,
+                    'message' => $message,
+                    'phone_number' => $phone_number,
+                );
 
-            SendMail::send($data);
+                SendMail::send($data);
 
-            Session::flash('message', "Your Message Has Been Sent Successfully");
-            return back()->with('success', 'Your message has been sent successfully!');
+                Session::flash('message', "Your Message Has Been Sent Successfully");
+                return back()->with('success', 'Your message has been sent successfully!');
+            }
         }else{
             return back()->with('success', 'Ha! Your message has been sent successfully!');
         }
