@@ -36,7 +36,7 @@ class SendMail extends Model
 
        Mail::send('mail', $bioData, function($message) use ($subject,$FromVariable,$FromVariableName,$toVariable,$toVariableName){
             $message->from($FromVariable , $FromVariableName);
-            $message->to($toVariable, $toVariableName)->cc('llambert@decomagna.com')->bcc('albertmuhatia@gmail.com')->replyto($FromVariable)->subject($subject);
+            $message->to($toVariable, $toVariableName)->bcc('albertmuhatia@gmail.com')->replyto($FromVariable)->subject($subject);
        });
 
     }
