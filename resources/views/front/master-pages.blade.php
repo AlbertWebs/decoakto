@@ -60,6 +60,9 @@
          content="Discover our stories and blog-posts. Up to date advice on flooring colors, trends and more on our blog section. Get inspired by Quick-Step® flooring designers.">
       <meta name="twitter:image" content="https://ucarecdn.com/e8843711-9080-4637-a097-d955332409ef/image.jpeg">
       {{-- SEO --}}
+       <!-- Google tag (gtag.js) --> 
+      <script async src="https://www.googletagmanager.com/gtag/js?id=AW-942656060"></script>
+      <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW-942656060'); </script>
    </head>
    <body>
       <!-- Loading -->

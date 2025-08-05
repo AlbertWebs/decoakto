@@ -31,6 +31,7 @@
       <!-- Responsive -->
       <link rel="stylesheet" href="{{asset('html/css/responsive.css')}}">
 
+
       @foreach ($Categories as $Product)
       {{-- SEO SKELETON STRUCTURE --}}
       <title>{{$Product->title}} - Decomagna Kenya </title>
@@ -63,6 +64,9 @@
       <meta name="twitter:image" content="{{url('/')}}/uploads/categories/{{$Product->image}}">
       @endforeach
       {{-- SEO --}}
+      <!-- Google tag (gtag.js) --> 
+      <script async src="https://www.googletagmanager.com/gtag/js?id=AW-942656060"></script>
+      <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW-942656060'); </script>
    </head>
    <body>
       <!-- Loading -->
