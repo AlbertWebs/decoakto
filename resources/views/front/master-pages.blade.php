@@ -61,8 +61,7 @@
       <meta name="twitter:image" content="https://ucarecdn.com/e8843711-9080-4637-a097-d955332409ef/image.jpeg">
       {{-- SEO --}}
        <!-- Google tag (gtag.js) --> 
-      <script async src="https://www.googletagmanager.com/gtag/js?id=AW-942656060"></script>
-      <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW-942656060'); </script>
+      @include('front.google-tags')
    </head>
    <body>
       <!-- Loading -->
