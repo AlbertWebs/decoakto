@@ -83,17 +83,17 @@
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-EFZD63N5XN"></script>
     <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-    gtag('config', 'G-EFZD63N5XN');
+      gtag('config', 'G-EFZD63N5XN');
     </script>
 
+   
+   <!-- Google tag (gtag.js) --> 
    @include('front.google-tags')
- <!-- Google tag (gtag.js) --> 
-      {{-- <script async src="https://www.googletagmanager.com/gtag/js?id=AW-942656060"></script>
-      <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW-942656060'); </script> --}}
+
    </head>
    <body>
       <h1 style="display: none">Quick-Step - Kenya - Laminate Flooring - Engineered wood - Vinyl flooring - made in Belgium</h1>
