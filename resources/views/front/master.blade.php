@@ -108,7 +108,7 @@
       <!-- Loading -->
       <div id="pq-loading">
          <div id="pq-loading-center">
-            <img src="{{asset('uploads/logo/logo-clean.png')}}" alt="Loading">
+            <img style="width:320px; " src="{{asset('uploads/logo/logo-clean.png')}}" alt="Loading">
             <div>
                 {{-- <img src="{{asset('uploads/logo/logo-clean.png')}}" alt="Loading"> --}}
                 <center>
