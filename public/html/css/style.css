@@ -7379,7 +7379,7 @@ Custom Css
     width:100%;
     height:100%;
 }
-#pq-loading-center img{
+.pq-loading-center img{
    width:200px;
    height:auto;
    object-fit: contain;
