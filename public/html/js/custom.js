@@ -36,9 +36,8 @@ Design and Developed by: PeacefulQode
         /*==================================================
         [ Page Loader ]
         ==================================================*/
-        jQuery(window).on("load", function () {
-            jQuery("#pq-loading").fadeOut("fast"); // or use .hide() for instant removal
-        });
+        jQuery("#pq-loading").fadeOut();
+        // jQuery("#pq-loading").delay(0).fadeOut("slow");
 
         var Scrollbar = window.Scrollbar;
 
