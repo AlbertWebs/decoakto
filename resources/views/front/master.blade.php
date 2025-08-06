@@ -147,10 +147,11 @@
                                  </div>
                                  <div class="pq-header-social">
                                     <ul>
-                                       <li><a href="https://www.facebook.com/decomagnaDev/"><i class="fab fa-facebook-f"></i></a></li>
-                                       <li><a href="https://www.instagram.com/decomagna_kenya/"><i class="fab fa-instagram"></i></a></li>
-                                       <li><a href="https://www.instagram.com/decomagna_kenya/"><i class="fab fa-twitter"></i></a></li>
-                                       <li><a href="https://goo.gl/maps/njDLRodCvupea21D9"><i class="fa fa-map-marker"></i></a></li>
+                                      <li><a href="https://www.facebook.com/decomagnaDev/" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+                                       <li><a href="https://www.instagram.com/decomagna_kenya/" aria-label="Instagram"><i class="fab fa-instagram"></i></a></li>
+                                       <li><a href="https://twitter.com/decomagna_kenya" aria-label="Twitter"><i class="fab fa-twitter"></i></a></li>
+                                       <li><a href="https://goo.gl/maps/njDLRodCvupea21D9" aria-label="Our Location on Google Maps"><i class="fa fa-map-marker"></i></a></li>
+
                                     </ul>
                                  </div>
                               </div>
@@ -190,7 +191,7 @@
                               </div>
                               <div class="pq-menu-search-block">
                                  <a href="javascript:void(0)" class="pq-tools-serach-button" data-bs-toggle="offcanvas" data-bs-target="#offcanvassearch"><i class="ti-search"></i></a>
-                                 <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvassearch" aria-hidden="true">
+                                 <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvassearch">
                                     @include('front.search-form')
                                  </div>
                               </div>

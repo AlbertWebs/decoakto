@@ -48,10 +48,10 @@
                             ?>
                             @foreach ($Color as $color)
 
-                             @if($color->title == "White")
-                                 <a style="background-color: {{$color->title}}; color:#000000; font-weight:600; width:70px;" href="{{url('/')}}/products/color/original-laminate-flooring/{{$color->title}}" class="tag-cloud-link pq-post-category">{{$color->title}}</a>
-                             @else
+                             @if($color->title == "Black")
                                  <a style="background-color: {{$color->title}}; color:#ffffff; font-weight:600; width:70px;" href="{{url('/')}}/products/color/original-laminate-flooring/{{$color->title}}" class="tag-cloud-link pq-post-category">{{$color->title}}</a>
+                             @else
+                                 <a style="background-color: {{$color->title}}; color:#000000; font-weight:600; width:70px;" href="{{url('/')}}/products/color/original-laminate-flooring/{{$color->title}}" class="tag-cloud-link pq-post-category">{{$color->title}}</a>
                              @endif
 
                             @endforeach
