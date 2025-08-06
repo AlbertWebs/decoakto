@@ -105,19 +105,7 @@
 
       <meta name="google-site-verification" content="aPfWre_bGZ9l-YSyG_gYlHfEe3SHX5h3JVjqnNyD6-8" />
       {{-- SEO --}}
-       <!--Start of Tawk.to Script-->
-    <script type="text/javascript">
-        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-        (function(){
-        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-        s1.async=true;
-        s1.src='https://embed.tawk.to/66224fea1ec1082f04e49347/1hrr0gc9c';
-        s1.charset='UTF-8';
-        s1.setAttribute('crossorigin','*');
-        s0.parentNode.insertBefore(s1,s0);
-        })();
-        </script>
-    <!--End of Tawk.to Script-->
+
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-EFZD63N5XN"></script>
