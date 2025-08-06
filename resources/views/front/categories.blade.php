@@ -64,7 +64,7 @@
                                 {{-- <input type="search" placeholder="Search floor" /> --}}
 
                                 <div class="form-group">
-                                    <label for="class">Select Class</label>
+                                    <label for="cat">Select Class</label>
                                     <?php
                                         $Class = DB::table('classifications')->get();
                                     ?>
@@ -76,7 +76,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group sub_cat_holder">
-                                    <label for="child">Subclass</label>
+                                    <label for="sub_cat">Subclass</label>
                                     <select name="child"  id="sub_cat" class="form-control form-control-sm" id="exampleFormControlSelect1">
 
                                     </select>

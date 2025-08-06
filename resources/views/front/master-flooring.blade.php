@@ -141,7 +141,7 @@
       <div class="pq-background-overlay"></div>
       <div class="pq-sidebar">
          <div class="pq-close-btn">
-            <button class="pq-close" type="button">
+            <button class="pq-close" type="button" aria-label="Close">
             <i class="ion-close-round"></i>
             </button>
          </div>
