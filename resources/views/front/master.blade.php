@@ -6,36 +6,44 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
       <!-- Favicon -->
-      <link rel="shortcut icon" href="{{asset('uploads/logo/favicon.png')}}">
-      <link rel="apple-touch-icon" sizes="180x180" href="{{asset('favicon/apple-touch-icon.png')}}">
-      <link rel="icon" type="image/png" sizes="32x32" href="{{asset('favicon/favicon-32x32.png')}}">
-      <link rel="icon" type="image/png" sizes="16x16" href="{{asset('favicon/favicon-16x16.png')}}">
-      <link rel="manifest" href="{{asset('favicon/site.webmanifest')}}">
+         <!-- Favicons -->
+      <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('favicon/apple-touch-icon.png') }}">
+      <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon/favicon-32x32.png') }}">
+      <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon/favicon-16x16.png') }}">
+      <link rel="shortcut icon" href="{{ asset('uploads/logo/favicon.png') }}">
+      <link rel="manifest" href="{{ asset('favicon/site.webmanifest') }}">
+      <meta name="theme-color" content="#ffffff">
 
-      <!-- Bootstrap -->
-      <link rel="stylesheet" href="{{asset('html/css/bootstrap.min.css')}}">
-      <!-- Simplebar -->
-      <link rel="stylesheet" href="{{asset('html/css/simplebar.min.css')}}">
-      <!-- Rev-slider -->
-      <link rel="stylesheet" href="{{asset('html/rev/css/rs6.css')}}">
-      <link rel="stylesheet" href="{{asset('html/rev/fonts/font-awesome/css/font-awesome.css')}}">
-      <link rel="stylesheet" href="{{asset('html/rev/fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css')}}">
-      <link rel="stylesheet" href="{{asset('html/rev/fonts/pe-icon-7-stroke/css/helper.css')}}">
-      <!-- Owl Carousel -->
-      <link rel="stylesheet" href="{{asset('html/css/owl.carousel.min.css')}}">
-      <!-- Aimation -->
-      <link rel="stylesheet" href="{{asset('html/css/animations.min.css')}}">
-      <!-- Icons -->
-      <link rel="stylesheet" href="{{asset('html/fonts/font-awesome/css/all.min.css')}}">
-      <link rel="stylesheet" href="{{asset('html/css/ionicons.min.css')}}">
-      <link rel="stylesheet" href="{{asset('html/fonts/themify-icons/themify-icons.css')}}">
-      <link rel="stylesheet" href="{{asset('html/fonts/flaticon/flaticon.css')}}">
-      <!-- Magnefic Popup -->
-      <link rel="stylesheet" href="{{asset('html/css/magnific-popup.min.css')}}">
-      <!-- Style -->
-      <link rel="stylesheet" href="{{asset('html/css/style.css')}}">
-      <!-- Responsive -->
-      <link rel="stylesheet" href="{{asset('html/css/responsive.css')}}">
+      <!-- Preconnect for Performance (Optional but Recommended) -->
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+      <!-- Preload Critical CSS (If Any) -->
+      <link rel="preload" href="{{ asset('html/css/bootstrap.min.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+      <noscript><link rel="stylesheet" href="{{ asset('html/css/bootstrap.min.css') }}"></noscript>
+
+      <!-- Core Stylesheets -->
+      <link rel="stylesheet" href="{{ asset('html/css/simplebar.min.css') }}">
+      <link rel="stylesheet" href="{{ asset('html/rev/css/rs6.css') }}">
+      <link rel="stylesheet" href="{{ asset('html/rev/fonts/font-awesome/css/font-awesome.css') }}">
+      <link rel="stylesheet" href="{{ asset('html/rev/fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css') }}">
+      <link rel="stylesheet" href="{{ asset('html/rev/fonts/pe-icon-7-stroke/css/helper.css') }}">
+      <link rel="stylesheet" href="{{ asset('html/css/owl.carousel.min.css') }}">
+      <link rel="stylesheet" href="{{ asset('html/css/animations.min.css') }}">
+
+      <!-- Icon Fonts -->
+      <link rel="stylesheet" href="{{ asset('html/fonts/font-awesome/css/all.min.css') }}">
+      <link rel="stylesheet" href="{{ asset('html/css/ionicons.min.css') }}">
+      <link rel="stylesheet" href="{{ asset('html/fonts/themify-icons/themify-icons.css') }}">
+      <link rel="stylesheet" href="{{ asset('html/fonts/flaticon/flaticon.css') }}">
+
+      <!-- Plugins -->
+      <link rel="stylesheet" href="{{ asset('html/css/magnific-popup.min.css') }}">
+
+      <!-- Main Styles -->
+      <link rel="stylesheet" href="{{ asset('html/css/style.css') }}">
+      <link rel="stylesheet" href="{{ asset('html/css/responsive.css') }}">
+
       {{-- SEO SKELETON STRUCTURE --}}
       <title>Quick-Step Kenya - Laminate - Engineered wood - Vinyl flooring</title>
       <meta name="robots" content="index,follow">
@@ -216,31 +224,27 @@
          </a>
       </div>
       <!-- Back To Top -->
-      <!-- Jquery -->
-      <script src="{{asset('html/js/jquery.min.js')}}"></script>
-      <!-- Bootstrap -->
-      <script src="{{asset('html/js/bootstrap.min.js')}}"></script>
-      <!-- Owl Carousel -->
-      <script src="{{asset('html/js/owl.carousel.min.js')}}"></script>
-      <!-- Isotope -->
-      <script src="{{asset('html/js/isotope.pkgd.min.js')}}"></script>
-      <!-- Counter -->
-      <script src="{{asset('html/js/jquery.countTo.min.js')}}"></script>
-      <!-- Wow -->
-      <script src="{{asset('html/js/wow.min.js')}}"></script>
-      <!-- Magnefic Popup -->
-      <script src="{{asset('html/js/jquery.magnific-popup.min.js')}}"></script>
-      <!-- Revslider -->
-      <script src="{{asset('html/rev/js/rbtools.min.js')}}"></script>
-      <script src="{{asset('html/rev/js/rs6.min.js')}}"></script>
-      <script src="{{asset('html/js/rev-custom.js')}}"></script>
-      <!-- Simplebar -->
-      <script src="{{asset('html/js/simplebar.min.js')}}"></script>
-      <!-- Custom -->
-      <script src="{{asset('html/js/load-more.js')}}"></script>
-      <!-- Custom -->
-      <script src="{{asset('html/js/custom.js')}}"></script>
-      {{--  --}}
+<!-- Core Libraries -->
+      <script src="{{ asset('html/js/jquery.min.js') }}" defer></script>
+      <script src="{{ asset('html/js/bootstrap.min.js') }}" defer></script>
+
+      <!-- Plugins -->
+      <script src="{{ asset('html/js/owl.carousel.min.js') }}" defer></script>
+      <script src="{{ asset('html/js/isotope.pkgd.min.js') }}" defer></script>
+      <script src="{{ asset('html/js/jquery.countTo.min.js') }}" defer></script>
+      <script src="{{ asset('html/js/wow.min.js') }}" defer></script>
+      <script src="{{ asset('html/js/jquery.magnific-popup.min.js') }}" defer></script>
+      <script src="{{ asset('html/js/simplebar.min.js') }}" defer></script>
+
+      <!-- Revolution Slider -->
+      <script src="{{ asset('html/rev/js/rbtools.min.js') }}" defer></script>
+      <script src="{{ asset('html/rev/js/rs6.min.js') }}" defer></script>
+      <script src="{{ asset('html/js/rev-custom.js') }}" defer></script>
+
+      <!-- Custom Scripts -->
+      <script src="{{ asset('html/js/load-more.js') }}" defer></script>
+      <script src="{{ asset('html/js/custom.js') }}" defer></script>
+
 
       @include('front.schema')
       {{--  --}}
