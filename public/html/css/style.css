@@ -7384,6 +7384,10 @@ Custom Css
    height:auto;
    object-fit: contain;
 }
+.prod-img{
+	width:100%; height:309px; object-fit:cover;
+}
+
 @media (max-width: 767px) {
     .pellete-img {
         display:block;

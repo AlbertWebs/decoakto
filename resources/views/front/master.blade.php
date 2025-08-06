@@ -36,6 +36,7 @@
       <link rel="stylesheet" href="{{ asset('html/css/ionicons.min.css') }}">
       <link rel="stylesheet" href="{{ asset('html/fonts/themify-icons/themify-icons.css') }}">
       <link rel="stylesheet" href="{{ asset('html/fonts/flaticon/flaticon.css') }}">
+      <link rel="canonical" href="https://decomagna.com">
 
       <!-- Plugins -->
       <link rel="stylesheet" href="{{ asset('html/css/magnific-popup.min.css') }}">

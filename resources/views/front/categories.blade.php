@@ -130,7 +130,7 @@
                             <div class="col-lg-4">
                                 <div class="pq-blog-post">
                                     <div class="pq-post-media">
-                                        <img decoding="async" src="{{url('/')}}/uploads/products/{{$products->image_one}}" alt="{{$products->name}}" style="height:309px">
+                                        <img decoding="async" src="{{url('/')}}/uploads/products/{{$products->image_one}}" alt="{{$products->name}}" class="prod-img">
                                         <div class="pq-post-category" style="background-color: {{$products->color}}">
                                             <a style="background-color: {{$products->color}}" href="{{url('/')}}/product/{{$products->slung}}">{{$products->color}}</a>
                                         </div>
