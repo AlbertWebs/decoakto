@@ -64,10 +64,11 @@
                                 {{-- <input type="search" placeholder="Search floor" /> --}}
 
                                 <div class="form-group">
-                                    <label for="exampleFormControlSelect1">Select Class</label>
+                                    <label for="class">Select Class</label>
                                     <?php
                                         $Class = DB::table('classifications')->get();
                                     ?>
+                                    
                                     <select name="class" id="cat" class="form-control form-control-sm" id="exampleFormControlSelect1">
                                         @foreach ($Class as $class)
                                         <option value="{{$class->slung}}" >{{$class->title}}</option>
@@ -75,7 +76,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group sub_cat_holder">
-                                    <label for="exampleFormControlSelect1">Subclass</label>
+                                    <label for="child">Subclass</label>
                                     <select name="child"  id="sub_cat" class="form-control form-control-sm" id="exampleFormControlSelect1">
 
                                     </select>

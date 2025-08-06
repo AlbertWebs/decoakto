@@ -209,7 +209,7 @@
                                  </div>
                               </div>
                               <div class="pq-menu-search-block">
-                                 <button type="button" class="pq-tools-serach-button" data-bs-toggle="offcanvas" data-bs-target="#offcanvassearch">
+                                 <button type="button" class="pq-tools-serach-button" data-bs-toggle="offcanvas" data-bs-target="#offcanvassearch" aria-label="Open search">
                                     <i class="ti-search"></i></button>
                                  <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvassearch">
                                     @include('front.search-form')
