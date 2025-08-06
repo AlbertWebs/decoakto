@@ -2389,7 +2389,7 @@ header#pq-header.pq-header-default .pq-toggle-btn {
 	margin: 0 0 0 30px;
 }
 
-header#pq-header.pq-header-default .pq-toggle-btn a {
+header#pq-header.pq-header-default .pq-toggle-btn button {
 	position: relative;
 	display: inline-block;
 	padding: 0;
@@ -2544,7 +2544,7 @@ header#pq-header.pq-header-style-1 .pq-toggle-btn {
 	margin-left: 30px;
 }
 
-header#pq-header.pq-header-style-1 .pq-toggle-btn a {
+header#pq-header.pq-header-style-1 .pq-toggle-btn button {
 	position: relative;
 	display: block;
 	top: 0;
@@ -2559,8 +2559,8 @@ header#pq-header.pq-header-style-1 .pq-toggle-btn a {
 	transition: 0.35s;
 }
 
-header#pq-header.pq-header-style-1 .pq-toggle-btn a:before,
-header#pq-header.pq-header-style-1 .pq-toggle-btn a:after {
+header#pq-header.pq-header-style-1 .pq-toggle-btn button:before,
+header#pq-header.pq-header-style-1 .pq-toggle-btn button:after {
 	position: absolute;
 	top: 0;
 	left: 50%;
@@ -2572,14 +2572,14 @@ header#pq-header.pq-header-style-1 .pq-toggle-btn a:after {
 	transition: transform 0.35s;
 }
 
-header#pq-header.pq-header-style-1 .pq-toggle-btn a:before {
+header#pq-header.pq-header-style-1 .pq-toggle-btn button:before {
 	transform: translate(0%, -10px);
 	left: auto;
 	right: 0;
 	width: 80%;
 }
 
-header#pq-header.pq-header-style-1 .pq-toggle-btn a:after {
+header#pq-header.pq-header-style-1 .pq-toggle-btn button:after {
 	transform: translate(0%, 10px);
 	left: auto;
 	right: 0;
@@ -2831,7 +2831,7 @@ header#pq-header.pq-header-style-4 .pq-toggle-btn:hover {
 	background-color: var(--dark-color);
 }
 
-header#pq-header.pq-header-style-4 .pq-toggle-btn a {
+header#pq-header.pq-header-style-4 .pq-toggle-btn button {
 	position: relative;
 	display: block;
 	top: 0;
@@ -2846,8 +2846,8 @@ header#pq-header.pq-header-style-4 .pq-toggle-btn a {
 	transition: 0.35s;
 }
 
-header#pq-header.pq-header-style-4 .pq-toggle-btn a:before,
-header#pq-header.pq-header-style-4 .pq-toggle-btn a:after {
+header#pq-header.pq-header-style-4 .pq-toggle-btn button:before,
+header#pq-header.pq-header-style-4 .pq-toggle-btn button:after {
 	position: absolute;
 	top: 0;
 	left: 50%;
@@ -2859,11 +2859,11 @@ header#pq-header.pq-header-style-4 .pq-toggle-btn a:after {
 	transition: transform 0.35s;
 }
 
-header#pq-header.pq-header-style-4 .pq-toggle-btn a:before {
+header#pq-header.pq-header-style-4 .pq-toggle-btn button:before {
 	transform: translate(-50%, -10px);
 }
 
-header#pq-header.pq-header-style-4 .pq-toggle-btn a:after {
+header#pq-header.pq-header-style-4 .pq-toggle-btn button:after {
 	transform: translate(-50%, 10px);
 }
 

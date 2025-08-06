@@ -1,4 +1,4 @@
-@extends('front.master')
+@extends('front.master-flooring')
 
 
 @section('content')
@@ -48,7 +48,7 @@
                             ?>
                             @foreach ($Color as $color)
 
-                             @if($color->title == "Black")
+                             @if($color->title == "Black" || $color->title == "Brown" || $color->title == "Green")
                                  <a style="background-color: {{$color->title}}; color:#ffffff; font-weight:600; width:70px;" href="{{url('/')}}/products/color/original-laminate-flooring/{{$color->title}}" class="tag-cloud-link pq-post-category">{{$color->title}}</a>
                              @else
                                  <a style="background-color: {{$color->title}}; color:#000000; font-weight:600; width:70px;" href="{{url('/')}}/products/color/original-laminate-flooring/{{$color->title}}" class="tag-cloud-link pq-post-category">{{$color->title}}</a>

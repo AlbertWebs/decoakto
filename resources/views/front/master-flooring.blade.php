@@ -43,34 +43,65 @@
       <!-- Main Styles -->
       <link rel="stylesheet" href="{{ asset('html/css/style.css') }}">
       <link rel="stylesheet" href="{{ asset('html/css/responsive.css') }}">
+    <link rel="canonical" href="https://decomagna.com/products/original-laminate-flooring">
+
 
       {{-- SEO SKELETON STRUCTURE --}}
-      <title>Quick-Step Kenya - Laminate - Engineered wood - Vinyl flooring</title>
-      <meta name="robots" content="index,follow">
-      <meta name="googlebot" content="index,follow">
-      <!-- Google Specific -->
-      <meta name="subject" content="Quick-Step Kenya - Laminate - Engineered wood - Vinyl flooring">
-      <meta name="description" content="Discover our stories and blog-posts. Up to date advice on flooring colors, trends and more on our blog section. Get inspired by Quick-Step® flooring designers.">
-      <meta name="rating" content="General">
-      <meta name="google-site-verification" value="" content="verification_token">
-      <meta name="referrer" content="no-referrer">
-      {{-- OG --}}
-      <meta property="og:url" content="{{url('/')}}">
-      <meta property="og:type" content="website">
-      <meta property="og:title" content="Quick-Step Kenya - Laminate - Engineered wood - Vinyl flooring">
-      <meta property="og:image" content="{{url('/')}}/uploads/slider/download-slider-8.webp">
-      <meta property="og:description" content="Discover our stories and blog-posts. Up to date advice on flooring colors, trends and more on our blog section. Get inspired by Quick-Step® flooring designers.">
-      <meta property="og:site_name" content="DecoMagna">
-      <meta property="og:locale" content="en_US">
-      {{-- Twitter --}}
-      <meta name="twitter:card" content="summary">
-      <meta name="twitter:site" content="@Decomagna_Kenya">
-      <meta name="twitter:url" content="{{url('/')}}">
-      <meta name="twitter:title"
-         content="Quick-Step Kenya - Laminate - Engineered wood - Vinyl flooring">
-      <meta name="twitter:description"
-         content="Discover our stories and blog-posts. Up to date advice on flooring colors, trends and more on our blog section. Get inspired by Quick-Step® flooring designers.">
-      <meta name="twitter:image" content="{{url('/')}}/uploads/slider/download-slider-8.webp">
+        <title>Original Laminate Flooring – Durable & Stylish | Quick-Step Kenya</title>
+        <meta name="robots" content="index,follow">
+        <meta name="googlebot" content="index,follow">
+
+        <!-- Google Specific -->
+        <meta name="subject" content="Original Laminate Flooring – Quick-Step Kenya">
+        <meta name="description" content="Explore our Original Laminate Flooring collection. Discover durable, stylish, and easy-to-install flooring from Quick-Step Kenya – perfect for modern homes and commercial spaces.">
+        <meta name="rating" content="General">
+     
+        <meta name="referrer" content="no-referrer">
+        <meta name="keywords" content="laminate flooring, original laminate, Quick-Step, flooring Kenya, engineered wood, vinyl floors">
+
+
+        {{-- Open Graph --}}
+        <meta property="og:url" content="{{ url('products/original-laminate-flooring') }}">
+        <meta property="og:type" content="product">
+        <meta property="og:title" content="Original Laminate Flooring – Durable & Stylish | Quick-Step Kenya">
+        <meta property="og:image" content="{{ url('/') }}/uploads/products/original-laminate-flooring.webp">
+        <meta property="og:description" content="Explore our Original Laminate Flooring collection. Durable, stylish, and easy-to-maintain flooring for every space.">
+        <meta property="og:site_name" content="DecoMagna">
+        <meta property="og:locale" content="en_US">
+        <meta property="og:image:alt" content="High-quality original laminate flooring by Quick-Step Kenya">
+
+
+
+        {{-- Twitter --}}
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@Decomagna_Kenya">
+        <meta name="twitter:url" content="{{ url('products/original-laminate-flooring') }}">
+        <meta name="twitter:title" content="Original Laminate Flooring – Durable & Stylish | Quick-Step Kenya">
+        <meta name="twitter:description" content="Browse Quick-Step’s Original Laminate Flooring. A perfect blend of durability and aesthetics for residential and commercial spaces.">
+        <meta name="twitter:image" content="{{ url('/') }}/uploads/products/original-laminate-flooring.webp">
+        <meta name="twitter:image:alt" content="High-quality original laminate flooring by Quick-Step Kenya">
+
+        <script type="application/ld+json">
+        {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "Original Laminate Flooring",
+        "image": "https://decomagna.com/uploads/products/original-laminate-flooring.jpg",
+        "description": "Premium original laminate flooring with durable finish and Quick-Step® technology.",
+        "brand": {
+            "@type": "Brand",
+            "name": "Quick-Step"
+        },
+        "offers": {
+            "@type": "Offer",
+            "url": "https://decomagna.com/products/original-laminate-flooring",
+            "priceCurrency": "KES",
+            "availability": "https://schema.org/InStock"
+        }
+        }
+        </script>
+
+
 
       <meta name="google-site-verification" content="aPfWre_bGZ9l-YSyG_gYlHfEe3SHX5h3JVjqnNyD6-8" />
       {{-- SEO --}}
