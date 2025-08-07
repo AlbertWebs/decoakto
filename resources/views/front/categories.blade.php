@@ -137,11 +137,11 @@
                                         </div>
                                     </div>
                                     <div class="pq-blog-contain">
-                                        <h5 class="pq-blog-title">
+                                        <p class="pq-blog-title product-name">
                                             <a href="{{url('/')}}/product/{{$products->slung}}">
                                                 {{$products->name}}
                                             </a>
-                                        </h5>
+                                        </p>
 
                                         <div class="pq-btn-container">
                                             <a href="{{url('/')}}/product/{{$products->slung}}" class="pq-button pq-button-flat">

@@ -7387,6 +7387,23 @@ Custom Css
 .prod-img{
 	width:100%; height:309px; object-fit:cover;
 }
+.product-name{
+	font-weight:600;
+	color:rgb(97, 97, 97) !important;
+	font-size:16px;
+
+}
+
+.product-name a{
+
+	color:rgb(26, 25, 25) !important;
+
+
+}
+/* hover */
+.product-name a:hover{
+	color:#1c186c !important;
+}
 
 @media (max-width: 767px) {
     .pellete-img {
