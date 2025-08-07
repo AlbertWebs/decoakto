@@ -7415,4 +7415,9 @@ Custom Css
     #pq-loading img{
         height:80px;
     }
+
+	.headline-intro{
+		font-size:20px;
+		line-height: normal;
+	}
 }
