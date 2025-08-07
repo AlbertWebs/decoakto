@@ -7420,4 +7420,8 @@ Custom Css
 		font-size:20px;
 		line-height: normal;
 	}
+
+	.hide-mobile{
+		display:none;
+	}
 }

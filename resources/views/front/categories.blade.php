@@ -36,7 +36,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3 mt-4 mt-lg-0">
-                <div class="sidebar">
+                <div class="sidebar hide-mobile">
 
 
 
