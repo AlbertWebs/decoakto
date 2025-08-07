@@ -36,7 +36,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3 mt-4 mt-lg-0">
-                <div class="sidebar hide-mobile">
+                <div class="sidebar ">
 
 
 
@@ -57,7 +57,7 @@
                             @endforeach
                     </div>
 
-                    <div class="widget widget_block">
+                    <div class="widget widget_block hide-mobile">
                         <h2>Search Filter</h2>
                         <div class='filterComponent form-white'>
                             <form class="form-white" method="get" action="{{url('/')}}/search-filter">
@@ -95,7 +95,7 @@
                         </div>
                     </div>
 
-                    <div class="widget widget_block">
+                    <div class="widget widget_block hide-mobile" >
                         <div class="is-layout-constrained wp-block-group">
                             <?php
                                 $Classifications = DB::table('classifications')->get();
