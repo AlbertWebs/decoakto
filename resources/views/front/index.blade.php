@@ -394,7 +394,7 @@
              <div class="divider pq-right-border pq-45"></div>
           </div>
        </div>
-       <div class="row">
+       {{-- <div class="row">
           <div class="col-lg-12 wow animated fadeInUp">
              <div class="pq-blog tex-left">
                 <div class="owl-carousel owl-loaded owl-drag" data-dots="false" data-nav="false"
@@ -405,14 +405,12 @@
                       <div class="pq-blog-post">
                          <div class="pq-post-media blog-img">
                             <img decoding="async" src="{{url('/')}}/uploads/blogs/{{$blog->image_one}}" alt="{{$blog->title}}">
-                            {{-- <div class="pq-post-category">
-                               <a href="{{url('/')}}/blogs/{{$blog->slung}}">
+                           
                                   <?php
                                       $Category = \App\Models\Category::find($blog->category);
                                       echo $Category->name;
                                    ?>
-                               </a>
-                            </div> --}}
+                             
                          </div>
                          <div class="pq-blog-contain">
                             <div class="pq-post-meta">
@@ -462,7 +460,7 @@
                 </div>
              </div>
           </div>
-       </div>
+       </div> --}}
     </div>
  </section>
  <!-- Blog -->
