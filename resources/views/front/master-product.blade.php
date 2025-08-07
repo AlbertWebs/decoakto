@@ -68,7 +68,7 @@
    </head>
    <body>
       <!-- Loading -->
-      <div id="pq-loading">
+      <div id="pq-loading" style="display: none">
          <div id="pq-loading-center">
             <img src="{{asset('uploads/logo/logo-clean.png')}}" alt="Loading">
          </div>

@@ -125,7 +125,7 @@
    <body>
       <h1 style="display: none">Quick-Step - Kenya - Laminate Flooring - Engineered wood - Vinyl flooring - made in Belgium</h1>
       <!-- Loading -->
-      <div id="pq-loading">
+      <div id="pq-loading" style="display: none">
          <div id="pq-loading-center" class="pq-loading-center">
             <img src="{{asset('uploads/logo/logo-clean.png')}}" alt="Loading">
             <div>
