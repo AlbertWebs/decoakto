@@ -85,7 +85,7 @@
             </div>
             <div class="col-lg-4 col-md-4 wow animated fadeInLeft">
                 <div class="button-align">
-                    <a class="pq-button pq-button-flat" href="services-1.html">
+                    <a class="pq-button pq-button-flat" href="https://decomagna.com/portfolio">
                         <div class="pq-button-block">
                             <span class="pq-button-text"> Browse Portfolio </span>
                             <span class="pq-button-line-right"></span>

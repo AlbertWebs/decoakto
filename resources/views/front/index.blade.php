@@ -283,7 +283,7 @@
 
             <div class="col-lg-4 col-md-4 wow animated fadeInLeft">
                 <div class="button-align">
-                    <a class="pq-button pq-button-flat" href="services-1.html">
+                    <a class="pq-button pq-button-flat" href="https://decomagna.com/products/original-laminate-flooring">
                         <div class="pq-button-block">
                             <span class="pq-button-text">view more </span>
                             <span class="pq-button-line-right"></span>
