@@ -95,7 +95,7 @@
           </div>
           <div class="col-lg-4 col-md-4 wow animated fadeInRight">
              <div class="button-align">
-                <a class="pq-button pq-button-flat" download href="{{url('/')}}/uploads/files/QS-Laminate-Brochure-2016-Z2-english.pdf">
+                <a class="pq-button pq-button-flat" download href="{{url('/')}}/uploads/files/Decomagna2025-Flooring.pdf">
                    <div class="pq-button-block">
                       <span class="pq-button-text">Browse Catalogue </span>
                       <span class="pq-button-line-right"></span>
