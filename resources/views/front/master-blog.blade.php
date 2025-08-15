@@ -67,11 +67,11 @@
    </head>
    <body>
       <!-- Loading -->
-      <div id="pq-loading">
+      {{-- <div id="pq-loading">
          <div id="pq-loading-center">
             <img src="{{asset('uploads/logo/logo-clean.png')}}" alt="Loading">
          </div>
-      </div>
+      </div> --}}
       <!-- Loading -->
       <!-- Header -->
       <div class="pq-background-overlay"></div>
