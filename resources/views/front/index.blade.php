@@ -367,7 +367,7 @@
 </section>
 <!-- Award -->
 
-<?php $Blog = DB::table("blogs")->limit('3')->where('tags','1')->orderBy('id','DESC')->get(); ?>
+<?php $Blog = DB::table("blogs")->limit('3')->where('active','4')->orderBy('id','DESC')->get(); ?>
  <!-- Blog -->
  <section class="blog">
     <div class="container">
