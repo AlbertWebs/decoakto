@@ -53,7 +53,7 @@
                                         <h5 class="pq-blog-title">
                                             <a href="{{url('/')}}/blogs/{{$blog->slung}}">{{$blog->title}}</a>
                                         </h5>
-                                        <p>{{$blog->meta}}</p>
+                                        {{-- <p>{{$blog->meta}}</p> --}}
                                         <div class="pq-btn-container">
                                             <a href="{{url('/')}}/blogs/{{$blog->slung}}" class="pq-button pq-button-flat">
                                                 <div class="pq-button-block">
