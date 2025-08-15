@@ -38,7 +38,7 @@
                         @foreach ($Blog as $blog)
                             <div class="col-lg-4">
                                 <div class="pq-blog-post">
-                                    <div class="pq-post-media">
+                                    <div class="pq-post-media blog-img">
                                         <img decoding="async" src="{{url('/')}}/uploads/blogs/{{$blog->image_one}}" alt="blog-image">
                                     </div>
                                     <div class="pq-blog-contain">

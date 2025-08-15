@@ -164,7 +164,7 @@ class HomeController extends Controller
 
     public function blog()
     {
-        $Blog = DB::table('blogs')->get();
+        $Blog = DB::table('blogs')->orderBy('id','DESC')->get();
         return view('front.blog', compact('Blog'));
     }
 

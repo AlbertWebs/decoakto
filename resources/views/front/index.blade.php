@@ -367,7 +367,7 @@
 </section>
 <!-- Award -->
 
-<?php $Blog = DB::table("blogs")->limit('3')->orderBy('id','DESC')->get(); ?>
+<?php $Blog = DB::table("blogs")->limit('3')->where('tag','1')->orderBy('id','DESC')->get(); ?>
  <!-- Blog -->
  <section class="blog">
     <div class="container">
@@ -394,7 +394,7 @@
              <div class="divider pq-right-border pq-45"></div>
           </div>
        </div>
-       {{-- <div class="row">
+       <div class="row">
           <div class="col-lg-12 wow animated fadeInUp">
              <div class="pq-blog tex-left">
                 <div class="owl-carousel owl-loaded owl-drag" data-dots="false" data-nav="false"
@@ -460,7 +460,7 @@
                 </div>
              </div>
           </div>
-       </div> --}}
+       </div>
     </div>
  </section>
  <!-- Blog -->
