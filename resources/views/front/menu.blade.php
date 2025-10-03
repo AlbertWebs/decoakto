@@ -23,6 +23,9 @@
         @endif
     @endforeach
     <li class="menu-item">
+        <a href="{{url('/')}}/blogs">Updates</a>
+    </li>
+    <li class="menu-item">
         <a href="{{url('/')}}/contact-us">Contact Us</a>
     </li>
 </ul>

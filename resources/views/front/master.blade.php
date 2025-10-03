@@ -99,9 +99,25 @@
       gtag('config', 'G-EFZD63N5XN');
     </script>
 
-   
-   <!-- Google tag (gtag.js) --> 
+
+   <!-- Google tag (gtag.js) -->
    @include('front.google-tags')
+    <style>
+        .whatsapp-float {
+        position: fixed;
+        bottom: 100px;
+        right: 20px;
+        z-index: 1000;
+        cursor: pointer;
+        }
+
+        .whatsapp-float img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+    </style>
 
    </head>
    <body>
@@ -250,6 +266,14 @@
 
 
       @include('front.schema')
+      <a href="https://wa.me/254796110511"
+        class="whatsapp-float"
+        target="_blank"
+        title="Chat with us on WhatsApp">
+        <img src="https://img.icons8.com/color/48/000000/whatsapp--v1.png"
+                alt="WhatsApp Chat" />
+        </a>
+
       {{--  --}}
    </body>
 </html>
