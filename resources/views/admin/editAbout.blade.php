@@ -77,7 +77,51 @@
                                     <textarea required id="article-ckeditor" name="content" class="materialilze-textarea" placeholder="content">{{$item->content}}</textarea>
 
                                 </div>
-                            </div><br><br>
+                            </div>
+                            <style>
+                                .btn-file {
+                                    position: relative;
+                                    overflow: hidden;
+                                }
+                                .btn-file input[type=file] {
+                                    position: absolute;
+                                    top: 0;
+                                    right: 0;
+                                    min-width: 100%;
+                                    min-height: 100%;
+                                    font-size: 100px;
+                                    text-align: right;
+                                    filter: alpha(opacity=0);
+                                    opacity: 0;
+                                    outline: none;
+                                    background: white;
+                                    cursor: inherit;
+                                    display: block;
+                                }
+
+                                #img-upload{
+                                    width: 100%;
+                                }
+                            </style>
+                            <div class="row">
+                                <div class="">
+                                    <div class="input-field col s12">
+                                        <div class="form-group">
+                                            <label>Banner Image</label>
+                                            <div class="input-group">
+                                                <span class="input-group-btn">
+                                                    <span class="btn btn-default btn-file">
+                                                        Browse… <input name="image" type="file" id="imgInp">
+                                                    </span>
+                                                </span>
+                                                <input type="text" class="form-control" readonly>
+                                            </div>
+                                            <img class="image-preview" style="width:auto;" src="{{url('/')}}/uploads/about/{{$item->image_one}}" id='img-upload'/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br><br>
 
                             <div class="row">
                                 <div class="input-field col s12">

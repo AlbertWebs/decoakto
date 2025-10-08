@@ -240,10 +240,21 @@ class AdminsController extends Controller
 
     public function edit_about(Request $request){
         activity()->log('Update o the copyright page');
-        $updateDetails = array(
+        $path = 'uploads/about';
+
+        if(isset($request->image)){
+            $file = $request->file('image');
+            $filename = $file->getClientOriginalName();
+            $file->move($path, $filename);
+            $image = $filename;
+        }else{
+            $image = $request->thumbnail_cheat;
+        }
+         $updateDetails = array(
             'title'=>$request->title,
             'content'=>$request->content,
             'meta'=>$request->meta,
+            'image_one'=>$image
         );
         DB::table('abouts')->update($updateDetails);
 
