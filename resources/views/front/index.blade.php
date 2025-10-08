@@ -367,7 +367,7 @@
 </section>
 <!-- Award -->
 
-<?php $Blog = DB::table("blogs")->limit('3')->where('active','4')->orderBy('id','DESC')->get(); ?>
+<?php $Blog = DB::table("blogs")->limit('3')->orderBy('id','DESC')->get(); ?>
  <!-- Blog -->
  <section class="blog">
     <div class="container">
@@ -405,12 +405,12 @@
                       <div class="pq-blog-post">
                          <div class="pq-post-media blog-img">
                             <img decoding="async" src="{{url('/')}}/uploads/blogs/{{$blog->image_one}}" alt="{{$blog->title}}">
-                           
+
                                   <?php
                                       $Category = \App\Models\Category::find($blog->category);
                                       echo $Category->name;
                                    ?>
-                             
+
                          </div>
                          <div class="pq-blog-contain">
                             <div class="pq-post-meta">
