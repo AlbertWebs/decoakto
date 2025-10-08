@@ -63,6 +63,13 @@
                                 </div>
                             </div>
 
+                             <div class="row">
+                                <div class="input-field col s12">
+                                    <input value="{{$item->meta}}" autocomplete="off" name="meta" id="list-title" type="text" class="validate" required>
+                                    <label for="list-title">Post Meta</label>
+                                </div>
+                            </div>
+
 
 
                             <div class="row">

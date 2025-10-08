@@ -229,7 +229,7 @@ class AdminsController extends Controller
         return Redirect::back();
     }
 
-    public function about(){
+    public function aboutHome (){
         activity()->log('User Accessed The About Section');
         // activity()->log('User Accessed Site Settings Page');
         $About = About::all();
@@ -242,7 +242,8 @@ class AdminsController extends Controller
         activity()->log('Update o the copyright page');
         $updateDetails = array(
             'title'=>$request->title,
-            'content'=>$request->content
+            'content'=>$request->content,
+            'meta'=>$request->meta,
         );
         DB::table('abouts')->update($updateDetails);
 
@@ -1297,6 +1298,8 @@ class AdminsController extends Controller
         Session::flash('message', "Blog Has Been Added");
         return Redirect::back();
     }
+
+
 
     public function blog(){
         activity()->log('Accessed the all blogs page ');

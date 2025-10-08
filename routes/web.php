@@ -22,6 +22,7 @@ use App\Http\Controllers\BlogController;
 //     return view('welcome');
 // });
 Route::get('/', [HomeController::class, 'index'])->name('home-pages');
+Route::get('/about-us', [HomeController::class, 'about'])->name('about');
 Route::get('/products', [HomeController::class, 'products']);
 Route::get('/search-product', [HomeController::class, 'search'])->name('search');
 Route::get('/search-filter', [HomeController::class, 'filter'])->name('search-filter');
@@ -84,6 +85,8 @@ Route::middleware(['auth', 'web'])->group(function () {
         Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
         Route::get('', [AdminsController::class, 'adminHome'])->name('admin.home');
         Route::get('/home', [AdminsController::class, 'adminHome'])->name('admin.homes');
+        Route::get('/about', [AdminsController::class, 'aboutHome'])->name('admin.about');
+
 
 
         // SiteSettings

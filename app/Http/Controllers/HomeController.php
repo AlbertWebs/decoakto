@@ -18,6 +18,14 @@ class HomeController extends Controller
         return view('front.index', compact('Slider'));
     }
 
+    public function about()
+    {
+        $About = DB::table('abouts')->orderBy('id','ASC')->get();
+        return view('front.about', compact('About'));
+    }
+
+
+
     public function portfolio()
     {
         $Portfolio = DB::table('portfolios')->get();
