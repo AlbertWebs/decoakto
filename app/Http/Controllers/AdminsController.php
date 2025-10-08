@@ -1300,7 +1300,7 @@ class AdminsController extends Controller
 
     public function blog(){
         activity()->log('Accessed the all blogs page ');
-        $Blog = Blog::all();
+        $Blog = Blog::orderby('id','DESC')->get();
         $page_title = 'list';
         $page_name = 'Blog';
         return view('admin.blog',compact('page_title','Blog','page_name'));
