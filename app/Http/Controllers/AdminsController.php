@@ -597,6 +597,7 @@ class AdminsController extends Controller
 
         $updateDetails = array(
             'title'=>$request->title,
+            'order'=>$request->order,
             'heading_two_section'=>$request->heading_two_section,
             'heading_two'=>$request->heading_two,
             'slung' => Str::slug($request->title),

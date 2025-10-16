@@ -51,6 +51,13 @@
                             <label for="list-title">Edit Category Title</label>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="list-title" name="order" type="text" value="{{$Category->order}}" class="validate">
+                            <label for="list-title">Order(the least number is the first)</label>
+                        </div>
+                    </div>
+
                     {{--  --}}
                     <div class="row">
                         <div class="input-field col s12">
@@ -69,9 +76,10 @@
                     <div class="row">
                         <div class="input-field col s12">
                             <textarea required name="meta" class="materialize-textarea">{{$Category->meta}}</textarea>
-                            <label for="textarea1">Excerpt:</label>
+                            <label for="textarea1">Excerpt(SEO Meta Data):</label>
                         </div>
                     </div>
+
                     {{--  --}}
                     <div class="row">
                         <div class="input-field col s12">
@@ -105,10 +113,7 @@
                         </div>
                     </div><br><br>
 
-                    <script src="https://amanivehiclesounds.co.ke/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
-                    <script>
-                        CKEDITOR.replace( 'article_ckeditor' );
-                    </script>
+
                      {{-- Images --}}
                                  {{-- Preview --}}
                             {{-- Style --}}

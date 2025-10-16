@@ -68,7 +68,7 @@
                                     <?php
                                         $Class = DB::table('classifications')->get();
                                     ?>
-                                    
+
                                     <select name="class" id="cat" class="form-control form-control-sm" id="exampleFormControlSelect1">
                                         @foreach ($Class as $class)
                                         <option value="{{$class->slung}}" >{{$class->title}}</option>

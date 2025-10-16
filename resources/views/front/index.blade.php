@@ -110,14 +110,14 @@
           {{--  --}}
           <?php $Categories = DB::table("categories")->get(); ?>
           @foreach ($Categories as $cat)
-          <div class="col-lg-4 col-md-6 wow animated fadeInUp">
+          <div class="col-lg-4 col-md-6 wow animated fadeInUp" style="margin-bottom:20px;">
              <div class="pq-service-box pq-style-3 text-center">
                 <div class="pq-service-media">
                    <div class="pq-service-img">
                       <img class="ser-img" decoding="async" src="{{url('/')}}/uploads/categories/{{$cat->image}}" alt="{{$cat->title}}">
                    </div>
                 </div>
-                @if($cat->id == 1)
+                @if($cat->has_products == 1)
                     <div class="pq-service-info">
                     <h5 class="pq-service-title">
                         <a class="category-title" href="{{url('/')}}/products/{{$cat->slung}}">{{$cat->title}}</a>

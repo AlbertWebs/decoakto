@@ -7084,7 +7084,8 @@ Custom Css
     padding:80px !important;
 }
 .ser-img{
-    width:409px; height:477px
+    width:409px; height:477px;
+    object-fit:cover;
 }
 
 
