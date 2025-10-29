@@ -64,6 +64,37 @@
      </div>
      <!-- Banner -->
 
+    <style>
+    /* Responsive typography and spacing for mobile/tablet */
+    @media (max-width: 576px){
+        .headline-intro{ font-size: 22px; line-height: 30px; }
+        .pq-section-title .pq-section-main-title{ font-size: 22px; line-height: 30px; }
+        .pq-section-main-titles{ font-size: 20px !important; line-height: 28px !important; }
+        .pq-section-sub-title{ font-size: 12px; letter-spacing: .02em; }
+        .pq-section-description, .pq-section-title p, .pq-blog-contain p{ font-size: 14px; line-height: 22px; }
+        .pq-button .pq-button-text{ font-size: 14px; }
+        .pq-service-title a{ font-size: 16px; }
+        .pq-portfolio-content span a{ font-size: 12px; }
+        .pq-portfolio-content h5 a{ font-size: 16px; }
+        .pq-blog-title a{ font-size: 16px; }
+        .pq-post-meta a{ font-size: 12px; }
+        .sp-80{ padding-top: 40px; padding-bottom: 40px; }
+        .pq-my-30{ margin-top: 15px !important; margin-bottom: 15px !important; }
+        /* Revolution slider title */
+        .rs-title-font{ font-size: 22px !important; line-height: 30px !important; padding: 6px !important; border-width: 3px !important; }
+    }
+
+    @media (min-width: 577px) and (max-width: 991.98px){
+        .headline-intro{ font-size: 28px; line-height: 36px; }
+        .pq-section-title .pq-section-main-title{ font-size: 28px; line-height: 36px; }
+        .pq-section-main-titles{ font-size: 26px !important; line-height: 34px !important; }
+        .pq-section-description, .pq-section-title p{ font-size: 15px; line-height: 24px; }
+        .pq-button .pq-button-text{ font-size: 15px; }
+        .sp-80{ padding-top: 56px; padding-bottom: 56px; }
+        .rs-title-font{ font-size: 28px !important; line-height: 36px !important; padding: 8px !important; border-width: 4px !important; }
+    }
+    </style>
+
 
 
 
@@ -114,7 +145,7 @@
              <div class="pq-service-box pq-style-3 text-center">
                 <div class="pq-service-media">
                    <div class="pq-service-img">
-                      <img class="ser-img" decoding="async" src="{{url('/')}}/uploads/categories/{{$cat->image}}" alt="{{$cat->title}}">
+                      <img class="ser-img img-fluid w-100" decoding="async" src="{{url('/')}}/uploads/categories/{{$cat->image}}" alt="{{$cat->title}}">
                    </div>
                 </div>
                 @if($cat->has_products == 1)
@@ -146,7 +177,7 @@
 <!-- About Us -->
     <section class="about-us pq-bg-img-1 py-xl-0 pb-10">
         <div class="container">
-            <div class="floating-image floating-image-right floating-image-5">
+            <div class="floating-image floating-image-right floating-image-5 d-none d-md-block">
                 <img src="{{url('/')}}/uploads/sections/Laminate.png" alt="{{$sectionhome->name}}">
             </div>
         <div class="row align-items-center">
@@ -226,7 +257,7 @@
                         <div class="pq-portfoliobox-3">
                             <div class="pq-portfolio-img">
                                 <a href="{{url('/')}}/portfolio/{{$Portfolio->slung}}">
-                                    <img style="border-radius:10px" decoding="async" src="{{url('/')}}/uploads/portfolios/{{$Portfolio->image_one}}" alt="{{$Portfolio->name}}">
+                                    <img class="img-fluid" style="border-radius:10px" decoding="async" src="{{url('/')}}/uploads/portfolios/{{$Portfolio->image_one}}" alt="{{$Portfolio->name}}">
                                 </a>
                             </div>
                             <div class="pq-portfolio-info">
@@ -299,11 +330,11 @@
                $Color = DB::table('colors')->where('category_id','1')->get();
             ?>
             @foreach ($Color as $color)
-            <div class="col-lg-4 col-md-6 wow animated fadeInUp">
+            <div class="col-6 col-md-6 col-lg-4 wow animated fadeInUp">
                 <div class="pq-image-box pq-style-4">
                     <div class="pq-image-box-img">
                         <a class="pellete-img"  href="{{url('/')}}/products/color/original-laminate-flooring/{{$color->title}}">
-                            <img src="{{url('/')}}/uploads/colors/{{$color->image}}" class="img-fluid w-100s" alt="Decomagna {{$color->title}}">
+                            <img src="{{url('/')}}/uploads/colors/{{$color->image}}" class="img-fluid w-100" alt="Decomagna {{$color->title}}">
                         </a>
                     </div>
                     <div class="pq-image-box-content">
@@ -321,7 +352,15 @@
 
 
 
- <!-- Award -->
+<!-- Award -->
+<style>
+.partner-logo{ height: 120px; width: auto; object-fit: contain; }
+@media (max-width: 576px){
+    .partner-logo{ height: 80px; }
+    .award .pq-award-title{ display:none !important; }
+    .award .owl-dots{ display:none !important; }
+}
+</style>
  <section class="award pq-bg-img-1">
     <div class="container">
         <div class="row align-items-center">
@@ -347,13 +386,13 @@
             </div>
             <div class="col-lg-12 wow animated fadeInLeft">
                 <div class="pq-awardbox-1-slider pq-awardbox-1">
-                    <div class="owl-carousel owl-loaded owl-drag" data-dots="true" data-nav="false" data-desk_num="4" data-lap_num="3" data-tab_num="2" data-mob_num="1" data-mob_sm="1" data-autoplay="true" data-loop="true" data-margin="30">
+                    <div class="owl-carousel owl-loaded owl-drag" data-dots="true" data-nav="false" data-desk_num="4" data-lap_num="3" data-tab_num="2" data-mob_num="3" data-mob_sm="3" data-autoplay="true" data-loop="true" data-margin="30">
                         <?php $Partners = DB::table("partners")->get(); ?>
                         @foreach ($Partners as $partners)
-                        <div class="item " style="width:265px; height:265px; background-color:#ffffff">
+                        <div class="item" style="background-color:#ffffff">
                             <div class="pq-awardbox-1 ">
                                 <a>
-                                    <img style="width:265px" decoding="async" src="{{url('/')}}/uploads/partners/{{$partners->image}}" alt="{{$partners->name}}">
+                                    <img class="img-fluid partner-logo d-block mx-auto" decoding="async" src="{{url('/')}}/uploads/partners/{{$partners->image}}" alt="{{$partners->name}}">
                                     <span class="pq-award-title">{{$partners->name}}</span>
                                 </a>
                             </div>
@@ -404,7 +443,7 @@
                    <div class="item">
                       <div class="pq-blog-post">
                          <div class="pq-post-media blog-img">
-                            <img decoding="async" src="{{url('/')}}/uploads/blogs/{{$blog->image_one}}" alt="{{$blog->title}}">
+                           <img class="img-fluid w-100" decoding="async" src="{{url('/')}}/uploads/blogs/{{$blog->image_one}}" alt="{{$blog->title}}">
 
                                   <?php
                                       $Category = \App\Models\Category::find($blog->category);
