@@ -1,222 +1,87 @@
-@extends('admin.master')
+@extends('admin.tw.layout')
+@section('title','Edit User')
 @section('content')
-<!-- Remember to include jQuery :) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+	<div class="mb-5 flex items-center justify-between">
+		<div class="flex items-center gap-2">
+			<span class="inline-flex h-9 w-9 items-center justify-center rounded-md bg-sky-100 text-sky-700 ring-1 ring-sky-200">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5"><path d="M15 19a6 6 0 10-12 0v1h12v-1zM9 11a4 4 0 100-8 4 4 0 000 8zM21 19a6.5 6.5 0 00-7.5-6.44 7.97 7.97 0 012.5 5.94v1H21v-1zM17 11a3 3 0 110-6 3 3 0 010 6z"/></svg>
+			</span>
+			<h2 class="text-lg font-semibold">Edit User</h2>
+		</div>
+		<a href="{{ url('/admin/users') }}" class="inline-flex items-center gap-2 rounded-md border border-gray-200 bg-white px-3 py-2 text-sm text-gray-700 hover:bg-gray-50">
+			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
+			Back
+		</a>
+	</div>
 
-<!-- jQuery Modal -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-<style>
-    .modal a.close-modal{
-        top:0px !important;
-        right:0px !important;
-    }
-</style>
-<!--== BODY CONTNAINER ==-->
- <div class="container-fluid sb2">
-    <div class="row">
-        @include('admin.sidebar')
+	@if(Session::has('message'))
+		<div class="mb-4 rounded-md border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-700">{{ Session::get('message') }}</div>
+	@endif
 
-        <!--== BODY INNER CONTAINER ==-->
-        
-        <div class="sb2-2">
-            <div class="sb2-2-2">
-                <ul>
-                    <li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
-                    </li>
-                    <li class="active-bre"><a href="#"> Edit User</a>
-                    </li>
-                    <li class="page-back"><a href="{{url('/')}}/admin/users"><i class="fa fa-backward" aria-hidden="true"></i> All Users</a>
-                    </li>
-                </ul>
-               
-            </div>
-            <div class="sb2-2-Edit-blog sb2-2-1">
-                <div class="box-inn-sp">
-                    <div class="inn-title">
-                        <h4>Edit User</h4>
-                        <p>  </p>
-                        <center>
-                            @if(Session::has('message'))
-                                          <div class="alert alert-success">{{ Session::get('message') }}</div>
-                           @endif
-           
-                           @if(Session::has('messageError'))
-                                          <div class="alert alert-danger">{{ Session::get('messageError') }}</div>
-                           @endif
-                        </center>
-                    </div>
-                    <div class="bor">
-                        <form method="POST" action="{{url('/')}}/admin/edit_User/{{$User->id}}" enctype="multipart/form-data">
-                            {{csrf_field()}}
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <input autocomplete="off" name="name" value="{{$User->name}}" id="list-title" type="text" class="validate" required>
-                                    <label for="list-title">User Name</label>
-                                </div>
-                                <div class="input-field col s12">
-                                    <input autocomplete="off" name="email" value="{{$User->email}}"  id="list-title" type="text" class="validate" required>
-                                    <label for="list-title">User Email</label>
-                                </div>
-                                <div class="input-field col s12">
-                                    <input autocomplete="off" name="mobile" value="{{$User->mobile}}" id="list-title" type="text" class="validate" required>
-                                    <label for="list-title">User Mobile Number</label>
-                                </div>
-                                <div class="input-field col s12">
-                                    <input autocomplete="off" name="country" value="{{$User->country}}" id="list-title" type="text" class="validate" required>
-                                    <label for="list-title">User Country</label>
-                                </div>
-                                <div class="input-field col s12">
-                                    <input autocomplete="off" name="address" value="{{$User->address}}" id="list-title" type="text" class="validate" required>
-                                    <label for="list-title">User address</label>
-                                </div>
-                                {{--  --}}
- {{-- Images --}}
-                                 {{-- Preview --}}
-                            {{-- Style --}}
-                            <style>
-                                .btn-file {
-                                    position: relative;
-                                    overflow: hidden;
-                                }
-                                .btn-file input[type=file] {
-                                    position: absolute;
-                                    top: 0;
-                                    right: 0;
-                                    min-width: 100%;
-                                    min-height: 100%;
-                                    font-size: 100px;
-                                    text-align: right;
-                                    filter: alpha(opacity=0);
-                                    opacity: 0;
-                                    outline: none;
-                                    background: white;
-                                    cursor: inherit;
-                                    display: block;
-                                }
+	<form action="{{ url('/admin/edit_User/'.$User->id) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+		@csrf
+		<input type="hidden" name="image_cheat" value="{{ $User->image ?? '' }}" />
+		<div class="rounded-xl bg-white ring-1 ring-gray-200 p-4 space-y-4">
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+				<div>
+					<label class="mb-1 block text-sm font-medium text-gray-700">Name</label>
+					<input name="name" value="{{ old('name', $User->name) }}" class="w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm text-gray-800" />
+				</div>
+				<div>
+					<label class="mb-1 block text-sm font-medium text-gray-700">Email</label>
+					<input name="email" type="email" value="{{ old('email', $User->email) }}" class="w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm text-gray-800" />
+				</div>
+				<div>
+					<label class="mb-1 block text-sm font-medium text-gray-700">Mobile</label>
+					<input name="mobile" value="{{ old('mobile', $User->mobile) }}" class="w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm text-gray-800" />
+				</div>
+				<div>
+					<label class="mb-1 block text-sm font-medium text-gray-700">Address</label>
+					<input name="address" value="{{ old('address', $User->address) }}" class="w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm text-gray-800" />
+				</div>
+			</div>
+			<div>
+				<label class="mb-1 block text-sm font-medium text-gray-700">Avatar</label>
+				<div class="upload-tile group rounded-lg border-2 border-dashed border-gray-200 bg-white p-3 hover:border-indigo-300 cursor-pointer max-w-sm" data-target="input_user_image">
+					<div class="flex items-center gap-3">
+						<div class="relative h-32 w-32 overflow-hidden rounded-md bg-gray-100 border-2 border-dashed border-gray-300 flex items-center justify-center">
+							<img id="preview_user_image" src="{{ $User->image ? url('/uploads/users/'.$User->image) : '' }}" alt="" class="{{ $User->image ? '' : 'hidden' }} absolute inset-0 h-full w-full object-cover" />
+							<svg id="placeholder_user_image" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="{{ $User->image ? 'hidden' : '' }} h-6 w-6 text-gray-400"><path d="M21 7.5V18a3 3 0 01-3 3H6a3 3 0 01-3-3V7.5L7.5 3h9L21 7.5z"/></svg>
+						</div>
+						<div class="flex-1">
+							<input id="input_user_image" type="file" name="image" accept="image/*" class="sr-only" />
+							<p class="text-xs text-gray-600"><span class="text-indigo-600 underline">Click here to upload</span> • JPG/PNG up to 2MB</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="pt-2">
+				<button class="inline-flex items-center gap-2 rounded-md bg-indigo-600 px-3 py-2 text-sm font-medium text-white hover:bg-indigo-700">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4"><path d="M17 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V5l-2-2zm-2 14H9v-5h6v5zm0-7H9V5h6v5z"/></svg>
+					Save Changes
+				</button>
+			</div>
+		</div>
+	</form>
 
-                                #img-upload{
-                                    width: 100%;
-                                }
-                            </style>
-                            {{-- Style --}}
-                            <div class="row">
-                            <div class="">
-                                <div class="input-field col s12">
-                                    <div class="form-group">
-                                        <label>Change Image</label>
-                                        <div class="input-group">
-                                            <span class="input-group-btn">
-                                                <span class="btn btn-default btn-file">
-                                                    Browse… <input name="image" type="file" id="imgInp">
-                                                </span>
-                                            </span>
-                                            <input type="text" class="form-control" readonly>
-                                        </div>
-                                        <img class="image-preview" style="width:auto;" src="{{url('/')}}/uploads/users/{{$User->image}}" id='img-upload'/>
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
-                            {{-- Preview --}}
-
-                            {{-- Images --}}
-                            
-                                
-                            </div>
-                            
-                            <br><br>
-                           
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <input readonly required autocomplete="off" value="{{Auth::user()->name }}" id="post-auth" name="author" type="text" class="validate">
-                                    <label for="post-auth">Author</label>
-                                </div>
-                            </div>
-                            <input type="hidden" name="image_cheat" value={{$User->image}}>
-                            
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <input  type="submit" class="waves-effect waves-light btn-large" value="Save Changes">
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--== BODY INNER CONTAINER ==-->
-
-    </div>
-</div>
-
-{{--  --}}
-<div id="ex1" class="modal">
-    <div class="sb2-2-3">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="box-inn-sp">
-                    <div class="inn-title">
-                        <h4>Edit New Category</h4>
-                    </div>
-                    <div class="tab-inn">
-                        <form method="POST" id="categoryEditForm">
-                            {{csrf_field()}}
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <input autocomplete="off" name="title" id="CategoryTitle" type="text" class="validate">
-                                    <label for="CategoryName">Category Name</label>
-                                </div>
-                            </div>
-                            <div class="row" id="submitButton">
-                                <div class="input-field col s12">
-                                    <input  type="submit" class="waves-effect waves-light btn-large" value="Submit">
-                                </div>
-                            </div>
-                            
-                            <div class="tab-inn" id="loading-bar">
-                                <div class="progress">
-                                    <div class="indeterminate"></div>
-                                </div>
-                            </div>
-                            
-                        </form>
-                    </div>
-                </div>
-            </div>
-{{-- <a href="#" rel="modal:close">Close</a> --}}
-<script type="text/javascript">
-        // A $( document ).ready() block.
-    $( document ).ready(function() {
-        $('#loading-bar').hide();
-    });
-
-    $('#categoryEditForm').on('submit',function(event){
-        event.preventDefault();
-        $('#loading-bar').show();
-   
-
-        let title = $('#CategoryTitle').val();
-       
-
-        $.ajax({
-          url: "{{url('/')}}/admin/EditCategoryAjaxRequest",
-          type:"POST",
-          data:{
-            "_token": "{{ csrf_token() }}",
-            title:title,
-          },
-          success:function(response){
-            $('#loading-bar').hide();
-            $('#submitButton').html('<center><span class="alert-success text-center">Category Edited Successfully</span></center>').delay(3000);
-            $('#categoryEditForm')[0].reset();
-            setTimeout(function() {
-                location.reload();
-            }, 5000);
-          },
-         });
-        });
-      </script>
-</div>
-{{--  --}}
+	<script>
+		document.addEventListener('DOMContentLoaded', function(){
+			const tile = document.querySelector('.upload-tile');
+			const input = document.getElementById('input_user_image');
+			const img = document.getElementById('preview_user_image');
+			const placeholder = document.getElementById('placeholder_user_image');
+			if (tile && input) {
+				tile.addEventListener('click', (e) => { if (e.target.tagName.toLowerCase() !== 'input') input?.click(); });
+				input.addEventListener('change', () => {
+					const file = input.files && input.files[0];
+					if (!file || !file.type.startsWith('image/')) { input.value=''; return; }
+					const reader = new FileReader();
+					reader.onload = e => { img.src = e.target.result; img.classList.remove('hidden'); placeholder?.classList.add('hidden'); };
+					reader.readAsDataURL(file);
+				});
+			}
+		});
+	</script>
 @endsection
+
+

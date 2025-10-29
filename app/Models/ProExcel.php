@@ -2,11 +2,22 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class ProExcel extends Model
 {
-    use HasFactory;
-    public $table = '_pro_excel';
+	protected $table = '_pro_excel';
+	protected $fillable = [
+		'code',
+		'title',
+		'description',
+		'availability',
+		'condition',
+		'price',
+		'link',
+		'image_link',
+		'brand',
+		'google_product_category',
+	];
+
 }

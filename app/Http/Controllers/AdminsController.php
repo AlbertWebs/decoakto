@@ -113,6 +113,16 @@ class AdminsController extends Controller
         return view('admin.index',compact('Notifications','ActivityLog','SiteSettings','Message'));
     }
 
+    public function adminHomeTw()
+    {
+        $Notifications = DB::table('notifications')->limit('5')->get();
+        $ActivityLog = DB::table('activity_log')->orderBy('id','DESC')->limit('5')->get();
+        $VisitorLog = DB::table('activity_log')->where('log_name','visitor')->orderBy('id','DESC')->limit('100')->get();
+        $SiteSettings = DB::table('_site_settings')->get();
+        $Message = DB::table('messages')->limit('5')->get();
+        return view('admin.tw.index', compact('Notifications','ActivityLog','VisitorLog','SiteSettings','Message'));
+    }
+
     public function activitylogs()
     {
         activity()->log('User Accessed the Admins Dashboard');
@@ -619,6 +629,7 @@ class AdminsController extends Controller
 
     // Products
     public function products(){
+       
         activity()->log('Accessed All Products');
         $Product = Product::all();
         $page_title = 'list';
@@ -629,76 +640,118 @@ class AdminsController extends Controller
     public function addProduct(){
         $Category = Category::all();
         $Classification = Classification::all();
+        // dropdown sources
+        $Thickness = DB::table('thicknesses')->get();
+        $ACRating = DB::table('a_c_ratings')->get();
+        $Color = DB::table('colors')->get();
+        $Species = DB::table('species')->get();
+        $Waters = DB::table('waters')->get();
+        $Warranties = DB::table('warranties')->get();
         activity()->log('Accessed Add Product Page');
         $page_title = 'formfiletext';
         $page_name = 'Add Product';
-        return view('admin.addProduct',compact('page_title','page_name','Category','Classification'));
+        return view('admin.addProduct',compact('page_title','page_name','Category','Classification','Thickness','ACRating','Color','Species','Waters','Warranties'));
     }
 
     public function add_Product(Request $request){
         activity()->log('Evoked add Product Operation');
+
+        // Validate according to Tailwind add form
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'price' => 'required|numeric|min:0',
+            'stock' => 'required|in:In Stock,Out Of Stock',
+            'category' => 'required',
+            'classification' => 'required',
+            'sub_classification' => 'nullable',
+            'dimensions' => 'nullable|string',
+            'meta' => 'nullable|string',
+            'content' => 'nullable|string',
+            'species' => 'nullable|string',
+            'color' => 'nullable|string',
+            'thickness' => 'nullable|string',
+            'a_c_ratings' => 'nullable|string',
+            'waters' => 'nullable|integer|min:0',
+            'warranties' => 'nullable|integer|min:0',
+            'image_one' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:4096',
+            'image_two' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:4096',
+            'image_three' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:4096',
+        ]);
+
         $path = public_path('uploads/products');
-        if(isset($request->image_one)){
+
+        // Ensure directory exists
+        if (!file_exists($path)) {
+            @mkdir($path, 0755, true);
+        }
+
+        // Handle images with unique filenames, fallback to "0" to preserve existing behavior
+        $image_one = "0";
+        if ($request->hasFile('image_one')) {
             $file = $request->file('image_one');
-            $filename = $file->getClientOriginalName();
+            $filename = time().'_'.Str::random(6).'_'.$file->getClientOriginalName();
             $file->move($path, $filename);
             $image_one = $filename;
-        }else{
-            $image_one = "0";
         }
 
-        if(isset($request->image_two)){
+        $image_two = "0";
+        if ($request->hasFile('image_two')) {
             $file = $request->file('image_two');
-            $filename = $file->getClientOriginalName();
+            $filename = time().'_'.Str::random(6).'_'.$file->getClientOriginalName();
             $file->move($path, $filename);
             $image_two = $filename;
-        }else{
-            $image_two = "0";
         }
 
-        if(isset($request->image_three)){
+        $image_three = "0";
+        if ($request->hasFile('image_three')) {
             $file = $request->file('image_three');
-            $filename = $file->getClientOriginalName();
+            $filename = time().'_'.Str::random(6).'_'.$file->getClientOriginalName();
             $file->move($path, $filename);
             $image_three = $filename;
-        }else{
-            $image_three = "0";
         }
 
         $Product = new Product;
-        $Product->name = $request->title;
-        $Product->slung = Str::slug($request->title);
-        $Product->meta = $request->meta;
-        $Product->dimensions = $request->dimensions;
-        $Product->warranties = $request->warranties;
-        $Product->waters = $request->waters;
-        $Product->classifications = $request->classification;
-        $Product->sub_classifications = $request->sub_classification;
-        $Product->category = $request->category;
-        $Product->species = $request->species;
-        $Product->color = $request->color;
-        $Product->a_c_ratings = $request->a_c_ratings;
-        $Product->thickness = $request->thickness;
-        $Product->stock = $request->stock;
-        $Product->price_raw = $request->price;
-        $Product->price = $request->price;
-        $Product->content = $request->content;
+        $Product->name = $validated['title'];
+        $Product->slung = Str::slug($validated['title']);
+        $Product->meta = $validated['meta'] ?? null;
+        $Product->dimensions = $validated['dimensions'] ?? null;
+        $Product->warranties = (int)($validated['warranties'] ?? 0);
+        $Product->waters = (int)($validated['waters'] ?? 0);
+        $Product->classifications = $validated['classification'];
+        $Product->sub_classifications = $validated['sub_classification'] ?? null;
+        $Product->category = $validated['category'];
+        $Product->species = $validated['species'] ?? null;
+        $Product->color = $validated['color'] ?? null;
+        $Product->a_c_ratings = $validated['a_c_ratings'] ?? null;
+        $Product->thickness = $validated['thickness'] ?? null;
+        $Product->stock = $validated['stock'];
+        $Product->price_raw = $validated['price'];
+        $Product->price = $validated['price'];
+        $Product->content = $validated['content'] ?? null;
         $Product->image_one = $image_one;
         $Product->image_two = $image_two;
         $Product->image_three = $image_three;
         $Product->save();
         Session::flash('message', "Product Has Been Added");
-        return Redirect::back();
+        // Redirect to the products list
+        return redirect('/admin/products');
     }
 
     public function editProducts($id){
         $Category = Category::all();
         $Classification = Classification::all();
+        // dropdown sources
+        $Thickness = DB::table('thicknesses')->get();
+        $ACRating = DB::table('a_c_ratings')->get();
+        $Color = DB::table('colors')->get();
+        $Species = DB::table('species')->get();
+        $Waters = DB::table('waters')->get();
+        $Warranties = DB::table('warranties')->get();
         activity()->log('Access Edit Product ID number '.$id.' ');
         $Product = Product::find($id);
         $page_title = 'formfiletext';
         $page_name = 'Edit Home Page Slider';
-        return view('admin.editProduct',compact('page_title','Product','page_name','Category','Classification'));
+        return view('admin.editProduct',compact('page_title','Product','page_name','Category','Classification','Thickness','ACRating','Color','Species','Waters','Warranties'));
     }
 
     public function edit_Product(Request $request, $id){
@@ -768,8 +821,8 @@ class AdminsController extends Controller
             'classifications'=>$request->classification,
             'sub_classifications'=>$request->sub_classification,
             'featured'=>$featured,
-            'warranties'=>$request->warranties,
-            'waters'=>$request->waters,
+            'warranties'=>(int)($request->warranties ?? 0),
+            'waters'=>(int)($request->waters ?? 0),
             'stock'=>$new_stock,
             'price'=>$request->price,
             'category'=>$request->category,
@@ -799,7 +852,10 @@ class AdminsController extends Controller
      // Portfolio
      public function portfolios(){
         activity()->log('Accessed All Portfolios');
-        $Portfolio = Portfolio::all();
+        $Portfolio = DB::table('portfolios')
+            ->leftJoin('categories', 'portfolios.category_id', '=', 'categories.id')
+            ->select('portfolios.*', 'categories.title as category_title')
+            ->get();
         $page_title = 'list';
         $page_name = 'Portfolios';
         return view('admin.portfolios',compact('page_title','Portfolio','page_name'));
@@ -1315,7 +1371,14 @@ class AdminsController extends Controller
 
     public function blog(){
         activity()->log('Accessed the all blogs page ');
-        $Blog = Blog::orderby('id','DESC')->get();
+        $Blog = DB::table('blogs')
+            ->leftJoin('categories', function($join){
+                $join->on('blogs.category', '=', 'categories.id')
+                     ->orOn('blogs.category', '=', 'categories.title');
+            })
+            ->select('blogs.*', 'categories.title as category_title')
+            ->orderBy('blogs.id','DESC')
+            ->get();
         $page_title = 'list';
         $page_name = 'Blog';
         return view('admin.blog',compact('page_title','Blog','page_name'));

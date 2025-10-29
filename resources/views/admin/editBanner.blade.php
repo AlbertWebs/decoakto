@@ -1,172 +1,117 @@
-@extends('admin.master')
+@extends('admin.tw.layout')
+@section('title','Edit Banner')
 @section('content')
-<!-- Remember to include jQuery :) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+	<div class="mb-5 flex items-center justify-between">
+		<div class="flex items-center gap-2">
+			<span class="inline-flex h-9 w-9 items-center justify-center rounded-md bg-indigo-50 text-indigo-600 ring-1 ring-indigo-100">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5"><path d="M16.862 3.487a1.5 1.5 0 112.121 2.121l-10.5 10.5a1.5 1.5 0 01-.53.353l-3.75 1.25a.75.75 0 01-.949-.949l1.25-3.75a1.5 1.5 0 01.353-.53l10.5-10.5z"/></svg>
+			</span>
+			<h2 class="text-lg font-semibold">Edit Banner</h2>
+		</div>
+		<a href="{{ url('/admin/banners') }}" class="inline-flex items-center gap-2 rounded-md border border-gray-200 bg-white px-3 py-2 text-sm text-gray-700 hover:bg-gray-50">
+			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
+			Back
+		</a>
+	</div>
 
-<!-- jQuery Modal -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-<style>
-    .modal a.close-modal{
-        top:0px !important;
-        right:0px !important;
-    }
-</style>
-<!--== BODY CONTNAINER ==-->
- <div class="container-fluid sb2">
-    <div class="row">
-        @include('admin.sidebar')
+	@if(Session::has('message'))
+		<div class="mb-4 rounded-md border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-700">{{ Session::get('message') }}</div>
+	@endif
 
-        <!--== BODY INNER CONTAINER ==-->
+	<form action="{{ url('/admin/edit_Banner/'.$Banner->id) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+		@csrf
+		<input type="hidden" name="image_cheat" value="{{ $Banner->image }}" />
+		<div class="rounded-xl bg-white ring-1 ring-gray-200 p-4 space-y-4">
+			<div class="mb-3 flex items-center gap-2 text-sm font-semibold text-gray-700">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4"><path d="M4 5h16v2H4zM4 11h16v2H4zM4 17h16v2H4z"/></svg>
+				<span>Details</span>
+			</div>
+			<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+				<div>
+					<label class="mb-1 block text-sm font-medium text-gray-700">Title</label>
+					<input name="title" required value="{{ old('title', $Banner->title) }}" class="w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-indigo-100" />
+				</div>
+				<div>
+					<label class="mb-1 block text-sm font-medium text-gray-700">Button Text</label>
+					<input name="link_name" value="{{ old('link_name', $Banner->link_name) }}" class="w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm text-gray-800" />
+				</div>
+				<div>
+					<label class="mb-1 block text-sm font-medium text-gray-700">Button URL</label>
+					<input name="link" value="{{ old('link', $Banner->link) }}" class="w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm text-gray-800" />
+				</div>
+				<div>
+					<label class="mb-1 block text-sm font-medium text-gray-700">Image</label>
+					<div class="upload-tile group rounded-lg border-2 border-dashed border-gray-200 bg-white p-3 hover:border-indigo-300 cursor-pointer" data-target="input_banner_image">
+						<div class="flex items-center gap-3">
+							<div class="relative h-24 w-40 overflow-hidden rounded-md bg-gray-100 border-2 border-dashed border-gray-300 flex items-center justify-center">
+								<img id="preview_banner_image" src="{{ $Banner->image ? url('/uploads/banners/'.$Banner->image) : '' }}" alt="" class="{{ $Banner->image ? '' : 'hidden' }} absolute inset-0 h-full w-full object-cover" />
+								<svg id="placeholder_banner_image" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="{{ $Banner->image ? 'hidden' : '' }} h-6 w-6 text-gray-400"><path d="M21 7.5V18a3 3 0 01-3 3H6a3 3 0 01-3-3V7.5L7.5 3h9L21 7.5z"/></svg>
+							</div>
+							<div class="flex-1">
+								<input id="input_banner_image" type="file" name="image" accept="image/*" class="sr-only" />
+								<p class="text-xs text-gray-600"><span class="text-indigo-600 underline">Click here to upload</span> • JPG/PNG up to 2MB</p>
+							</div>
+							<button type="button" id="clear_banner_image" class="{{ $Banner->image ? '' : 'hidden' }} shrink-0 rounded-md border border-gray-200 bg-white px-2 py-1 text-xs text-gray-700 hover:bg-gray-50">Clear</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div>
+				<label class="mb-1 block text-sm font-medium text-gray-700">Content</label>
+				<textarea id="content_editor" name="content" rows="8" class="w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm text-gray-800">{!! old('content', $Banner->content) !!}</textarea>
+			</div>
+			<div class="pt-2">
+				<button class="inline-flex items-center gap-2 rounded-md bg-indigo-600 px-3 py-2 text-sm font-medium text-white hover:bg-indigo-700">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4"><path d="M17 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V5l-2-2zm-2 14H9v-5h6v5zm0-7H9V5h6v5z"/></svg>
+					Save Changes
+				</button>
+			</div>
+		</div>
+	</form>
 
-        <div class="sb2-2">
-            <div class="sb2-2-2">
-                <ul>
-                    <li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
-                    </li>
-                    <li class="active-bre"><a href="#"> Edit {{$Banner->name}}</a>
-                    </li>
-                    <li class="page-back"><a href="{{url('/')}}/admin/banners"><i class="fa fa-backward" aria-hidden="true"></i> All Banners</a>
-                    </li>
-                </ul>
-
-            </div>
-            <div class="sb2-2-add-blog sb2-2-1">
-                <h2>Edit {{$Banner->name}} Banner</h2>
-                <p>Banner Images are random images used to bring out the layout</p>
-                <form method="POST" action="{{url('/')}}/admin/edit_Banner/{{$Banner->id}}" enctype="multipart/form-data">
-                    {{csrf_field()}}
-                    {{-- <div class="row">
-                        <div class="input-field col s12">
-                            <input id="list-title" name="link_name" type="text" value="{{$Banner->link_name}}" class="validate">
-                            <label for="list-title">Banner Link Name</label>
-                        </div>
-                    </div> --}}
-                    {{-- <div class="row">
-                        <div class="input-field col s12">
-                            <input id="list-title" name="link" type="text" value="{{$Banner->link}}" class="validate">
-                            <label for="list-title">Banner Link</label>
-                        </div>
-                    </div> --}}
-                    {{-- <div class="row">
-                        <?php $Settings = DB::table('_site_settings')->get(); ?>
-                        @foreach ($Settings as $settings)
-
-                        <div class="input-field col s12">
-                            <select required name="link" class="icons" id="mydiv">
-                                <option value="{{$Banner->link}}" selected>{{$Banner->link}}</option>
-                                <?php $Category = DB::table('categories')->get(); ?>
-                                @foreach ($Category as $Categories)
-                                <option value="{{$settings->url}}/products/{{$Categories->slung}}" data-icon="{{url('/')}}/uploads/categories/{{$Categories->image}}" class="circle">{{$Categories->title}} - Link: {{$settings->url}}/products/{{$Categories->slung}}</option>
-                                @endforeach
-                            </select>
-                            <label>Choose Where this Link Points To</label>
-                        </div>
-                        @endforeach
-                    </div> --}}
-                    {{-- <div class="row">
-                        <div class="input-field col s12">
-                            <input id="list-title" name="title" type="text" value="{{$Banner->title}}" class="validate">
-                            <label for="list-title">Banner title</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input id="list-title" name="content" type="text" value="{{$Banner->content}}" class="validate">
-                            <label for="list-title">Banner Content</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input id="list-title" name="size" type="text" value="{{$Banner->size}}" readonly class="validate">
-                            <label for="list-title">Banner Size</label>
-                        </div>
-                    </div> --}}
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input id="list-title" name="title" type="text" value="{{$Banner->title}}" class="validate">
-                            <label for="list-title">Banner title</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input id="list-title" name="section" type="text" value="{{$Banner->section}}" readonly class="validate">
-                            <label for="list-title">Banner Section</label>
-                        </div>
-                    </div>
-                    <br><br>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <textarea required id="article-ckeditor" name="content" class="materialilze-textarea" placeholder="content">{{$Banner->content}}</textarea>
-
-                        </div>
-                    </div><br><br>
-
-                     {{-- Images --}}
-                                 {{-- Preview --}}
-                            {{-- Style --}}
-                            <style>
-                                .btn-file {
-                                    position: relative;
-                                    overflow: hidden;
-                                }
-                                .btn-file input[type=file] {
-                                    position: absolute;
-                                    top: 0;
-                                    right: 0;
-                                    min-width: 100%;
-                                    min-height: 100%;
-                                    font-size: 100px;
-                                    text-align: right;
-                                    filter: alpha(opacity=0);
-                                    opacity: 0;
-                                    outline: none;
-                                    background: white;
-                                    cursor: inherit;
-                                    display: block;
-                                }
-
-                                #img-upload{
-                                    width: 100%;
-                                }
-                            </style>
-                            {{-- Style --}}
-                            <div class="row">
-                                <div class="">
-                                    <div class="input-field col s12">
-                                        <div class="form-group">
-                                            <label>Banner Image</label>
-                                            <div class="input-group">
-                                                <span class="input-group-btn">
-                                                    <span class="btn btn-default btn-file">
-                                                        Browse… <input name="image" type="file" id="imgInp">
-                                                    </span>
-                                                </span>
-                                                <input type="text" class="form-control" readonly>
-                                            </div>
-                                            <img class="image-preview" style="width:auto;" src="{{url('/')}}/uploads/banners/{{$Banner->image}}" id='img-upload'/>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            {{-- Preview --}}
-
-                            {{-- Images --}}
-                            <br><br>
-                            <div class="clearfix"></div>
-                            <input type="hidden" name="image_cheat" value="{{$Banner->image}}">
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input type="submit" class="waves-effect waves-light btn-large" value="Save Changes">
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <!--== BODY INNER CONTAINER ==-->
-
-    </div>
-</div>
-
-
+	<script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+	<script>
+		if (window.CKEDITOR) { CKEDITOR.replace('content_editor'); }
+		document.addEventListener('DOMContentLoaded', function(){
+			function bindPreview(inputId, imgId, placeholderId, clearId) {
+				const input = document.getElementById(inputId);
+				const img = document.getElementById(imgId);
+				const placeholder = document.getElementById(placeholderId);
+				const clearBtn = document.getElementById(clearId);
+				if (!input || !img) return;
+				input.addEventListener('change', () => {
+					const file = input.files && input.files[0];
+					if (!file) return;
+					if (!file.type.startsWith('image/')) { input.value=''; return; }
+					const reader = new FileReader();
+					reader.onload = e => {
+						img.src = e.target.result;
+						img.classList.remove('hidden');
+						placeholder?.classList.add('hidden');
+						clearBtn?.classList.remove('hidden');
+					};
+					reader.readAsDataURL(file);
+				});
+				clearBtn?.addEventListener('click', (e) => {
+					e.stopPropagation();
+					input.value = '';
+					img.src = '';
+					img.classList.add('hidden');
+					placeholder?.classList.remove('hidden');
+					clearBtn.classList.add('hidden');
+				});
+			}
+			bindPreview('input_banner_image', 'preview_banner_image', 'placeholder_banner_image', 'clear_banner_image');
+			document.querySelectorAll('.upload-tile').forEach(tile => {
+				const inputId = tile.dataset.target;
+				const input = document.getElementById(inputId);
+				tile.addEventListener('click', (e) => {
+					if (e.target.tagName.toLowerCase() === 'button') return;
+					input?.click();
+				});
+			});
+		});
+	</script>
 @endsection
+
+

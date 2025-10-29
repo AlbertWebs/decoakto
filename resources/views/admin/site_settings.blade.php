@@ -1,227 +1,187 @@
-@extends('admin.master')
+@extends('admin.tw.layout')
+@section('title','Site Settings')
 @section('content')
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<!--== BODY CONTNAINER ==-->
- <div class="container-fluid sb2">
-    <div class="row">
-        @include('admin.sidebar')
-        @foreach ($SiteSettings as $Setting)
-        <!--== BODY INNER CONTAINER ==-->
-        <div class="sb2-2">
-            <div class="sb2-2-2">
-                <ul>
-                    <li><a href="#"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
-                    </li>
-                    <li class="active-bre"><a href="#">System Settings</a>
-                    </li>
-                    <li class="page-back"><a href="{{url('/')}}/admin/home"><i class="fa fa-backward" aria-hidden="true"></i> Dashboard </a>
-                    </li>
-                </ul>
+	@php $s = ($SiteSettings ?? [])[0] ?? null; @endphp
+	<div class="mb-5 flex items-center justify-between">
+		<div class="flex items-center gap-2">
+			<span class="inline-flex h-9 w-9 items-center justify-center rounded-md bg-amber-100 text-amber-700 ring-1 ring-amber-200">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5"><path d="M12 8a4 4 0 110 8 4 4 0 010-8z"/><path fill-rule="evenodd" d="M12 2a1 1 0 011 1v1.07a7.965 7.965 0 012.121.877l.758-.758a1 1 0 011.414 0l1.414 1.414a1 1 0 010 1.414l-.758.758c.36.65.642 1.367.817 2.121H21a1 1 0 011 1v2a1 1 0 01-1 1h-1.07a7.965 7.965 0 01-.877 2.121l.758.758a1 1 0 010 1.414l-1.414 1.414a1 1 0 01-1.414 0l-.758-.758a7.965 7.965 0 01-2.121.817V21a1 1 0 01-1 1h-2a1 1 0 01-1-1v-1.07a7.965 7.965 0 01-2.121-.877l-.758.758a1 1 0 01-1.414 0L5.05 18.35a1 1 0 010-1.414l.758-.758A7.965 7.965 0 015 14.058H4a1 1 0 01-1-1v-2a1 1 0 011-1h1.07a7.965 7.965 0 01.877-2.121l-.758-.758a1 1 0 010-1.414L7.603 3.34a1 1 0 011.414 0l.758.758A7.965 7.965 0 0112 4.07V3a1 1 0 011-1z" clip-rule="evenodd"/></svg>
+			</span>
+			<h2 class="text-lg font-semibold">Site Settings</h2>
+		</div>
+	</div>
+
+<form id="siteSettingsForm" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+		<!-- Branding -->
+<details class="rounded-xl bg-white ring-1 ring-gray-200 lg:col-span-1" open>
+			<summary class="flex cursor-pointer list-none items-center justify-between p-4 text-sm font-semibold text-gray-700">
+				<span class="inline-flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4 text-indigo-600"><path d="M4 6h16v12H4z"/></svg> Branding</span>
+				<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.18l3.71-3.95a.75.75 0 111.08 1.04l-4.25 4.52a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+			</summary>
+			<div class="p-5 pt-0 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="text-xs text-gray-500">Site Name</label>
+                    <input name="sitename" value="{{ $s->sitename ?? '' }}" class="mt-1 w-full rounded-md border border-gray-200 px-2 py-1 text-sm text-gray-800" />
+                </div>
+                <div>
+                    <label class="text-xs text-gray-500">Tagline</label>
+                    <input name="tagline" value="{{ $s->tagline ?? '' }}" class="mt-1 w-full rounded-md border border-gray-200 px-2 py-1 text-sm text-gray-800" />
+                </div>
+			</div>
+			<div class="px-5 grid grid-cols-3 gap-4 pb-5">
+				<div class="space-y-2">
+					<p class="text-xs text-gray-500">Logo</p>
+					<div class="h-16 w-full rounded border border-gray-200 bg-gray-50 flex items-center justify-center overflow-hidden">
+						@if(!empty($s->logo))
+							<img src="{{ url('/uploads/logo/'.$s->logo) }}" class="h-full object-contain" alt="logo" />
+						@else
+							<span class="text-xs text-gray-400">No logo</span>
+						@endif
+					</div>
+				</div>
+				<div class="space-y-2">
+					<p class="text-xs text-gray-500">Footer Logo</p>
+					<div class="h-16 w-full rounded border border-gray-200 bg-gray-50 flex items-center justify-center overflow-hidden">
+						@if(!empty($s->logo_footer))
+							<img src="{{ url('/uploads/logo/'.$s->logo_footer) }}" class="h-full object-contain" alt="logo footer" />
+						@else
+							<span class="text-xs text-gray-400">No logo</span>
+						@endif
+					</div>
+				</div>
+				<div class="space-y-2">
+					<p class="text-xs text-gray-500">Favicon</p>
+					<div class="h-10 w-10 rounded border border-gray-200 bg-gray-50 flex items-center justify-center overflow-hidden">
+						@if(!empty($s->favicon))
+							<img src="{{ url('/uploads/logo/'.$s->favicon) }}" class="h-full w-full object-contain" alt="favicon" />
+						@else
+							<span class="text-[10px] text-gray-400">N/A</span>
+						@endif
+					</div>
+				</div>
+			</div>
+		</details>
+
+		<!-- Contact -->
+<details class="rounded-xl bg-white ring-1 ring-gray-200 lg:col-span-1" open>
+			<summary class="flex cursor-pointer list-none items-center justify-between p-4 text-sm font-semibold text-gray-700">
+				<span class="inline-flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4 text-sky-600"><path d="M2.25 6.75l9.75 6 9.75-6v10.5a1.5 1.5 0 01-1.5 1.5H3.75a1.5 1.5 0 01-1.5-1.5V6.75z"/></svg> Contact</span>
+				<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.18l3.71-3.95a.75.75 0 111.08 1.04l-4.25 4.52a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+			</summary>
+            <div class="p-5 pt-0 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div><label class="text-xs text-gray-500">Email</label><input name="email" value="{{ $s->email ?? '' }}" class="mt-1 w-full rounded-md border border-gray-200 px-2 py-1 text-sm"/></div>
+                <div><label class="text-xs text-gray-500">Email (alt)</label><input name="email_one" value="{{ $s->email_one ?? '' }}" class="mt-1 w-full rounded-md border border-gray-200 px-2 py-1 text-sm"/></div>
+                <div><label class="text-xs text-gray-500">Mobile</label><input name="mobile_one" value="{{ $s->mobile_one ?? '' }}" class="mt-1 w-full rounded-md border border-gray-200 px-2 py-1 text-sm"/></div>
+                <div><label class="text-xs text-gray-500">Mobile (alt)</label><input name="mobile_two" value="{{ $s->mobile_two ?? '' }}" class="mt-1 w-full rounded-md border border-gray-200 px-2 py-1 text-sm"/></div>
+                <div><label class="text-xs text-gray-500">Address</label><input name="address" value="{{ $s->address ?? '' }}" class="mt-1 w-full rounded-md border border-gray-200 px-2 py-1 text-sm"/></div>
+                <div><label class="text-xs text-gray-500">Location</label><input name="location" value="{{ $s->location ?? '' }}" class="mt-1 w-full rounded-md border border-gray-200 px-2 py-1 text-sm"/></div>
+                <div class="sm:col-span-2"><label class="text-xs text-gray-500">Website</label><input name="url" value="{{ $s->url ?? '' }}" class="mt-1 w-full rounded-md border border-gray-200 px-2 py-1 text-sm text-indigo-700"/></div>
             </div>
-            <div class="sb2-2-3">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="box-inn-sp">
-                            <div class="inn-title">
-                                <h4>System Settings</h4>
-                                <p>System Defaults For various Operations</p>
-                            </div>
-                            <div class="tab-inn">
-                                <form method="PUT" id="saveSettings" enctype="multipart/form-data">
-                                    {{csrf_field()}}
-                                    <div class="row">
-                                        <div class="input-field col s6">
-                                            <input autocomplete="off" type="url" name="url" value="{{$Setting->url}}" class="validate">
-                                            <label for="website">Website</label>
-                                        </div>
-                                        <div class="input-field col s6">
-                                            <input autocomplete="off" type="text" value="{{$Setting->sitename}}" name="sitename" class="validate">
-                                            <label>Sitename</label>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="row">
-                                      
-                                        <div class="input-field col s12">
-                                            <input autocomplete="off" type="text" value="{{$Setting->tagline}}" name="tagline"  class="validate">
-                                            <label>Tagline</label>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="input-field col s6">
-                                            <input autocomplete="off" id="phone" value="{{$Setting->mobile_one}}" type="text" name="mobile_one" class="validate">
-                                            <label for="phone">Mobile</label>
-                                        </div>
-                                        <div class="input-field col s6">
-                                            <input autocomplete="off" id="cphone" type="text" value="{{$Setting->mobile_two}}" name="mobile_two" class="validate">
-                                            <label for="cphone">Phone</label>
-                                        </div>
-                                    </div>
-                                 
-                                    <div class="row">
-                                        <div class="input-field col s6">
-                                            <input autocomplete="off" value="{{$Setting->email_one}}" id="email" name="email_one" type="email"  class="validate">
-                                            <label for="email">Email</label>
-                                        </div>
-                                        <div class="input-field col s6">
-                                            <input autocomplete="off" value="{{$Setting->email}}" id="email1" name="email" type="email" class="validate">
-                                            <label for="email1">Alternate Email</label>
-                                        </div>
-                                    </div>
+		</details>
 
-                                    <div class="row">
-                                        <div class="input-field col s6">
-                                            <input autocomplete="off" value="{{$Setting->mpesa}}" id="email" name="mpesa" type="text"  class="validate">
-                                            <label for="email">M_PESA TILL/PAYBILL</label>
-                                        </div>
-                                        <div class="input-field col s6">
-                                            <input autocomplete="off" value="{{$Setting->paypal}}" id="email1" name="paypal" type="text" class="validate">
-                                            <label for="email1">Alternate Email</label>
-                                        </div>
-                                    </div>
+		<!-- Socials & Payments -->
+<details class="rounded-xl bg-white ring-1 ring-gray-200 lg:col-span-2">
+			<summary class="flex cursor-pointer list-none items-center justify-between p-4 text-sm font-semibold text-gray-700">
+				<span class="inline-flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4 text-blue-600"><path d="M8 12a4 4 0 118 0 4 4 0 01-8 0z"/><path d="M2 12a10 10 0 1020 0 10 10 0 10-20 0zm10-7a7 7 0 110 14 7 7 0 010-14z"/></svg> Socials & Payments</span>
+				<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.18l3.71-3.95a.75.75 0 111.08 1.04l-4.25 4.52a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+			</summary>
+            <div class="p-5 pt-0 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div><label class="text-xs text-gray-500">Facebook</label><input name="facebook" value="{{ $s->facebook ?? '' }}" class="mt-1 w-full rounded-md border border-gray-200 px-2 py-1 text-sm"/></div>
+                <div><label class="text-xs text-gray-500">WhatsApp</label><input name="whatsapp" value="{{ $s->whatsapp ?? '' }}" class="mt-1 w-full rounded-md border border-gray-200 px-2 py-1 text-sm"/></div>
+                <div><label class="text-xs text-gray-500">Telegram</label><input name="telegram" value="{{ $s->telegram ?? '' }}" class="mt-1 w-full rounded-md border border-gray-200 px-2 py-1 text-sm"/></div>
+                <div><label class="text-xs text-gray-500">Twitter</label><input name="twitter" value="{{ $s->twitter ?? '' }}" class="mt-1 w-full rounded-md border border-gray-200 px-2 py-1 text-sm"/></div>
+                <div><label class="text-xs text-gray-500">LinkedIn</label><input name="linkedin" value="{{ $s->linkedin ?? '' }}" class="mt-1 w-full rounded-md border border-gray-200 px-2 py-1 text-sm"/></div>
+                <div><label class="text-xs text-gray-500">Instagram</label><input name="instagram" value="{{ $s->instagram ?? '' }}" class="mt-1 w-full rounded-md border border-gray-200 px-2 py-1 text-sm"/></div>
+                <div><label class="text-xs text-gray-500">YouTube</label><input name="youtube" value="{{ $s->youtube ?? '' }}" class="mt-1 w-full rounded-md border border-gray-200 px-2 py-1 text-sm"/></div>
+                <div><label class="text-xs text-gray-500">Google</label><input name="google" value="{{ $s->google ?? '' }}" class="mt-1 w-full rounded-md border border-gray-200 px-2 py-1 text-sm"/></div>
+                <div><label class="text-xs text-gray-500">M-Pesa</label><input name="mpesa" value="{{ $s->mpesa ?? '' }}" class="mt-1 w-full rounded-md border border-gray-200 px-2 py-1 text-sm"/></div>
+                <div><label class="text-xs text-gray-500">PayPal</label><input name="paypal" value="{{ $s->paypal ?? '' }}" class="mt-1 w-full rounded-md border border-gray-200 px-2 py-1 text-sm"/></div>
+            </div>
+		</details>
 
-                                    <div class="row">
-                                        <div class="input-field col s6">
-                                            <input autocomplete="off" value="{{$Setting->location}}" id="email" name="location" type="text"  class="validate">
-                                            <label for="email">Location</label>
-                                        </div>
-                                        <div class="input-field col s6">
-                                            <input autocomplete="off" value="{{$Setting->address}}" id="email1" name="address" type="text" class="validate">
-                                            <label for="email1">Address</label>
-                                        </div>
-                                    </div>
+		<!-- Content Blocks -->
+<details class="rounded-xl bg-white ring-1 ring-gray-200 lg:col-span-2" open>
+			<summary class="flex cursor-pointer list-none items-center justify-between p-4 text-sm font-semibold text-gray-700">
+				<span class="inline-flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4 text-rose-600"><path d="M4 5h16v2H4zM4 11h16v2H4zM4 17h16v2H4z"/></svg> Content</span>
+				<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.18l3.71-3.95a.75.75 0 111.08 1.04l-4.25 4.52a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+			</summary>
+			<div class="p-5 pt-0 grid grid-cols-1 md:grid-cols-1 gap-6">
+                <div>
+                    <label class="text-xs text-gray-500 mb-1">Welcome</label>
+                    <textarea id="welcome_editor" name="welcome" rows="6" class="mt-1 w-full rounded-md border border-gray-200 bg-white p-2 text-sm text-gray-800">{{ $s->welcome ?? '' }}</textarea>
+                </div>
+                
+                <div class="md:col-span-2">
+                    <label class="text-xs text-gray-500 mb-1">Map Embed</label>
+                    <textarea name="map" rows="3" class="mt-1 w-full rounded-md border border-gray-200 bg-white p-2 text-xs text-gray-700">{{ $s->map ?? '' }}</textarea>
+                </div>
+			</div>
+		</details>
 
-                                    <div class="row">
-                                        <div class="input-field col s6">
-                                            <div class="box-inn-sp box-second-inn">
-                                                <div class="inn-title">
-                                                    <h4>Live Chat Status</h4>
-                                                </div>
-                                                <div class="tab-inn">
-                                                    @if($Setting->tawkToStatus == 0)
-                                                    <!-- Switch -->
-                                                    <div class="switch mar-bot-20">
-                                                        <label>
-                                                            Off
-                                                            <input name="tawkToStatus" type="checkbox">
-                                                            <span class="lever"></span> On
-                                                        </label>
-                                                    </div>
-                                                    @else 
-                                                    <!-- Switch -->
-                                                    <div class="switch mar-bot-20">
-                                                        <label>
-                                                            Off
-                                                            <input name="tawkToStatus" checked type="checkbox">
-                                                            <span class="lever"></span> On
-                                                        </label>
-                                                    </div>
-                                                    @endif
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="input-field col s6">
-                                            <div class="box-inn-sp box-second-inn">
-                                                <div class="inn-title">
-                                                    <h4>WhatsApp Widget Status</h4>
-                                                </div>
-                                                <div class="tab-inn">
-                                                    @if($Setting->whatsAppStatus == 0)
-                                                    <!-- Switch -->
-                                                    <div class="switch mar-bot-20">
-                                                        <label>
-                                                            Off
-                                                            <input name="whatsAppStatus" type="checkbox">
-                                                            <span class="lever"></span> On
-                                                        </label>
-                                                    </div>
-                                                    @else 
-                                                    <!-- Switch -->
-                                                    <div class="switch mar-bot-20">
-                                                        <label>
-                                                            Off
-                                                            <input name="whatsAppStatus" checked type="checkbox">
-                                                            <span class="lever"></span> On
-                                                        </label>
-                                                    </div>
-                                                    @endif
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="input-field col s12">
-                                            <textarea required name="tawkTo" class="materialize-textarea" placeholder="content">{{$Setting->tawkTo}}</textarea>
-                                             <label for="textarea1">Tawk To Script:</label>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="input-field col s12">
-                                            <textarea required name="map" class="materialize-textarea" placeholder="content">{{$Setting->map}}</textarea>
-                                             <label for="textarea1">Our Location On Map:</label>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="input-field col s12">
-                                            <textarea required id="article-ckeditor" name="welcome" class="materialilze-textarea" placeholder="content">{{$Setting->welcome}}</textarea>
-                                        </div>
-                                    </div><br><br>
-
-                                    <div class="row">
-                                        <div class="input-field col s12">
-                                            <input type="submit"  value="Save Changes" class="waves-effect waves-light btn-large">
-                                        </div>
-                                    </div>
-
-                                </form>
-                            </div>
-                        </div>
+		<!-- Widgets / Status -->
+<details class="rounded-xl bg-white ring-1 ring-gray-200 lg:col-span-2">
+			<summary class="flex cursor-pointer list-none items-center justify-between p-4 text-sm font-semibold text-gray-700">
+				<span class="inline-flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4 text-emerald-600"><path d="M12 2a10 10 0 100 20 10 10 0 000-20z"/></svg> Widgets</span>
+				<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.18l3.71-3.95a.75.75 0 111.08 1.04l-4.25 4.52a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+			</summary>
+            <div class="p-5 pt-0 grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div>
+                    @php $tawk = (int)($s->tawkToStatus ?? 0) === 1; @endphp
+                    <label class="text-xs text-gray-500">Tawk.to Status</label>
+                    <div class="mt-1 flex items-center gap-2">
+                        <input type="checkbox" name="tawkToStatus" {{ $tawk ? 'checked' : '' }} class="h-4 w-4" />
+                        <span class="text-xs text-gray-600">Enable</span>
                     </div>
                 </div>
+                <div>
+                    @php $wa = (int)($s->whatsAppStatus ?? 0) === 1; @endphp
+                    <label class="text-xs text-gray-500">WhatsApp Status</label>
+                    <div class="mt-1 flex items-center gap-2">
+                        <input type="checkbox" name="whatsAppStatus" {{ $wa ? 'checked' : '' }} class="h-4 w-4" />
+                        <span class="text-xs text-gray-600">Enable</span>
+                    </div>
+                </div>
+                <div class="sm:col-span-1">
+                    <label class="text-xs text-gray-500">Tawk.to Script</label>
+                    <textarea name="tawkTo" rows="4" class="mt-1 w-full rounded-md border border-gray-200 bg-white p-2 text-[11px] text-gray-700">{{ $s->tawkTo ?? '' }}</textarea>
+                </div>
             </div>
-        </div>
-        <!--== BODY INNER CONTAINER ==-->
-        @endforeach
+		</details>
 
+    <div class="lg:col-span-3 flex items-center justify-end gap-3">
+        <button type="submit" class="inline-flex items-center gap-2 rounded-md bg-indigo-600 px-3 py-2 text-sm font-medium text-white hover:bg-indigo-700">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4"><path d="M17 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V5l-2-2zm-2 14H9v-5h6v5zm0-7H9V5h6v5z"/></svg>
+            Save Settings
+        </button>
+        <span id="saveStatus" class="text-sm text-gray-500"></span>
     </div>
-</div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+</form>
+
 <script>
-
-    $("#saveSettings").on('submit',function(event)
-        {
-            event.preventDefault(); // prevent form submit
-            swal({
-                title: "Are you sure you want to make this changes?",
-                text: "Once submited You cannot revert back to the previous state",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-                })
-                .then((willDelete) => {
-                if (willDelete) {
-                    //do the ajax stuff.
-                    $.ajax({
-                        url: "{{url('/')}}/admin/updateSiteSettingsAjax",
-                        type: "PUT",
-                        dataType: "html",
-                        data: $(this).serialize(),
-                        success: function () 
-                        {
-                            swal("Done!","Your Changes Have Been Updated");
-                            setTimeout(function() {
-                                window.location.reload();
-                            }, 3000);
-                        }
-                    });
-                    // 
-                  
-                } 
-            });
-        });
+document.addEventListener('DOMContentLoaded', function(){
+    const form = document.getElementById('siteSettingsForm');
+    const statusEl = document.getElementById('saveStatus');
+    form?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        statusEl.textContent = 'Saving...';
+        const fd = new FormData(form);
+        fd.append('_method', 'PUT');
+        try {
+            const res = await fetch(`{{ url('/admin/updateSiteSettingsAjax') }}`, { method: 'POST', body: fd });
+            if (!res.ok) throw new Error('Failed');
+            statusEl.textContent = 'Saved successfully';
+            setTimeout(()=> statusEl.textContent = '', 2500);
+        } catch(err) {
+            statusEl.textContent = 'Save failed';
+        }
+    });
+    if (window.CKEDITOR) {
+        try { CKEDITOR.replace('welcome_editor'); } catch(e) {}
+    }
+});
 </script>
-
+<script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
 @endsection
+
+

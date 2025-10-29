@@ -2,10 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class How extends Model
 {
-    use HasFactory;
+	protected $table = 'hows';
+	public $incrementing = false;
+
+	protected $fillable = [
+		'title',
+		'slung',
+		'content',
+		'image',
+	];
+
 }

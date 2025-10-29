@@ -1,98 +1,35 @@
-@extends('admin.master')
+@extends('admin.tw.layout')
+@section('title','Social Media Settings')
 @section('content')
-<!--== BODY CONTNAINER ==-->
- <div class="container-fluid sb2">
-    <div class="row">
-        @include('admin.sidebar')
+	<div class="mb-5 flex items-center justify-between">
+		<div class="flex items-center gap-2">
+			<span class="inline-flex h-9 w-9 items-center justify-center rounded-md bg-blue-100 text-blue-700 ring-1 ring-blue-200">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5"><path d="M8 12a4 4 0 118 0 4 4 0 01-8 0z"/><path d="M2 12a10 10 0 1020 0 10 10 0 10-20 0zm10-7a7 7 0 110 14 7 7 0 010-14z"/></svg>
+			</span>
+			<h2 class="text-lg font-semibold">Social Media Settings</h2>
+		</div>
+	</div>
 
-        <!--== BODY INNER CONTAINER ==-->
-        @foreach ($SiteSettings as $Setting)
-        <div class="sb2-2">
-            <div class="sb2-2-2">
-                <ul>
-                    <li><a href="#"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
-                    </li>
-                    <li class="active"><a href="#"> Social Media</a>
-                    </li>
-                    <li class="page-back"><a href="{{url('/')}}/admin/home"><i class="fa fa-backward" aria-hidden="true"></i> Dashboard </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="sb2-2-add-blog sb2-2-1">
-                <div class="inn-title">
-                    <h4>Social Media Settings</h4>
-                    <p>Your Social Media Settings</p>
-                </div>
-                <div class="bor">
-                    <form id="saveSettings" method="PUT">
-                        <div class="form-group">
-                            <label for="email1">Facebook:</label>
-                            <input type="text" name="facebook" value="{{$Setting->facebook}}" class="form-control" id="email1" placeholder="">
-                        </div>
-                        <div class="form-group">
-                            <label for="email2">Twitter:</label>
-                            <input type="text" name="twitter" value="{{$Setting->twitter}}" class="form-control" id="email2" placeholder="">
-                        </div>
-                   
-                        <div class="form-group">
-                            <label for="email3">Instagram:</label>
-                            <input type="text" name="instagram" value="{{$Setting->instagram}}" class="form-control" id="email3" placeholder="">
-                        </div>
-                        <div class="form-group">
-                            <label for="email4">Linked In:</label>
-                            <input type="text" name="linkedin" value="{{$Setting->linkedin}}" class="form-control" id="email4" placeholder="">
-                        </div>
-                        <div class="form-group">
-                            <label for="email3">Telegram:</label>
-                            <input type="text" name="telegram" value="{{$Setting->telegram}}" class="form-control" id="email3" placeholder="">
-                        </div>
-                        <div class="form-group">
-                            <label for="email5">Whats App:</label>
-                            <input type="text" name="whatsapp" value="{{$Setting->whatsapp}}" class="form-control" id="email5" placeholder="">
-                        </div>
-                        <button type="submit" class="btn btn-default">Save Changes</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-        @endforeach
-        <!--== BODY INNER CONTAINER ==-->
-
-    </div>
-</div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script>
-
-    $("#saveSettings").on('submit',function(event)
-        {
-            event.preventDefault(); // prevent form submit
-            swal({
-                title: "Are you sure you want to make this changes?",
-                text: "Once submited You cannot revert back to the previous state",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-                })
-                .then((willDelete) => {
-                if (willDelete) {
-                    //do the ajax stuff.
-                    $.ajax({
-                        url: "{{url('/')}}/admin/updateSiteSocialMediaAjax",
-                        type: "PUT",
-                        dataType: "html",
-                        data: $(this).serialize(),
-                        success: function () 
-                        {
-                            swal("Done!","Your Changes Have Been Updated");
-                            setTimeout(function() {
-                                window.location.reload();
-                            }, 3000);
-                        }
-                    });
-                    // 
-                  
-                } 
-            });
-        });
-</script>
+	<div class="rounded-xl bg-white ring-1 ring-gray-200">
+		<div class="overflow-x-auto">
+			<table class="min-w-full divide-y divide-gray-200 text-sm">
+				<thead class="bg-gray-50 text-left text-gray-600">
+					<tr>
+						<th class="px-4 py-3 font-medium">Key</th>
+						<th class="px-4 py-3 font-medium">Value</th>
+					</tr>
+				</thead>
+				<tbody class="divide-y divide-gray-100">
+					@foreach(($SiteSettings ?? []) as $s)
+						<tr>
+							<td class="px-4 py-3 text-gray-800 font-medium">{{ $s->key ?? $s->name ?? 'Setting' }}</td>
+							<td class="px-4 py-3 text-gray-600">{{ $s->value ?? $s->content ?? '' }}</td>
+						</tr>
+					@endforeach
+				</tbody>
+			</table>
+		</div>
+	</div>
 @endsection
+
+

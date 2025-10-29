@@ -1,288 +1,101 @@
-@extends('admin.master')
+@extends('admin.tw.layout')
+@section('title','Edit Blog')
 @section('content')
-<!-- Remember to include jQuery :) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+	<div class="mb-5 flex items-center justify-between">
+		<div class="flex items-center gap-2">
+			<span class="inline-flex h-9 w-9 items-center justify-center rounded-md bg-indigo-50 text-indigo-600 ring-1 ring-indigo-100">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5"><path d="M16.862 3.487a1.5 1.5 0 112.121 2.121l-10.5 10.5a1.5 1.5 0 01-.53.353l-3.75 1.25a.75.75 0 01-.949-.949l1.25-3.75a1.5 1.5 0 01.353-.53l10.5-10.5z"/></svg>
+			</span>
+			<h2 class="text-lg font-semibold">Edit Post</h2>
+		</div>
+		<a href="{{ url('/admin/blog') }}" class="inline-flex items-center gap-2 rounded-md border border-gray-200 bg-white px-3 py-2 text-sm text-gray-700 hover:bg-gray-50">
+			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
+			Back
+		</a>
+	</div>
 
-<!-- jQuery Modal -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-<style>
-    .modal a.close-modal{
-        top:0px !important;
-        right:0px !important;
-    }
-</style>
-<!--== BODY CONTNAINER ==-->
- <div class="container-fluid sb2">
-    <div class="row">
-        @include('admin.sidebar')
+	@if(Session::has('message'))
+		<div class="mb-4 rounded-md border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-700">{{ Session::get('message') }}</div>
+	@endif
 
-        <!--== BODY INNER CONTAINER ==-->
+	<form action="{{ url('/admin/edit_Blog/'.$Blog->id) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+		@csrf
+		<input type="hidden" name="image_one_cheat" value="{{ $Blog->image_one }}" />
+		<div class="rounded-xl bg-white ring-1 ring-gray-200 p-4 space-y-4">
+			<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+				<div>
+					<label class="mb-1 block text-sm font-medium text-gray-700">Title</label>
+					<input name="title" required value="{{ old('title', $Blog->title) }}" class="w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm text-gray-800" />
+				</div>
+				<div>
+					<label class="mb-1 block text-sm font-medium text-gray-700">Author</label>
+					<input name="author" value="{{ old('author', $Blog->author) }}" class="w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm text-gray-800" />
+				</div>
+				<div>
+					<label class="mb-1 block text-sm font-medium text-gray-700">Category</label>
+					<select name="category" class="w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm text-gray-800">
+						@foreach(($Category ?? []) as $cat)
+							<option value="{{ $cat->title }}" {{ (old('category', $Blog->category)===$cat->title) ? 'selected' : '' }}>{{ $cat->title }}</option>
+						@endforeach
+					</select>
+				</div>
+				<div>
+					<label class="mb-1 block text-sm font-medium text-gray-700">Tags (comma separated)</label>
+					<input name="tags" value="{{ old('tags', $Blog->tags) }}" class="w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm text-gray-800" />
+				</div>
+			</div>
+			<div>
+				<label class="mb-1 block text-sm font-medium text-gray-700">Meta</label>
+				<textarea name="meta" rows="3" class="w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm text-gray-800">{{ old('meta', $Blog->meta) }}</textarea>
+			</div>
+			<div>
+				<label class="mb-1 block text-sm font-medium text-gray-700">Content</label>
+				<textarea id="content_editor" name="content" rows="10" class="w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm text-gray-800">{!! old('content', $Blog->content) !!}</textarea>
+			</div>
+			<div>
+				<label class="mb-1 block text-sm font-medium text-gray-700">Featured Image</label>
+				<div class="upload-tile group rounded-lg border-2 border-dashed border-gray-200 bg-white p-3 hover:border-indigo-300 cursor-pointer" data-target="input_blog_image">
+					<div class="flex items-center gap-3">
+						<div class="relative h-24 w-40 overflow-hidden rounded-md bg-gray-100 border-2 border-dashed border-gray-300 flex items-center justify-center">
+							<img id="preview_blog_image" src="{{ $Blog->image_one ? url('/uploads/blogs/'.$Blog->image_one) : '' }}" alt="" class="{{ $Blog->image_one ? '' : 'hidden' }} absolute inset-0 h-full w-full object-cover" />
+							<svg id="placeholder_blog_image" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="{{ $Blog->image_one ? 'hidden' : '' }} h-6 w-6 text-gray-400"><path d="M21 7.5V18a3 3 0 01-3 3H6a3 3 0 01-3-3V7.5L7.5 3h9L21 7.5z"/></svg>
+						</div>
+						<div class="flex-1">
+							<input id="input_blog_image" type="file" name="image_one" accept="image/*" class="sr-only" />
+							<p class="text-xs text-gray-600"><span class="text-indigo-600 underline">Click here to upload</span> • JPG/PNG up to 2MB</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="pt-2">
+				<button class="inline-flex items-center gap-2 rounded-md bg-indigo-600 px-3 py-2 text-sm font-medium text-white hover:bg-indigo-700">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4"><path d="M17 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V5l-2-2zm-2 14H9v-5h6v5zm0-7H9V5h6v5z"/></svg>
+					Save Changes
+				</button>
+			</div>
+		</div>
+	</form>
 
-        <div class="sb2-2">
-            <div class="sb2-2-2">
-                <ul>
-                    <li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
-                    </li>
-                    <li class="active-bre"><a href="#"> Edit Blog Post</a>
-                    </li>
-                    <li class="page-back"><a href="{{url('/')}}/admin/home"><i class="fa fa-backward" aria-hidden="true"></i> Back</a>
-                    </li>
-                </ul>
-
-            </div>
-            <div class="sb2-2-add-blog sb2-2-1">
-                <div class="box-inn-sp">
-                    <div class="inn-title">
-                        <h4>Edit Blog Post</h4>
-                        <p> Editing <strong>{{$Blog->title}}</strong> </p>
-                        <center>
-                            @if(Session::has('message'))
-                                          <div class="alert alert-success">{{ Session::get('message') }}</div>
-                           @endif
-
-                           @if(Session::has('messageError'))
-                                          <div class="alert alert-danger">{{ Session::get('messageError') }}</div>
-                           @endif
-                        </center>
-                    </div>
-                    <div class="bor">
-                        <form method="POST" action="{{url('/')}}/admin/edit_Blog/{{$Blog->id}}" enctype="multipart/form-data">
-                            {{csrf_field()}}
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <input value="{{$Blog->title}}" autocomplete="off" name="title" id="list-title" type="text" class="validate" required>
-                                    <label for="list-title">Post Title</label>
-                                </div>
-                            </div>
-
-                            <div class="row">
-
-                                {{--  --}}
-                                <div class="input-field col s12">
-                                    <select required name="category" class="icons" id="mydiv">
-                                        <?php $CategorySelected = DB::table('categories')->where('id',$Blog->category)->get() ?>
-                                        @foreach ($CategorySelected as $CatSel)
-                                        <option value="{{$CatSel->id}}" selected>{{$CatSel->title}}</option>
-                                        @endforeach
-                                        @foreach ($Category as $Categories)
-                                        <option value="{{$Categories->id}}" data-icon="{{url('/')}}/uploads/categories/{{$Categories->image}}" class="circle">{{$Categories->title}}</option>
-                                        @endforeach
-                                    </select>
-                                    <label>Choose Category</label>
-                                </div>
-                                <a href="#ex1" rel="modal:open"> <strong>+ Add New Category</strong> </a>
-                                {{--  --}}
-                                <div class="section-space col s12"></div>
-                                <div class="input-field col s12">
-                                    <select required name="tags" multiple>
-                                        <option value="" disabled selected>Choose Tags</option>
-                                        <option value="Bitcoin">Bitcoin</option>
-                                        <option value="Forex">Forex</option>
-                                        <option value="Crypto">Crypto</option>
-                                        <option value="Stock">Stock</option>
-                                        <option value="Currency">Currency</option>
-                                        <option value="New York">New York</option>
-                                        <option value="Forbes">Forbes</option>
-                                        <option value="Educations">Educations</option>
-                                        <option value="Events">Events</option>
-                                        <option value="Clubs">Clubs</option>
-                                    </select>
-                                    <label>Select Tags</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <textarea required name="meta" class="materialize-textarea">{{$Blog->meta}}</textarea>
-                                    <label for="textarea1">Meta Descriptions:</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <textarea required id="article-ckeditor" name="content" class="materialilze-textarea" placeholder="content">{{$Blog->content}}</textarea>
-                                    {{-- <label for="textarea1">Blog Descriptions:</label> --}}
-                                </div>
-                            </div><br><br>
-                            <script src="{{ asset('ckeditor/ckeditor.js')}}"></script>
-                            <script>CKEDITOR.replace('article-ckeditor');</script>
-
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <input required autocomplete="off" value="{{Auth::user()->name }}" id="post-auth" name="author" type="text" class="validate">
-                                    <label for="post-auth">Author Name</label>
-                                </div>
-                            </div>
-                            {{-- Images --}}
-                                 {{-- Preview --}}
-                            {{-- Style --}}
-                            <style>
-                                .btn-file {
-                                    position: relative;
-                                    overflow: hidden;
-                                }
-                                .btn-file input[type=file] {
-                                    position: absolute;
-                                    top: 0;
-                                    right: 0;
-                                    min-width: 100%;
-                                    min-height: 100%;
-                                    font-size: 100px;
-                                    text-align: right;
-                                    filter: alpha(opacity=0);
-                                    opacity: 0;
-                                    outline: none;
-                                    background: white;
-                                    cursor: inherit;
-                                    display: block;
-                                }
-
-                                #img-upload{
-                                    width: 100%;
-                                }
-                            </style>
-                            {{-- Style --}}
-                            <div class="row">
-                            <div class="">
-                                <div class="input-field col s12">
-                                    <div class="form-group">
-                                        <label>Change Image</label>
-                                        <div class="input-group">
-                                            <span class="input-group-btn">
-                                                <span class="btn btn-default btn-file">
-                                                    Browse… <input name="image_one" type="file" id="imgInp">
-                                                </span>
-                                            </span>
-                                            <input type="text" class="form-control" readonly>
-                                        </div>
-                                        <img class="image-preview" style="width:auto;" src="{{url('/')}}/uploads/blogs/{{$Blog->image_one}}" id='img-upload'/>
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
-                            {{-- Preview --}}
-
-                            {{-- Images --}}
-
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <input  type="submit" class="waves-effect waves-light btn-large" value="Save Changes">
-                                </div>
-                            </div>
-                            <input type="hidden" name="image_one_cheat" value="{{$Blog->image_one}}">
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--== BODY INNER CONTAINER ==-->
-
-    </div>
-</div>
-
-{{--  --}}
-<div id="ex1" class="modal">
-    <div class="sb2-2-3">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="box-inn-sp">
-                    <div class="inn-title">
-                        <h4>Add New Category</h4>
-                    </div>
-                    <div class="tab-inn">
-                        <form method="POST" id="categoryAddForm">
-                            {{csrf_field()}}
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <input autocomplete="off" name="title" id="CategoryTitle" type="text" class="validate">
-                                    <label for="CategoryName">Category Name</label>
-                                </div>
-                            </div>
-                            <div class="row" id="submitButton">
-                                <div class="input-field col s12">
-                                    <input  type="submit" class="waves-effect waves-light btn-large" value="Submit">
-                                </div>
-                            </div>
-
-                            <div class="tab-inn" id="loading-bar">
-                                <div class="progress">
-                                    <div class="indeterminate"></div>
-                                </div>
-                            </div>
-
-                        </form>
-                    </div>
-                </div>
-            </div>
-{{-- <a href="#" rel="modal:close">Close</a> --}}
-<script type="text/javascript">
-        // A $( document ).ready() block.
-    $( document ).ready(function() {
-        $('#loading-bar').hide();
-    });
-
-    $('#categoryAddForm').on('submit',function(event){
-        event.preventDefault();
-        $('#loading-bar').show();
-
-
-        let title = $('#CategoryTitle').val();
-
-
-        $.ajax({
-          url: "{{url('/')}}/admin/addCategoryAjaxRequest",
-          type:"POST",
-          data:{
-            "_token": "{{ csrf_token() }}",
-            title:title,
-          },
-          success:function(response){
-            $('#loading-bar').hide();
-            $('#submitButton').html('<center><span class="alert-success text-center">Category Added Successfully</span></center>').delay(3000);
-            $('#categoryAddForm')[0].reset();
-            setTimeout(function() {
-                location.reload();
-            }, 5000);
-          },
-         });
-        });
-      </script>
-        <script>
-            $(document).ready( function() {
-                $(document).on('change', '.btn-file :file', function() {
-                var input = $(this),
-                    label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-                input.trigger('fileselect', [label]);
-                });
-
-                $('.btn-file :file').on('fileselect', function(event, label) {
-
-                    var input = $(this).parents('.input-group').find(':text'),
-                        log = label;
-
-                    if( input.length ) {
-                        input.val(log);
-                    } else {
-                        if( log ) alert(log);
-                    }
-
-                });
-                function readURL(input) {
-                    if (input.files && input.files[0]) {
-                        var reader = new FileReader();
-
-                        reader.onload = function (e) {
-                            $('#img-upload').attr('src', e.target.result);
-                        }
-
-                        reader.readAsDataURL(input.files[0]);
-                    }
-                }
-
-                $("#imgInp").change(function(){
-                    readURL(this);
-                });
-            });
-        </script>
-</div>
-{{--  --}}
+	<script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+	<script>
+		if (window.CKEDITOR) { CKEDITOR.replace('content_editor'); }
+		document.addEventListener('DOMContentLoaded', function(){
+			const tile = document.querySelector('.upload-tile');
+			const input = document.getElementById('input_blog_image');
+			const img = document.getElementById('preview_blog_image');
+			const placeholder = document.getElementById('placeholder_blog_image');
+			if (tile && input) {
+				tile.addEventListener('click', (e) => { input?.click(); });
+				input.addEventListener('change', () => {
+					const file = input.files && input.files[0];
+					if (!file || !file.type.startsWith('image/')) { input.value=''; return; }
+					const reader = new FileReader();
+					reader.onload = e => { img.src = e.target.result; img.classList.remove('hidden'); placeholder?.classList.add('hidden'); };
+					reader.readAsDataURL(file);
+				});
+			}
+		});
+	</script>
 @endsection
+
+

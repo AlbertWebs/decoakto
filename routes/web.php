@@ -81,11 +81,12 @@ Auth::routes();
 // Admin Routes
 Auth::routes();
 Route::middleware(['auth', 'web'])->group(function () {
-    Route::group(['prefix' => '/admin'], function () {
+    Route::group(['prefix' => '/admin', 'as' => 'admin.'], function () {
         Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
-        Route::get('', [AdminsController::class, 'adminHome'])->name('admin.home');
-        Route::get('/home', [AdminsController::class, 'adminHome'])->name('admin.homes');
-        Route::get('/about', [AdminsController::class, 'aboutHome'])->name('admin.about');
+        Route::get('', [AdminsController::class, 'adminHomeTw'])->name('home');
+        Route::get('/home', [AdminsController::class, 'adminHomeTw'])->name('homes');
+        Route::get('/tw', [AdminsController::class, 'adminHomeTw'])->name('tw');
+        Route::get('/about', [AdminsController::class, 'aboutHome'])->name('about');
 
 
 

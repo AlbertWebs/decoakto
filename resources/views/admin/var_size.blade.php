@@ -1,125 +1,60 @@
-@extends('admin.master')
+@extends('admin.tw.layout')
+@section('title','Sizes')
 @section('content')
-<!-- Remember to include jQuery :) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+	<div class="mb-5 flex items-center justify-between">
+		<div class="flex items-center gap-2">
+			<span class="inline-flex h-9 w-9 items-center justify-center rounded-md bg-indigo-50 text-indigo-600 ring-1 ring-indigo-100">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5"><path d="M4 11h16v2H4z"/></svg>
+			</span>
+			<h2 class="text-lg font-semibold">Sizes</h2>
+		</div>
+		<a href="{{ url('/admin/addVariation/size') }}" class="inline-flex items-center gap-2 rounded-md bg-indigo-600 px-3 py-2 text-sm font-medium text-white hover:bg-indigo-700">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4"><path d="M12 4.5v15m7.5-7.5h-15"/></svg>
+			Add Size
+		</a>
+	</div>
 
-<!-- jQuery Modal -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-<style>
-    .modal a.close-modal{
-        top:0px !important;
-        right:0px !important;
-    }
-</style>
-<!--== BODY CONTNAINER ==-->
- <div class="container-fluid sb2">
-    <div class="row">
-        @include('admin.sidebar')
+	@if(Session::has('message'))
+		<div class="mb-4 rounded-md border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-700">{{ Session::get('message') }}</div>
+	@endif
 
-        <!--== BODY INNER CONTAINER ==-->
-        <div class="sb2-2">
-            <div class="sb2-2-2">
-                <ul>
-                    <li><a href="#"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
-                    </li>
-                    <li class="active-bre"><a href="#"> Size Variations</a>
-                    </li>
-                    <li class="page-back"><a href="{{url('/')}}/admin/addVariation/color"><i class="fa fa-pencil" aria-hidden="true"></i> Add Color Variation</a>
-                    </li>
-                    <li class="page-back"><a href="{{url('/')}}/admin/addVariation/size"><i class="fa fa-pencil" aria-hidden="true"></i> Add Size Variation</a>
-                    </li>
-                    <li class="page-back"><a href="{{url('/')}}/admin/variations/color"><i class="fa fa-pencil" aria-hidden="true"></i> All Size Variations</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="sb2-2-1">
-                <h2>All Variations</h2>
-                <center>
-                    @if(Session::has('message'))
-                                  <div class="alert alert-success">{{ Session::get('message') }}</div>
-                   @endif
-   
-                   @if(Session::has('messageError'))
-                                  <div class="alert alert-danger">{{ Session::get('messageError') }}</div>
-                   @endif
-                </center>
-               
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>value</th>
-                            <th>Product Name</th>
-                            {{-- <th>image</th> --}}
-                            
-                            <th>Edit</th>
-                            {{-- <th>Delete</th> --}}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-                        @foreach ($Variation as $item)
-                        <tr>
-                            <td>{{$item->id}}</td>
-                            <td>{{$item->value}}</td>
-                            <?php $Product = \App\Models\Product::find($item->product_id) ?>
-                            <td><a target="new" href="{{url('/')}}/product/{{$Product->slung}}">{{$Product->name}}</a></td>
-                           {{-- <td>
-                            
-                            <a target="new" href="{{url('/')}}/product/{{$Product->slung}}"><img width="150" src="{{url('/')}}/uploads/variations/{{$item->image}}"></a>
-                           </td> --}}
-                            <td><a href="{{url('/')}}/admin/editVariation/{{$item->id}}" class="sb2-2-1-edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                            </td>
-                            {{-- <td><a onclick="archiveFunction{{$item->id}}()" href="#" class="sb2-2-1-edit"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                            </td> --}}
-                        </tr>
-                        <script>
-                            function archiveFunction{{$item->id}}()
-                                {
-                                    event.preventDefault(); // prevent form submit
-                                    swal({
-                                        title: "Are you sure?",
-                                        text: "Once deleted, you will not be able to recover this imaginary file!",
-                                        icon: "warning",
-                                        buttons: true,
-                                        dangerMode: true,
-                                        })
-                                        .then((willDelete) => {
-                                        if (willDelete) {
-                                            //do the ajax stuff.
-                                            $.ajax({
-                                                url: "{{url('/')}}/admin/deleteCategoryAjax",
-                                                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                                                type: "POST",
-                                                data: {id: {{$item->id}}},
-                                                dataType: "html",
-                                                success: function () 
-                                                {
-                                                    swal("Done!","It was succesfully deleted!","success");
-                                                    setTimeout(function() {
-                                                        window.location.reload();
-                                                    }, 3000);
-
-                                                }
-                                            });
-                                            // 
-                                          
-                                        } else {
-                                            swal("Your imaginary file is safe!");
-                                        }
-                                    });
-                                }
-                        </script>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <!--== BODY INNER CONTAINER ==-->
-
-    </div>
-</div>
-
-
+	<div class="rounded-xl bg-white ring-1 ring-gray-200">
+		<div class="overflow-x-auto">
+			<table class="min-w-full divide-y divide-gray-200 text-sm">
+				<thead class="bg-gray-50 text-left text-gray-600">
+					<tr>
+						<th class="px-4 py-3 font-medium">Size</th>
+						<th class="px-4 py-3 font-medium">Price</th>
+						<th class="px-4 py-3 font-medium">Product ID</th>
+						<th class="px-4 py-3 font-medium">Created</th>
+						<th class="px-4 py-3 font-medium text-right">Actions</th>
+					</tr>
+				</thead>
+				<tbody class="divide-y divide-gray-100">
+					@forelse(($Variation ?? []) as $sz)
+						<tr>
+							<td class="px-4 py-3 text-gray-800 font-medium">{{ $sz->value }}</td>
+							<td class="px-4 py-3 text-gray-600">{{ $sz->price }}</td>
+							<td class="px-4 py-3 text-gray-500">{{ $sz->product_id }}</td>
+							<td class="px-4 py-3 text-gray-500">{{ $sz->created_at }}</td>
+							<td class="px-4 py-3">
+								<div class="flex items-center justify-end gap-2">
+									<a href="{{ url('/admin/editVariation/'.$sz->id) }}" class="inline-flex items-center gap-1 rounded-md border border-gray-200 bg-white px-2 py-1 text-xs text-gray-700 hover:bg-gray-50">
+										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4"><path d="M16.862 3.487a1.5 1.5 0 112.121 2.121l-10.5 10.5a1.5 1.5 0 01-.53.353l-3.75 1.25a.75.75 0 01-.949-.949l1.25-3.75a1.5 1.5 0 01.353-.53l10.5-10.5z"/></svg>
+										Edit
+									</a>
+								</div>
+							</td>
+						</tr>
+					@empty
+						<tr>
+							<td class="px-4 py-8 text-center text-gray-500" colspan="5">No sizes found.</td>
+						</tr>
+					@endforelse
+				</tbody>
+			</table>
+		</div>
+	</div>
 @endsection
+
+

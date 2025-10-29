@@ -1,184 +1,66 @@
-@extends('admin.master')
+@extends('admin.tw.layout')
+@section('title','Edit Category')
 @section('content')
-<!-- Remember to include jQuery :) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+	<div class="mb-5 flex items-center justify-between">
+		<div class="flex items-center gap-2">
+			<span class="inline-flex h-9 w-9 items-center justify-center rounded-md bg-indigo-50 text-indigo-600 ring-1 ring-indigo-100">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5"><path d="M16.862 3.487a1.5 1.5 0 112.121 2.121l-10.5 10.5a1.5 1.5 0 01-.53.353l-3.75 1.25a.75.75 0 01-.949-.949l1.25-3.75a1.5 1.5 0 01.353-.53l10.5-10.5z"/></svg>
+			</span>
+			<h2 class="text-lg font-semibold">Edit Category</h2>
+		</div>
+		<a href="{{ url('/admin/categories') }}" class="inline-flex items-center gap-2 rounded-md border border-gray-200 bg-white px-3 py-2 text-sm text-gray-700 hover:bg-gray-50">
+			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
+			Back
+		</a>
+	</div>
 
-<!-- jQuery Modal -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-<style>
-    .modal a.close-modal{
-        top:0px !important;
-        right:0px !important;
-    }
-</style>
-<!--== BODY CONTNAINER ==-->
- <div class="container-fluid sb2">
-    <div class="row">
-        @include('admin.sidebar')
+	@if(Session::has('message'))
+		<div class="mb-4 rounded-md border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-700">{{ Session::get('message') }}</div>
+	@endif
 
-        <!--== BODY INNER CONTAINER ==-->
+	<form action="{{ url('/admin/edit_Category/'.$Category->id) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+		@csrf
+		<input type="hidden" name="image_cheat" value="{{ $Category->image }}" />
+		<div class="rounded-xl bg-white ring-1 ring-gray-200 p-4">
+			<div class="mb-3 flex items-center gap-2 text-sm font-semibold text-gray-700">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4"><path d="M4 5h16v2H4zM4 11h16v2H4zM4 17h16v2H4z"/></svg>
+				<span>Details</span>
+			</div>
+			<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+				<div>
+					<label class="mb-1 block text-sm font-medium text-gray-700">Title</label>
+					<input name="title" required value="{{ old('title', $Category->title) }}" class="w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-indigo-100" />
+				</div>
+				<div>
+					<label class="mb-1 block text-sm font-medium text-gray-700">Image</label>
+					<input type="file" name="image" accept="image/*" class="w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm text-gray-800" />
+					<div class="mt-2">
+						@php $img = $Category->image ? url('/uploads/categories/'.$Category->image) : null; @endphp
+						@if($img)
+							<img src="{{ $img }}" alt="{{ $Category->title }}" class="h-14 w-14 rounded object-cover ring-1 ring-gray-200" />
+						@endif
+					</div>
+				</div>
+			</div>
+			<div class="mt-4">
+				<label class="mb-1 block text-sm font-medium text-gray-700">Content</label>
+				<textarea id="content_editor" name="content" rows="10" class="w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm text-gray-800">{!! old('content', $Category->content) !!}</textarea>
+			</div>
+			<div class="pt-4">
+				<button class="inline-flex items-center gap-2 rounded-md bg-indigo-600 px-3 py-2 text-sm font-medium text-white hover:bg-indigo-700">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4"><path d="M17 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V5l-2-2zm-2 14H9v-5h6v5zm0-7H9V5h6v5z"/></svg>
+					Save Changes
+				</button>
+			</div>
+		</div>
+	</form>
 
-        <div class="sb2-2">
-            <div class="sb2-2-2">
-                <ul>
-                    <li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
-                    </li>
-                    <li class="active-bre"><a href="#"> Edit {{$Category->title}}</a>
-                    </li>
-                    <li class="page-back"><a href="{{url('/')}}/admin/categories"><i class="fa fa-backward" aria-hidden="true"></i> All Categories</a>
-                    </li>
-                </ul>
-
-            </div>
-            <div class="sb2-2-add-blog sb2-2-1">
-                <h2>Edit {{$Category->title}}</h2>
-                <p>Categories Are Used In Both Blogs And General Content Classification</p>
-                <center>
-                    @if(Session::has('message'))
-                                  <div class="alert alert-success">{{ Session::get('message') }}</div>
-                   @endif
-
-                   @if(Session::has('messageError'))
-                                  <div class="alert alert-danger">{{ Session::get('messageError') }}</div>
-                   @endif
-                </center>
-                <form method="POST" action="{{url('/')}}/admin/edit_Category/{{$Category->id}}" enctype="multipart/form-data">
-                    {{csrf_field()}}
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input id="list-title" name="title" type="text" value="{{$Category->title}}" class="validate">
-                            <label for="list-title">Edit Category Title</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input id="list-title" name="order" type="text" value="{{$Category->order}}" class="validate">
-                            <label for="list-title">Order(the least number is the first)</label>
-                        </div>
-                    </div>
-
-                    {{--  --}}
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input id="list-title" name="heading_two" type="text" value="{{$Category->heading_two}}" class="validate">
-                            <label for="list-title">Heading Two</label>
-                        </div>
-                    </div>
-                    {{--  --}}
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input id="list-title" name="heading_two_section" type="text" value="{{$Category->heading_two_section}}" class="validate">
-                            <label for="list-title">Section Heading</label>
-                        </div>
-                    </div>
-                    {{-- Meta --}}
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <textarea required name="meta" class="materialize-textarea">{{$Category->meta}}</textarea>
-                            <label for="textarea1">Excerpt(SEO Meta Data):</label>
-                        </div>
-                    </div>
-
-                    {{--  --}}
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <textarea required name="color" class="materialize-textarea">{!!html_entity_decode($Category->color)!!}</textarea>
-                            <label for="textarea1">Color:</label>
-                        </div>
-                    </div>
-                    {{--  --}}
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <textarea required name="thicknesses" class="materialize-textarea">{!!html_entity_decode($Category->thicknesses)!!}</textarea>
-                            <label for="textarea1">Thicknesses:</label>
-                        </div>
-                    </div>
-                    {{--  --}}
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <textarea required name="a_c_ratings" class="materialize-textarea">{!!html_entity_decode($Category->a_c_ratings)!!}</textarea>
-                            <label for="textarea1">AC-Ratings:</label>
-                        </div>
-                    </div>
-                    {{--  --}}
-                    <div class="row">
-
-                        <div class="input-field col s12">
-                            <label for="textarea1">Descriptions:</label>
-                            <br>
-                            <textarea required id="article-ckeditor" name="content" class="materialilze-textarea" placeholder="content">{!!html_entity_decode($Category->content)!!}</textarea>
-
-
-                        </div>
-                    </div><br><br>
-
-
-                     {{-- Images --}}
-                                 {{-- Preview --}}
-                            {{-- Style --}}
-                            <style>
-                                .btn-file {
-                                    position: relative;
-                                    overflow: hidden;
-                                }
-                                .btn-file input[type=file] {
-                                    position: absolute;
-                                    top: 0;
-                                    right: 0;
-                                    min-width: 100%;
-                                    min-height: 100%;
-                                    font-size: 100px;
-                                    text-align: right;
-                                    filter: alpha(opacity=0);
-                                    opacity: 0;
-                                    outline: none;
-                                    background: white;
-                                    cursor: inherit;
-                                    display: block;
-                                }
-
-                                #img-upload{
-                                    width: 100%;
-                                }
-                            </style>
-                            {{-- Style --}}
-                            <div class="row">
-                                <div class="">
-                                    <div class="input-field col s12">
-                                        <div class="form-group">
-                                            <label>Add Category Featured Image</label>
-                                            <div class="input-group">
-                                                <span class="input-group-btn">
-                                                    <span class="btn btn-default btn-file">
-                                                        Size: 440 by 550 Browse… <input name="image" type="file" id="imgInp">
-                                                    </span>
-                                                </span>
-                                                <input type="text" class="form-control" readonly>
-                                            </div>
-                                            <img class="image-preview" style="width:auto;" src="{{url('/')}}/uploads/categories/{{$Category->image}}" id='img-upload'/>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            {{-- Preview --}}
-
-                            {{-- Images --}}
-                            <br><br>
-                            <div class="clearfix"></div>
-                            <input type="hidden" name="image_cheat" value="{{$Category->image}}">
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input type="submit" class="waves-effect waves-light btn-large" value="Save Changes">
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <!--== BODY INNER CONTAINER ==-->
-
-    </div>
-</div>
-
-
+	<script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+	<script>
+		if (window.CKEDITOR) {
+			CKEDITOR.replace('content_editor');
+		}
+	</script>
 @endsection
+
+

@@ -1,457 +1,304 @@
-@extends('admin.master')
+@extends('admin.tw.layout')
+@section('title','Edit Product')
 @section('content')
-<!-- Remember to include jQuery :) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+	<div class="mb-5 flex items-center justify-between">
+		<div class="flex items-center gap-2">
+			<span class="inline-flex h-9 w-9 items-center justify-center rounded-md bg-indigo-50 text-indigo-600 ring-1 ring-indigo-100">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5"><path d="M16.862 3.487a1.5 1.5 0 112.121 2.121l-10.5 10.5a1.5 1.5 0 01-.53.353l-3.75 1.25a.75.75 0 01-.949-.949l1.25-3.75a1.5 1.5 0 01.353-.53l10.5-10.5z"/></svg>
+			</span>
+			<h2 class="text-lg font-semibold">Edit Product</h2>
+		</div>
+		<a href="{{ url('/admin/products') }}" class="inline-flex items-center gap-2 rounded-md border border-gray-200 bg-white px-3 py-2 text-sm text-gray-700 hover:bg-gray-50">
+			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
+			Back
+		</a>
+	</div>
 
-<!-- jQuery Modal -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-<style>
-    .modal a.close-modal{
-        top:0px !important;
-        right:0px !important;
-    }
-</style>
-<!--== BODY CONTNAINER ==-->
- <div class="container-fluid sb2">
-    <div class="row">
-        @include('admin.sidebar')
+	@if(Session::has('message'))
+		<div class="mb-4 rounded-md border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-700">{{ Session::get('message') }}</div>
+	@endif
 
-        <!--== BODY INNER CONTAINER ==-->
+	<form action="{{ url('/admin/edit_Product/'.$Product->id) }}" method="POST" enctype="multipart/form-data" class="grid grid-cols-1 gap-5">
+		@csrf
+		<div class="space-y-6">
+			<div class="rounded-xl bg-white ring-1 ring-gray-200 p-4">
+				<div class="mb-3 flex items-center gap-2 text-sm font-semibold text-gray-700">
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h12m-12 5.25h16.5"/></svg>
+					<span>Basics</span>
+				</div>
+				<div class="space-y-4">
+					<div>
+						<label class="mb-1 block text-sm font-medium text-gray-700">Name</label>
+						<input name="title" required value="{{ old('title', $Product->name ?? $Product->title) }}" class="w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm text-gray-800  focus:ring-2 focus:ring-indigo-100" />
+					</div>
+					<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+						<div>
+							<label class="mb-1 block text-sm font-medium text-gray-700">Price</label>
+							<input name="price" type="number" step="0.01" value="{{ old('price', $Product->price) }}" class="w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm text-gray-800  focus:ring-2 focus:ring-indigo-100" />
+						</div>
+						<div>
+							<label class="mb-1 block text-sm font-medium text-gray-700">Stock</label>
+							<select name="stock" class="w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm text-gray-800  focus:ring-2 focus:ring-indigo-100">
+								@php $stock = old('stock', $Product->stock); @endphp
+								<option value="In Stock" {{ ($stock==='In Stock') ? 'selected' : '' }}>In Stock</option>
+								<option value="Out Of Stock" {{ ($stock==='Out Of Stock') ? 'selected' : '' }}>Out Of Stock</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
 
-        <div class="sb2-2">
-            <div class="sb2-2-2">
-                <ul>
-                    <li><a href="{{url('/')}}"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
-                    </li>
-                    <li class="active-bre"><a href="#"> Edit {{$Product->name}}</a>
-                    </li>
-                    <li class="page-back"><a href="{{url('/')}}/admin/products"><i class="fa fa-backward" aria-hidden="true"></i> All Products</a>
-                    </li>
-                </ul>
+			<div class="rounded-xl bg-white ring-1 ring-gray-200 p-4 space-y-4">
+				<div class="mb-3 flex items-center gap-2 text-sm font-semibold text-gray-700">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4"><path d="M4 5h6v6H4zM14 5h6v6h-6zM4 15h6v6H4zM14 15h6v6h-6z"/></svg>
+					<span>Classification</span>
+				</div>
+				<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+					<div>
+						<label class="mb-1 block text-sm font-medium text-gray-700">Category</label>
+						<select name="category" class="w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm text-gray-800  focus:ring-2 focus:ring-indigo-100">
+							@foreach(($Category ?? []) as $cat)
+								<option value="{{ $cat->id }}" {{ (old('category', $Product->category)==$cat->id) ? 'selected' : '' }}>{{ $cat->title }}</option>
+							@endforeach
+						</select>
+					</div>
+					<div>
+						<label class="mb-1 block text-sm font-medium text-gray-700">Classification</label>
+						<select name="classification" id="classificationSelect" class="w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm text-gray-800  focus:ring-2 focus:ring-indigo-100">
+							@foreach(($Classification ?? []) as $cl)
+								<option value="{{ $cl->id }}" {{ (old('classification', $Product->classifications)==$cl->id) ? 'selected' : '' }}>{{ $cl->title }}</option>
+							@endforeach
+						</select>
+					</div>
+					<div>
+						<label class="mb-1 block text-sm font-medium text-gray-700">Sub Classification</label>
+						<select name="sub_classification" id="subClassificationSelect" class="w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm text-gray-800  focus:ring-2 focus:ring-indigo-100">
+							@if(!empty($Product->sub_classifications))
+								<option value="{{ $Product->sub_classifications }}" selected>{{ $Product->sub_classifications }}</option>
+							@else
+								<option value="">Select...</option>
+							@endif
+						</select>
+					</div>
+					<div>
+						<label class="mb-1 block text-sm font-medium text-gray-700">Dimensions</label>
+						<input name="dimensions" value="{{ old('dimensions', $Product->dimensions) }}" class="w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm text-gray-800  focus:ring-2 focus:ring-indigo-100" />
+					</div>
+				</div>
+			</div>
 
-            </div>
-            <div class="sb2-2-add-blog sb2-2-1">
-                <div class="box-inn-sp">
-                    <div class="inn-title">
-                        <h4>Edit {{$Product->name}}</h4>
-                        <center>
-                            @if(Session::has('message'))
-                                          <div class="alert alert-success">{{ Session::get('message') }}</div>
-                           @endif
+			<div class="rounded-xl bg-white ring-1 ring-gray-200 p-4">
+				<div class="mb-3 flex items-center gap-2 text-sm font-semibold text-gray-700">
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 6.75h15m-15 5.25h15m-15 5.25h15"/></svg>
+					<span>Meta & Content</span>
+				</div>
+				<div class="mb-4">
+					<label class="mb-1 block text-sm font-medium text-gray-700">Short Description (meta)</label>
+					<textarea  name="meta" class="w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm text-gray-800  focus:ring-2 focus:ring-indigo-100" >{{ old('meta', $Product->meta) }}</textarea>
+				</div>
+				<div>
+					<label class="mb-1 block text-sm font-medium text-gray-700">Content</label>
+					<textarea id="content_editor" name="content" rows="12" class="w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm text-gray-800  focus:ring-2 focus:ring-indigo-100">{!! old('content', $Product->content) !!}</textarea>
+				</div>
+			</div>
+		</div>
 
-                           @if(Session::has('messageError'))
-                                          <div class="alert alert-danger">{{ Session::get('messageError') }}</div>
-                           @endif
-                        </center>
-                    </div>
-                    <div class="bor">
-                        <form method="POST" action="{{url('/')}}/admin/edit_Product/{{$Product->id}}" enctype="multipart/form-data">
-                            {{csrf_field()}}
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <input autocomplete="off" name="title" id="list-title" value="{{$Product->name}}" type="text">
-                                    <label for="list-title">Product Name</label>
-                                </div>
-                                <div class="input-field col s12">
-                                    <input autocomplete="off" name="price" id="list-title" value="{{$Product->price}}" type="number">
-                                    <label for="list-title">Product Price</label>
-                                </div>
-                                <div class="input-field col s12">
-                                    <input  name="sku" id="list-title" value="{{$Product->sku}}" type="text" placeholder="SKU-01">
-                                    <label for="list-title">SKU</label>
-                                </div>
-                            </div>
-                            <div class="section-space col s12"></div>
-                            <div class="row">
-                                {{--  --}}
-                                <div class="input-field col s6">
-                                    <select required name="classification" class="icons" id="cat">
-                                        {{--  --}}
-                                        <?php $ClassificationSelected = DB::table('classifications')->where('id',$Product->classifications)->get() ?>
-                                        @foreach ($ClassificationSelected as $ClassSelect)
-                                        <option value="{{$ClassSelect->id}}" selected>{{$ClassSelect->title}}</option>
-                                        @endforeach
+		<div class="space-y-6">
+			<div class="rounded-xl bg-white ring-1 ring-gray-200 p-4">
+				<div class="mb-3 flex items-center gap-2 text-sm font-semibold text-gray-700">
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4"><path stroke-linecap="round" stroke-linejoin="round" d="M3 4.5h18M4.5 9h15M3 13.5h18M4.5 18h15"/></svg>
+					<span>Images</span>
+				</div>
+				<div class="grid grid-cols-3 gap-5">
+					<div>
+						<label class="mb-1 block text-sm font-medium text-gray-700">Image 1</label>
+						<input type="hidden" name="image_one_cheat" value="{{ $Product->image_one }}" />
+						<div class="upload-tile group rounded-lg border-2 border-dashed border-gray-200 bg-white p-3 hover:border-indigo-300 cursor-pointer" data-target="input_image_one">
+							<div class="flex items-center gap-3">
+								<div class="relative h-24 w-24 overflow-hidden rounded-md bg-gray-100 border-2 border-dashed border-gray-300 flex items-center justify-center">
+									<img id="preview_image_one" src="{{ $Product->image_one ? url('/uploads/products/'.$Product->image_one) : '' }}" alt="" class="{{ $Product->image_one ? '' : 'hidden' }} absolute inset-0 h-full w-full object-cover" />
+									<svg id="placeholder_image_one" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="{{ $Product->image_one ? 'hidden' : '' }} h-6 w-6 text-gray-400"><path d="M21 7.5V18a3 3 0 01-3 3H6a3 3 0 01-3-3V7.5L7.5 3h9L21 7.5z"/></svg>
+								</div>
+								<div class="flex-1">
+									<input id="input_image_one" type="file" name="image_one" accept="image/*" class="sr-only" />
+									<p class="text-xs text-gray-600"><span class="text-indigo-600 underline">Click here to upload</span> • JPG/PNG up to 2MB</p>
+								</div>
+								<button type="button" id="clear_image_one" class="{{ $Product->image_one ? '' : 'hidden' }} shrink-0 rounded-md border border-gray-200 bg-white px-2 py-1 text-xs text-gray-700 hover:bg-gray-50">Clear</button>
+							</div>
+						</div>
+					</div>
+					<div>
+						<label class="mb-1 block text-sm font-medium text-gray-700">Image 2</label>
+						<input type="hidden" name="image_two_cheat" value="{{ $Product->image_two }}" />
+						<div class="upload-tile group rounded-lg border-2 border-dashed border-gray-200 bg-white p-3 hover:border-indigo-300 cursor-pointer" data-target="input_image_two">
+							<div class="flex items-center gap-3">
+								<div class="relative h-24 w-24 overflow-hidden rounded-md bg-gray-100 border-2 border-dashed border-gray-300 flex items-center justify-center">
+									<img id="preview_image_two" src="{{ $Product->image_two ? url('/uploads/products/'.$Product->image_two) : '' }}" alt="" class="{{ $Product->image_two ? '' : 'hidden' }} absolute inset-0 h-full w-full object-cover" />
+									<svg id="placeholder_image_two" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="{{ $Product->image_two ? 'hidden' : '' }} h-6 w-6 text-gray-400"><path d="M21 7.5V18a3 3 0 01-3 3H6a3 3 0 01-3-3V7.5L7.5 3h9L21 7.5z"/></svg>
+								</div>
+								<div class="flex-1">
+									<input id="input_image_two" type="file" name="image_two" accept="image/*" class="sr-only" />
+									<p class="text-xs text-gray-600"><span class="text-indigo-600 underline">Click here to upload</span> • JPG/PNG up to 2MB</p>
+								</div>
+								<button type="button" id="clear_image_two" class="{{ $Product->image_two ? '' : 'hidden' }} shrink-0 rounded-md border border-gray-200 bg-white px-2 py-1 text-xs text-gray-700 hover:bg-gray-50">Clear</button>
+							</div>
+						</div>
+					</div>
+					<div>
+						<label class="mb-1 block text-sm font-medium text-gray-700">Image 3</label>
+						<input type="hidden" name="image_three_cheat" value="{{ $Product->image_three }}" />
+						<div class="upload-tile group rounded-lg border-2 border-dashed border-gray-200 bg-white p-3 hover:border-indigo-300 cursor-pointer" data-target="input_image_three">
+							<div class="flex items-center gap-3">
+								<div class="relative h-24 w-24 overflow-hidden rounded-md bg-gray-100 border-2 border-dashed border-gray-300 flex items-center justify-center">
+									<img id="preview_image_three" src="{{ $Product->image_three ? url('/uploads/products/'.$Product->image_three) : '' }}" alt="" class="{{ $Product->image_three ? '' : 'hidden' }} absolute inset-0 h-full w-full object-cover" />
+									<svg id="placeholder_image_three" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="{{ $Product->image_three ? 'hidden' : '' }} h-6 w-6 text-gray-400"><path d="M21 7.5V18a3 3 0 01-3 3H6a3 3 0 01-3-3V7.5L7.5 3h9L21 7.5z"/></svg>
+								</div>
+								<div class="flex-1">
+									<input id="input_image_three" type="file" name="image_three" accept="image/*" class="sr-only" />
+									<p class="text-xs text-gray-600"><span class="text-indigo-600 underline">Click here to upload</span> • JPG/PNG up to 2MB</p>
+								</div>
+								<button type="button" id="clear_image_three" class="{{ $Product->image_three ? '' : 'hidden' }} shrink-0 rounded-md border border-gray-200 bg-white px-2 py-1 text-xs text-gray-700 hover:bg-gray-50">Clear</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="rounded-xl bg-white ring-1 ring-gray-200 p-4">
+				<div class="mb-3 flex items-center gap-2 text-sm font-semibold text-gray-700">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4"><path d="M12 2a7 7 0 00-7 7v2a7 7 0 007 7 7 7 0 007-7V9a7 7 0 00-7-7z"/></svg>
+					<span>Attributes</span>
+				</div>
+				<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+					<div>
+						<label class="mb-1 block text-sm font-medium text-gray-700">Species</label>
+						<select name="species" class="w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm text-gray-800  focus:ring-2 focus:ring-indigo-100">
+							@foreach(($Species ?? []) as $sp)
+								<option value="{{ $sp->title }}" {{ (old('species', $Product->species)==$sp->title) ? 'selected' : '' }}>{{ $sp->title }}</option>
+							@endforeach
+						</select>
+					</div>
+					<div>
+						<label class="mb-1 block text-sm font-medium text-gray-700">Color</label>
+						<select name="color" class="w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm text-gray-800  focus:ring-2 focus:ring-indigo-100">
+							@foreach(($Color ?? []) as $c)
+								<option value="{{ $c->title }}" {{ (old('color', $Product->color)===$c->title) ? 'selected' : '' }}>{{ $c->title }}</option>
+							@endforeach
+						</select>
+					</div>
+					<div>
+						<label class="mb-1 block text-sm font-medium text-gray-700">Thickness</label>
+						<select name="thickness" class="w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm text-gray-800  focus:ring-2 focus:ring-indigo-100">
+							@foreach(($Thickness ?? []) as $t)
+								<option value="{{ $t->title }}" {{ (old('thickness', $Product->thickness)===$t->title) ? 'selected' : '' }}>{{ $t->title }}</option>
+							@endforeach
+						</select>
+					</div>
+					<div>
+						<label class="mb-1 block text-sm font-medium text-gray-700">AC Rating</label>
+						<select name="a_c_ratings" class="w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm text-gray-800  focus:ring-2 focus:ring-indigo-100">
+							@foreach(($ACRating ?? []) as $a)
+								<option value="{{ $a->slung }}" {{ (old('a_c_ratings', $Product->a_c_ratings)===$a->slung) ? 'selected' : '' }}>{{ $a->title }}</option>
+							@endforeach
+						</select>
+					</div>
+				</div>
+				<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+					<div>
+						<label class="mb-1 block text-sm font-medium text-gray-700">Water Resistance</label>
+						<select name="waters" class="w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm text-gray-800  focus:ring-2 focus:ring-indigo-100">
+							@foreach(($Waters ?? []) as $w)
+								@php $wVal = (int)$w->title; @endphp
+								<option value="{{ $wVal }}" {{ (int)old('waters', (int)$Product->waters) === $wVal ? 'selected' : '' }}>{{ $w->title }}</option>
+							@endforeach
+						</select>
+					</div>
+					<div>
+						<label class="mb-1 block text-sm font-medium text-gray-700">Warranties</label>
+						<select name="warranties" class="w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm text-gray-800  focus:ring-2 focus:ring-indigo-100">
+							@foreach(($Warranties ?? []) as $wr)
+								@php $wrVal = (int)$wr->title; @endphp
+								<option value="{{ $wrVal }}" {{ (int)old('warranties', (int)$Product->warranties) === $wrVal ? 'selected' : '' }}>{{ $wr->title }}</option>
+							@endforeach
+						</select>
+					</div>
+				</div>
+				<div class="pt-4">
+					<button class="inline-flex items-center gap-2 rounded-md bg-indigo-600 px-3 py-2 text-sm font-medium text-white hover:bg-indigo-700">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="h-4 w-4"><path d="M17 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V5l-2-2zm-2 14H9v-5h6v5zm0-7H9V5h6v5z"/></svg>
+						Update Product
+					</button>
+				</div>
+			</div>
+		</div>
+	</form>
 
-                                        {{--  --}}
-                                        @foreach ($Classification as $class)
-                                        <option value="{{$class->id}}" class="circle">{{$class->title}}</option>
-                                        @endforeach
-                                    </select>
-                                    <label>Choose Class</label>
-                                </div>
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			const classification = document.getElementById('classificationSelect');
+			const subSelect = document.getElementById('subClassificationSelect');
+			if (classification && subSelect) {
+				classification.addEventListener('change', async () => {
+					const id = classification.value;
+					subSelect.innerHTML = '<option value="" id="loadingOption">Loading...</option>';
+					try {
+						const res = await fetch(`{{ url('/admin/get-subcategories') }}/${id}`, { headers: { 'X-Requested-With': 'XMLHttpRequest', 'Accept': 'application/json' }});
+						const data = await res.json();
+						subSelect.innerHTML = (data || []).map(s => `<option value="${s.id}">${s.title}</option>`).join('');
+					} catch (e) {
+						subSelect.innerHTML = '';
+					}
+				});
+			}
 
-                                <div class="input-field col s6">
-                                    <select id="sub_cat" required name="sub_classification">
-                                        <?php $SubClassificationSelected = DB::table('sub_classifications')->where('id',$Product->sub_classifications)->get();  ?>
-                                        @foreach ($SubClassificationSelected as $SubClassSelect)
-                                           <option selected value="{{$SubClassSelect->id}}" class="circle">{{$SubClassSelect->title}}</option>
-                                        @endforeach
+			function bindPreview(inputId, imgId, placeholderId, clearId) {
+				const input = document.getElementById(inputId);
+				const img = document.getElementById(imgId);
+				const placeholder = document.getElementById(placeholderId);
+				const clearBtn = document.getElementById(clearId);
+				if (!input || !img) return;
+				input.addEventListener('change', () => {
+					const file = input.files && input.files[0];
+					if (!file) return;
+					const reader = new FileReader();
+					reader.onload = e => {
+						img.src = e.target.result;
+						img.classList.remove('hidden');
+						placeholder?.classList.add('hidden');
+						clearBtn?.classList.remove('hidden');
+					};
+					reader.readAsDataURL(file);
+				});
+				clearBtn?.addEventListener('click', (e) => {
+					e.stopPropagation();
+					input.value = '';
+					img.src = '';
+					img.classList.add('hidden');
+					placeholder?.classList.remove('hidden');
+					clearBtn.classList.add('hidden');
+				});
+			}
 
-                                        <?php $SubClassificationSelected = DB::table('sub_classifications')->where('classification_id',$Product->classifications)->get(); ?>
-                                        @foreach ($SubClassificationSelected as $SubClassSelect)
-                                           <option value="{{$SubClassSelect->id}}" class="circle">{{$SubClassSelect->title}}</option>
-                                        @endforeach
-                                    </select>
-                                    <label>Choose Sub Class</label>
-                                </div>
-                                {{--  --}}
-                                <div class="section-space col s12"></div>
-                            </div>
-                            <div class="row">
-                                {{--  --}}
-                                <div class="input-field col s12">
-                                    <select required name="category" class="icons" id="mydiv">
-                                        <?php $CategorySelected = DB::table('categories')->where('id',$Product->category)->get() ?>
-                                        @foreach ($CategorySelected as $CatSel)
-                                        <option value="{{$CatSel->id}}" selected>{{$CatSel->title}}</option>
-                                        @endforeach
-                                        @foreach ($Category as $Categories)
-                                          <option value="{{$Categories->id}}" data-icon="{{url('/')}}/uploads/categories/{{$Categories->image}}" class="circle">{{$Categories->title}}</option>
-                                        @endforeach
-                                    </select>
-                                    <label>Choose Category</label>
-                                </div>
-                                <div class="section-space col s12"></div>
-                            </div>
-                            {{--  --}}
-                            <?php $Thickness = DB::table('thicknesses')->get(); ?>
-                            {{--  --}}
-                            <div class="row">
-                                <div class="input-field col s6">
-                                    <select required name="thickness" class="icons" id="mydiv">
-                                        <option value="{{$Product->thickness}}" selected>{{$Product->thickness}}</option>
-                                        @foreach ($Thickness as $thickness)
-                                        <option value="{{$thickness->title}}" data-icon="{{url('/')}}/uploads/thicknesses/{{$thickness->image}}" class="circle">{{$thickness->title}}</option>
-                                        @endforeach
-                                    </select>
-                                    <label>Choose Thickness</label>
-                                </div>
-                                <?php $ACRating = DB::table('a_c_ratings')->get(); ?>
-                                <div class="input-field col s6">
-                                    <select required name="a_c_ratings" class="icons" id="mydiv">
-                                        <?php
-                                            $ACRatings = DB::table('a_c_ratings')->where('slung',$Product->a_c_ratings)->get();
-                                        ?>
-                                        @foreach ($ACRatings as $acRatings)
+			bindPreview('input_image_one', 'preview_image_one', 'placeholder_image_one', 'clear_image_one');
+			bindPreview('input_image_two', 'preview_image_two', 'placeholder_image_two', 'clear_image_two');
+			bindPreview('input_image_three', 'preview_image_three', 'placeholder_image_three', 'clear_image_three');
 
-                                            <option value="{{$acRatings->slung}}" selected> {{$acRatings->title}}</option>
-                                        @endforeach
-                                        @foreach ($ACRating as $a_c_ratings)
-                                            <option value="{{$a_c_ratings->slung}}" data-icon="{{url('/')}}/uploads/ac_ratings/{{$a_c_ratings->image}}" class="circle">{{$a_c_ratings->title}}</option>
-                                        @endforeach
-                                    </select>
-                                    <label>Choose AC Ratings</label>
-                                </div>
-                                <div class="section-space col s12"></div>
-                            </div>
-                            {{--  --}}
+			document.querySelectorAll('.upload-tile').forEach(tile => {
+				const inputId = tile.dataset.target;
+				const input = document.getElementById(inputId);
+				tile.addEventListener('click', (e) => {
+					if (e.target.tagName.toLowerCase() === 'button') return;
+					input?.click();
+				});
+			});
+		});
+	</script>
 
-
-                            <?php $Color = DB::table('colors')->get(); ?>
-                            {{--  --}}
-                            <div class="row">
-                                <div class="input-field col s6">
-                                    <select required name="color" class="icons" id="mydiv">
-                                        <option value="{{$Product->color}}" selected>{{$Product->color}}</option>
-                                        @foreach ($Color as $color)
-                                        <option value="{{$color->title}}" data-icon="{{url('/')}}/uploads/colors/{{$color->image}}" class="circle">{{$color->title}}</option>
-                                        @endforeach
-                                    </select>
-                                    <label>Choose Color</label>
-                                </div>
-                                <?php $Species = DB::table('species')->get(); ?>
-                                <div class="input-field col s6">
-                                    <select required name="species" class="icons" id="mydiv">
-                                        <option value="{{$Product->species}}" selected>{{$Product->species}}</option>
-                                        @foreach ($Species as $species)
-                                        <option value="{{$species->title}}" data-icon="{{url('/')}}/uploads/species/{{$species->image}}" class="circle">{{$species->title}}</option>
-                                        @endforeach
-                                    </select>
-                                    <label>Choose Species</label>
-                                </div>
-                                <div class="section-space col s12"></div>
-                            </div>
-                            {{--  --}}
-
-                            <?php $Color = DB::table('waters')->get(); ?>
-                            {{--  --}}
-                            <div class="row">
-                                <div class="input-field col s6">
-                                    <select  name="waters" class="icons" id="mydiv">
-                                        <option value="{{$Product->waters}}" selected>{{$Product->waters}}</option>
-                                        @foreach ($Color as $color)
-                                        <option value="{{$color->title}}" data-icon="{{url('/')}}/uploads/colors/{{$color->image}}" class="circle">{{$color->title}}</option>
-                                        @endforeach
-                                    </select>
-                                    <label>Choose Water Resistant</label>
-                                </div>
-
-                                <?php $Species = DB::table('warranties')->get(); ?>
-                                <div class="input-field col s6">
-                                    <select  name="warranties" class="icons" id="mydiv">
-                                        <option value="{{$Product->warranties}}" selected>{{$Product->warranties}}</option>
-                                        @foreach ($Species as $species)
-                                        <option value="{{$species->title}}" data-icon="{{url('/')}}/uploads/species/{{$species->image}}" class="circle">{{$species->title}}</option>
-                                        @endforeach
-                                    </select>
-                                    <label>Choose Waranty</label>
-                                </div>
-
-                                <div class="section-space col s12"></div>
-                            </div>
-                            {{--  --}}
-
-                            <div class="row">
-                            {{-- Stock --}}
-                                <div class="input-field col s4">
-                                    <div class="box-inn-sp box-second-inn">
-                                        <div class="inn-title">
-                                            <h4>Stock Status</h4>
-                                        </div>
-                                        <div class="tab-inn">
-                                            @if($Product->stock == 'Out Of Stock')
-                                            <!-- Switch -->
-                                            <div class="switch mar-bot-20">
-                                                <label>
-                                                    Off
-                                                    <input name="stock" type="checkbox">
-                                                    <span class="lever"></span> On
-                                                </label>
-                                            </div>
-                                            @else
-                                            <!-- Switch -->
-                                            <div class="switch mar-bot-20">
-                                                <label>
-                                                    Off
-                                                    <input name="stock" checked type="checkbox">
-                                                    <span class="lever"></span> On
-                                                </label>
-                                            </div>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="input-field col s4">
-                                    <div class="box-inn-sp box-second-inn">
-                                        <div class="inn-title">
-                                            <h4>Trending</h4>
-                                        </div>
-                                        <div class="tab-inn">
-                                            @if($Product->trending == '0')
-                                            <!-- Switch -->
-                                            <div class="switch mar-bot-20">
-                                                <label>
-                                                    Off
-                                                    <input name="trending" type="checkbox">
-                                                    <span class="lever"></span> On
-                                                </label>
-                                            </div>
-                                            @else
-                                            <!-- Switch -->
-                                            <div class="switch mar-bot-20">
-                                                <label>
-                                                    Off
-                                                    <input name="trending" checked type="checkbox">
-                                                    <span class="lever"></span> On
-                                                </label>
-                                            </div>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="input-field col s4">
-                                    <div class="box-inn-sp box-second-inn">
-                                        <div class="inn-title">
-                                            <h4>Featured</h4>
-                                        </div>
-                                        <div class="tab-inn">
-                                            @if($Product->featured == '0')
-                                            <!-- Switch -->
-                                            <div class="switch mar-bot-20">
-                                                <label>
-                                                    Off
-                                                    <input name="featured" type="checkbox">
-                                                    <span class="lever"></span> On
-                                                </label>
-                                            </div>
-                                            @else
-                                            <!-- Switch -->
-                                            <div class="switch mar-bot-20">
-                                                <label>
-                                                    Off
-                                                    <input name="featured" checked type="checkbox">
-                                                    <span class="lever"></span> On
-                                                </label>
-                                            </div>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <textarea required name="meta" class="materialize-textarea">{{$Product->meta}}</textarea>
-                                    <label for="textarea1">Meta Descriptions:</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <textarea required id="article-ckeditor" name="content" class="materialilze-textarea" placeholder="content">{{$Product->content}}</textarea>
-                                </div>
-                            </div><br><br>
-
-                            <script src="{{ asset('ckeditor/ckeditor.js')}}"></script>
-                            <script>CKEDITOR.replace('article-ckeditor');</script>
-
-
-
-
-                           {{-- Images --}}
-                            <style>
-                                .btn-file {
-                                    position: relative;
-                                    overflow: hidden;
-                                }
-                                .btn-file input[type=file] {
-                                    position: absolute;
-                                    top: 0;
-                                    right: 0;
-                                    min-width: 33.33%;
-                                    min-height: 100%;
-                                    font-size: 100px;
-                                    text-align: right;
-                                    filter: alpha(opacity=0);
-                                    opacity: 0;
-                                    outline: none;
-                                    background: white;
-                                    cursor: inherit;
-                                    display: block;
-                                }
-
-                                #img-upload{
-                                    width: 33.33%;
-                                }
-                                .image-preview{
-                                    max-height:100%;
-                                    height:100% !important;
-                                }
-                            </style>
-                            {{-- Style --}}
-                            <div class="row">
-                                <div class="">
-                                    <div class="input-field col s3 col-lg-3">
-                                        <div class="form-group">
-                                            <label>Image One</label>
-                                            <div class="input-group">
-                                                <span class="input-group-btn">
-                                                    <span class="btn btn-default btn-file">
-                                                       <small> One: Size 277 by 377  Browse… </small><input name="image_one" type="file" id="imgInp">
-                                                    </span>
-                                                </span>
-                                                <input type="text" class="form-control" readonly>
-                                            </div>
-                                            <img class="image-preview" style="width:100%" src="{{url('/')}}/uploads/products/{{$Product->image_one}}"/>
-                                        </div>
-                                    </div>
-
-                                    <div class="input-field col s3 col-lg-3">
-                                        <div class="form-group">
-                                            <label>Image Two</label>
-                                            <div class="input-group">
-                                                <span class="input-group-btn">
-                                                    <span class="btn btn-default btn-file">
-                                                        <small>Two: Size 277 by 377 Browse… </small>
-                                                        <input name="image_two" type="file" id="imgInp">
-                                                    </span>
-                                                </span>
-                                                <input type="text" class="form-control" readonly>
-                                            </div>
-                                            <img class="image-preview" style="width:100%" src="{{url('/')}}/uploads/products/{{$Product->image_two}}"/>
-                                        </div>
-                                    </div>
-
-                                    <div class="input-field col s3 col-lg-3">
-                                        <div class="form-group">
-                                            <label>Image Three</label>
-                                            <div class="input-group">
-                                                <span class="input-group-btn">
-                                                    <span class="btn btn-default btn-file">
-                                                        <small> Three: Size 277 by 377  Browse… </small><input name="image_three" type="file" id="imgInp">
-                                                    </span>
-                                                </span>
-                                                <input type="text" class="form-control" readonly>
-                                            </div>
-                                            <img class="image-preview img-upload" style="width:100%" src="{{url('/')}}/uploads/products/{{$Product->image_three}}"/>
-                                        </div>
-                                    </div>
-
-                                    <div class="input-field col s3 col-lg-3">
-                                        <div class="form-group">
-                                            <label>Image Four</label>
-                                            <div class="input-group">
-                                                <span class="input-group-btn">
-                                                    <span class="btn btn-default btn-file">
-                                                        <small> Four: Size 277 by 377  Browse… </small><input name="image_four" type="file" id="imgInp">
-                                                    </span>
-                                                </span>
-                                                <input type="text" class="form-control" readonly>
-                                            </div>
-                                            <img class="image-preview img-upload" style="width:100%" src="{{url('/')}}/uploads/products/{{$Product->image_four}}"/>
-                                        </div>
-                                    </div>
-
-
-                                </div>
-                            </div>
-
-                            <input type="hidden" name="image_one_cheat" value="{{$Product->image_one}}">
-                            <input type="hidden" name="image_two_cheat" value="{{$Product->image_two}}">
-                            <input type="hidden" name="image_three_cheat" value="{{$Product->image_three}}">
-                            <input type="hidden" name="image_four_cheat" value="{{$Product->image_four}}">
-
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <input  type="submit" class="waves-effect waves-light btn-large" value="Save Changes">
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--== BODY INNER CONTAINER ==-->
-
-    </div>
-</div>
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script>
-    $(document).ready(function (e) {
-        $('#cat').on('change', e => {
-            var val = $('#cat').val();
-            var root = location.protocol + '//' + location.host;
-            $('#sub_cat').empty()
-            $.ajax({
-
-                url: `${root}/admin/get-subcategories/${val}`,
-                success: function(data){
-                        var toAppend = '';
-                        $.each(data,function(i,o){
-                        toAppend += '<option class="circle" value="'+o.id+'">'+o.title+'</option>';
-                    });
-                    $('#sub_cat').append(toAppend);
-                    $('#sub_cat').empty();
-                    $('#sub_cat').append(toAppend);
-                    $("#sub_cat").material_select()
-
-                    }
-            })
-        })
-    })
-</script>
-
+	<script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+	<script>
+		if (window.CKEDITOR) {
+			CKEDITOR.replace('content_editor');
+		}
+	</script>
 @endsection
+
+

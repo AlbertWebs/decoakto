@@ -2,10 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class SubClassification extends Model
 {
-    use HasFactory;
+	protected $table = 'sub_classifications';
+	protected $fillable = [
+		'classification_id',
+		'title',
+		'slung',
+		'image',
+	];
+
 }

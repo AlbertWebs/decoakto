@@ -2,10 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Warranty extends Model
 {
-    use HasFactory;
+	protected $table = 'warranties';
+	protected $fillable = [
+		'category_id',
+		'title',
+		'image',
+	];
+
 }

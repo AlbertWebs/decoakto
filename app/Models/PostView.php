@@ -2,28 +2,24 @@
 
 namespace App\Models;
 
-use App\Models\Blog;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class PostView extends Model
 {
-    use HasFactory;
+	protected $table = 'post_views';
+	protected $fillable = [
+		'post_id',
+		'titleslug',
+		'url',
+		'session_id',
+		'user_id',
+		'ip',
+		'agent',
+	];
 
-    public function postView()
-    {
-        return $this->belongsTo(Blog::class);
-    }
+	protected $casts = [
+		'post_id' => 'integer',
+		'user_id' => 'integer',
+	];
 
-    public static function createViewLog($post) {
-        $postViews= new PostView();
-        $postViews->post_id = $post->id;
-        $postViews->slug = $post->slug;
-        $postViews->url = request()->url();
-        $postViews->session_id = request()->getSession()->getId();
-        $postViews->user_id = (auth()->check())?auth()->id():null; 
-        $postViews->ip = request()->ip();
-        $postViews->agent = request()->header('User-Agent');
-        $postViews->save();
-    }
 }
