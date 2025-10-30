@@ -236,7 +236,7 @@
                     </a> --}}
                     <div class="pq-popup-video-block pq-popup-style-2">
                         <div class="pq-video-icon">
-                            <a href="https://www.youtube.com/watch?v=rw34dko8ty8"
+                            <a href="https://www.youtube.com/embed?v=rw34dko8ty8"
                                 class="pq-video default popup-youtube">
                                 <i aria-hidden="true" class="ion ion-play"></i>
                             </a>
