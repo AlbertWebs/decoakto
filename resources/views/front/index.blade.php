@@ -447,7 +447,7 @@
 
                                   <?php
                                       $Category = \App\Models\Category::find($blog->category);
-                                      echo $Category->name;
+
                                    ?>
 
                          </div>
