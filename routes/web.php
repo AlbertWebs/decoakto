@@ -66,6 +66,13 @@ Route::get('/email', [HomeController::class, 'email'])->name('email');
 Route::get('/get-subcategories/{id}',  [HomeController::class, 'get_subcategories']);
 
 
+// Embedded category content (isolated via iframe)
+Route::get('/embed/category/{id}', function($id){
+    $category = \App\Models\Category::findOrFail($id);
+    return response()->view('front.category-embed', compact('category'));
+})->name('embed.category');
+
+
 
 
 Route::get('/clear-cache', function() {

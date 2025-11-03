@@ -37,9 +37,25 @@
 <!-- About Us -->
     <section class="blog-single">
         <div class="container">
-           <p class="pq-section-description">
-                {!!html_entity_decode($Category->content)!!}
-            </p>
+           <iframe id="category-content-frame-{{$Category->id}}" class="category-content-frame" src="{{ route('embed.category', ['id' => $Category->id]) }}" style="width:100%;border:0;" scrolling="no"></iframe>
+           <script>
+           (function(){
+               var frame = document.getElementById('category-content-frame-{{$Category->id}}');
+               if(!frame){ return; }
+               function setHeight(h){
+                   var height = parseInt(h, 10);
+                   if (!isNaN(height) && height > 0) {
+                       frame.style.height = height + 'px';
+                   }
+               }
+               window.addEventListener('message', function(e){
+                   if (!e || !e.data) return;
+                   if (e.data.type === 'category-embed-height' && e.data.id === {{ $Category->id }}) {
+                       setHeight(e.data.height);
+                   }
+               });
+           })();
+           </script>
         </div>
     </section>
 
