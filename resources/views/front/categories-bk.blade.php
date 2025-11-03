@@ -4,7 +4,7 @@
 @section('content')
 @foreach ($Categories as $Category)
  <!-- Breadcrumb -->
-<br><br><br><br><br><br>
+<br><br>
     @if($Category->has_products == 1)
     <div class="container">
         <div class="row">
