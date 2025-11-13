@@ -432,28 +432,46 @@
 
 <!-- Award -->
 <style>
-.partner-logo{ height: 120px; width: auto; object-fit: contain; }
-.partner-carousel .owl-stage{
-    display: flex;
-    flex-wrap: wrap;
+.partner-grid{
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
+    align-items: stretch;
 }
-.partner-carousel .owl-item{
-    width: 25% !important;
-}
-.partner-carousel .owl-item .pq-awardbox-1{
-    height: 100%;
+.partner-grid-item{
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px 16px;
     display: flex;
-    flex-direction: column;
+    align-items: center;
     justify-content: center;
 }
-@media (max-width: 576px){
-    .partner-logo{ height: 80px; }
-    .award .pq-award-title{ display:none !important; }
-    .award .owl-dots{ display:none !important; }
+.partner-grid-item .pq-awardbox-1{
+    text-align: center;
+}
+.partner-logo{
+    height: 120px;
+    width: auto;
+    object-fit: contain;
 }
 @media (max-width: 991.98px){
-    .partner-carousel .owl-item{
-        width: 33.333% !important;
+    .partner-grid{
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+    }
+    .partner-logo{
+        height: 100px;
+    }
+}
+@media (max-width: 576px){
+    .partner-grid-item{
+        padding: 16px 12px;
+    }
+    .partner-logo{
+        height: 80px;
+    }
+    .award .pq-award-title{
+        display:none !important;
     }
 }
 </style>
@@ -481,20 +499,18 @@
                 <div class="divider pq-right-border pq-45"></div>
             </div>
             <div class="col-lg-12 wow animated fadeInLeft">
-                <div class="pq-awardbox-1-slider pq-awardbox-1 partner-carousel">
-                    <div class="owl-carousel owl-loaded owl-drag" data-dots="true" data-nav="false" data-desk_num="4" data-lap_num="3" data-tab_num="2" data-mob_num="3" data-mob_sm="3" data-autoplay="true" data-loop="true" data-margin="30">
-                        <?php $Partners = DB::table("partners")->get(); ?>
-                        @foreach ($Partners as $partners)
-                        <div class="item" style="background-color:#ffffff">
-                            <div class="pq-awardbox-1 ">
-                                <a>
-                                    <img class="img-fluid partner-logo d-block mx-auto" decoding="async" src="{{url('/')}}/uploads/partners/{{$partners->image}}" alt="{{$partners->name}}">
-                                    <span class="pq-award-title">{{$partners->name}}</span>
-                                </a>
-                            </div>
+                <?php $Partners = DB::table("partners")->get(); ?>
+                <div class="partner-grid">
+                    @foreach ($Partners as $partners)
+                    <div class="partner-grid-item">
+                        <div class="pq-awardbox-1">
+                            <a>
+                                <img class="img-fluid partner-logo d-block mx-auto" decoding="async" src="{{url('/')}}/uploads/partners/{{$partners->image}}" alt="{{$partners->name}}">
+                                <span class="pq-award-title">{{$partners->name}}</span>
+                            </a>
                         </div>
-                        @endforeach
                     </div>
+                    @endforeach
                 </div>
             </div>
         </div>
