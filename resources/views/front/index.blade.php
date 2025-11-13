@@ -141,7 +141,7 @@
           {{--  --}}
           <?php $Categories = DB::table("categories")->get(); ?>
           @foreach ($Categories as $cat)
-          <div class="col-lg-4 col-md-6 wow animated fadeInUp" style="margin-bottom:20px;">
+          <div class="col-lg-4 col-md-6 col-sm-6 wow animated fadeInUp" style="margin-bottom:20px;">
              <div class="pq-service-box pq-style-3 text-center">
                 <div class="pq-service-media">
                    <div class="pq-service-img">
