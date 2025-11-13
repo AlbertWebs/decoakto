@@ -433,10 +433,28 @@
 <!-- Award -->
 <style>
 .partner-logo{ height: 120px; width: auto; object-fit: contain; }
+.partner-carousel .owl-stage{
+    display: flex;
+    flex-wrap: wrap;
+}
+.partner-carousel .owl-item{
+    width: 25% !important;
+}
+.partner-carousel .owl-item .pq-awardbox-1{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 @media (max-width: 576px){
     .partner-logo{ height: 80px; }
     .award .pq-award-title{ display:none !important; }
     .award .owl-dots{ display:none !important; }
+}
+@media (max-width: 991.98px){
+    .partner-carousel .owl-item{
+        width: 33.333% !important;
+    }
 }
 </style>
  <section class="award pq-bg-img-1">
@@ -463,7 +481,7 @@
                 <div class="divider pq-right-border pq-45"></div>
             </div>
             <div class="col-lg-12 wow animated fadeInLeft">
-                <div class="pq-awardbox-1-slider pq-awardbox-1">
+                <div class="pq-awardbox-1-slider pq-awardbox-1 partner-carousel">
                     <div class="owl-carousel owl-loaded owl-drag" data-dots="true" data-nav="false" data-desk_num="4" data-lap_num="3" data-tab_num="2" data-mob_num="3" data-mob_sm="3" data-autoplay="true" data-loop="true" data-margin="30">
                         <?php $Partners = DB::table("partners")->get(); ?>
                         @foreach ($Partners as $partners)
