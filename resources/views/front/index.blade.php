@@ -66,14 +66,33 @@
 
     <style>
     /* Responsive typography and spacing for mobile/tablet */
-    @media (max-width: 576px){
+   .pq-service-img{
+        aspect-ratio: 1 / 1;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+   }
+
+   .pq-service-img .ser-img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+   }
+
+   @media (max-width: 576px){
+        .pq-popup-video-block.pq-popup-style-2{ display: none !important; }
+   }
+
+   @media (max-width: 576px){
         .headline-intro{ font-size: 22px; line-height: 30px; }
         .pq-section-title .pq-section-main-title{ font-size: 22px; line-height: 30px; }
         .pq-section-main-titles{ font-size: 20px !important; line-height: 28px !important; }
         .pq-section-sub-title{ font-size: 12px; letter-spacing: .02em; }
         .pq-section-description, .pq-section-title p, .pq-blog-contain p{ font-size: 14px; line-height: 22px; }
         .pq-button .pq-button-text{ font-size: 14px; }
-        .pq-service-title a{ font-size: 16px; }
+        .pq-service-title a{ font-size: 15px; }
         .pq-portfolio-content span a{ font-size: 12px; }
         .pq-portfolio-content h5 a{ font-size: 16px; }
         .pq-blog-title a{ font-size: 16px; }
