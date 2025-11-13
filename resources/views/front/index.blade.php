@@ -438,6 +438,9 @@
     gap: 24px;
     align-items: stretch;
 }
+.partner-carousel-slide{
+    padding: 8px 0;
+}
 .partner-grid-item{
     background-color: #ffffff;
     border-radius: 8px;
@@ -458,6 +461,9 @@
     .partner-grid{
         grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 18px;
+    }
+    .partner-grid-item:nth-child(n+7){
+        display: none;
     }
     .partner-logo{
         height: 100px;
@@ -500,14 +506,20 @@
             </div>
             <div class="col-lg-12 wow animated fadeInLeft">
                 <?php $Partners = DB::table("partners")->get(); ?>
-                <div class="partner-grid">
-                    @foreach ($Partners as $partners)
-                    <div class="partner-grid-item">
-                        <div class="pq-awardbox-1">
-                            <a>
-                                <img class="img-fluid partner-logo d-block mx-auto" decoding="async" src="{{url('/')}}/uploads/partners/{{$partners->image}}" alt="{{$partners->name}}">
-                                <span class="pq-award-title">{{$partners->name}}</span>
-                            </a>
+                <div class="pq-awardbox-1-slider partner-carousel owl-carousel owl-loaded owl-drag" data-dots="true" data-nav="false" data-desk_num="1" data-lap_num="1" data-tab_num="1" data-mob_num="1" data-mob_sm="1" data-autoplay="true" data-loop="true" data-margin="0">
+                    @foreach ($Partners->chunk(8) as $partnerChunk)
+                    <div class="partner-carousel-slide">
+                        <div class="partner-grid">
+                            @foreach ($partnerChunk as $partners)
+                            <div class="partner-grid-item">
+                                <div class="pq-awardbox-1">
+                                    <a>
+                                        <img class="img-fluid partner-logo d-block mx-auto" decoding="async" src="{{url('/')}}/uploads/partners/{{$partners->image}}" alt="{{$partners->name}}">
+                                        <span class="pq-award-title">{{$partners->name}}</span>
+                                    </a>
+                                </div>
+                            </div>
+                            @endforeach
                         </div>
                     </div>
                     @endforeach
