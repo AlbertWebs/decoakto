@@ -84,17 +84,20 @@
    .pq-grid{
         display: flex;
         flex-wrap: wrap;
-        gap: 24px;
+        margin: -12px;
    }
 
    .pq-grid .pq-grid-item{
-        flex: 0 0 calc(33.333% - 24px);
-        max-width: calc(33.333% - 24px);
+        flex: 0 0 33.333%;
+        max-width: 33.333%;
+        padding: 12px;
+        box-sizing: border-box;
         display: flex;
    }
 
    .pq-grid .pq-portfoliobox-3{
         width: 100%;
+        height: 100%;
    }
 
    .pq-grid .pq-portfolio-img{
@@ -119,10 +122,11 @@
         .pq-button .pq-button-text{ font-size: 14px; }
         .pq-service-title a{ font-size: 15px; line-height: 20px; }
         .pq-service-title .category-title{ line-height: 1.3; display: inline-block; margin-bottom: 0; }
-        .pq-grid{ gap: 12px; }
+        .pq-grid{ margin: -6px; }
         .pq-grid .pq-grid-item{
-            flex: 0 0 calc(50% - 12px);
-            max-width: calc(50% - 12px);
+            flex: 0 0 50%;
+            max-width: 50%;
+            padding: 6px;
         }
         .pq-grid-item .pq-portfolio-content span a{ font-size: 12px; line-height: 1.2; display: inline-block; margin-bottom: 2px; }
         .pq-grid-item .pq-portfolio-content h5{ margin-top: 4px; margin-bottom: 0; }
