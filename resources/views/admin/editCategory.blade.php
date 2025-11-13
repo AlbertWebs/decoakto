@@ -44,7 +44,7 @@
 			</div>
 			<div class="mt-4">
 				<label class="mb-1 block text-sm font-medium text-gray-700">Content</label>
-				<textarea id="content_editor" name="content" rows="10" class="w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm text-gray-800">{!! old('content', $Category->content) !!}</textarea>
+				<textarea id="content_editor" name="content" rows="10" class="w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm text-gray-800">{{ old('content', $Category->content) }}</textarea>
 			</div>
 			<div class="pt-4">
 				<button class="inline-flex items-center gap-2 rounded-md bg-indigo-600 px-3 py-2 text-sm font-medium text-white hover:bg-indigo-700">
