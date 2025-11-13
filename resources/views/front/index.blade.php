@@ -93,6 +93,7 @@
         .pq-section-description, .pq-section-title p, .pq-blog-contain p{ font-size: 14px; line-height: 22px; }
         .pq-button .pq-button-text{ font-size: 14px; }
         .pq-service-title a{ font-size: 15px; line-height: 20px; }
+        .pq-service-title .category-title{ line-height: 1.3; display: inline-block; margin-bottom: 0; }
         .pq-portfolio-content span a{ font-size: 12px; }
         .pq-portfolio-content h5 a{ font-size: 16px; }
         .pq-blog-title a{ font-size: 16px; }
