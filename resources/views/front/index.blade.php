@@ -81,8 +81,33 @@
         object-fit: cover;
    }
 
-   @media (max-width: 576px){
-        .pq-popup-video-block.pq-popup-style-2{ display: none !important; }
+   .pq-grid{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+   }
+
+   .pq-grid .pq-grid-item{
+        flex: 0 0 calc(33.333% - 24px);
+        max-width: calc(33.333% - 24px);
+        display: flex;
+   }
+
+   .pq-grid .pq-portfoliobox-3{
+        width: 100%;
+   }
+
+   .pq-grid .pq-portfolio-img{
+        aspect-ratio: 1 / 1;
+        width: 100%;
+        overflow: hidden;
+        border-radius: 10px;
+   }
+
+   .pq-grid .pq-portfolio-img img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
    }
 
    @media (max-width: 576px){
@@ -94,9 +119,14 @@
         .pq-button .pq-button-text{ font-size: 14px; }
         .pq-service-title a{ font-size: 15px; line-height: 20px; }
         .pq-service-title .category-title{ line-height: 1.3; display: inline-block; margin-bottom: 0; }
+        .pq-grid{ gap: 12px; }
+        .pq-grid .pq-grid-item{
+            flex: 0 0 calc(50% - 12px);
+            max-width: calc(50% - 12px);
+        }
         .pq-grid-item .pq-portfolio-content span a{ font-size: 12px; line-height: 1.2; display: inline-block; margin-bottom: 2px; }
         .pq-grid-item .pq-portfolio-content h5{ margin-top: 4px; margin-bottom: 0; }
-        .pq-grid-item .pq-portfolio-content h5 a{ font-size: 16px; line-height: 1.3; display: inline-block; }
+        .pq-grid-item .pq-portfolio-content h5 a{ font-size: 15px; line-height: 1.3; display: inline-block; }
         .pq-portfolio-content span a{ font-size: 12px; }
         .pq-portfolio-content h5 a{ font-size: 16px; }
         .pq-blog-title a{ font-size: 16px; }
@@ -105,6 +135,7 @@
         .pq-my-30{ margin-top: 15px !important; margin-bottom: 15px !important; }
         /* Revolution slider title */
         .rs-title-font{ font-size: 22px !important; line-height: 30px !important; padding: 6px !important; border-width: 3px !important; }
+        .pq-popup-video-block.pq-popup-style-2{ display: none !important; }
     }
 
     @media (min-width: 577px) and (max-width: 991.98px){
@@ -276,7 +307,7 @@
                     $Portfolio = DB::table('portfolios')->where('home','1')->where('big','0')->limit('6')->get();
                     ?>
                     @foreach ($Portfolio as $Portfolio)
-                    <div class="pq-grid-item pq-filter-items pq-col-6 59">
+                    <div class="pq-grid-item pq-filter-items pq-col-6 col-6 col-md-4">
                         <div class="pq-portfoliobox-3">
                             <div class="pq-portfolio-img">
                                 <a href="{{url('/')}}/portfolio/{{$Portfolio->slung}}">
