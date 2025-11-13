@@ -128,10 +128,10 @@
             max-width: 50%;
             padding: 6px;
         }
-        .pq-grid-item .pq-portfolio-content{ text-align: center; }
+        .pq-grid-item .pq-portfolio-content{ text-align: center; display: flex; flex-direction: column; align-items: center; }
         .pq-grid-item .pq-portfolio-content span a{ font-size: 12px; line-height: 1.2; display: inline-block; margin-bottom: 2px; }
         .pq-grid-item .pq-portfolio-content h5{ margin-top: 2px; margin-bottom: 0; }
-        .pq-grid-item .pq-portfolio-content h5 a{ font-size: 15px; line-height: 1.25; display: inline-block; }
+        .pq-grid-item .pq-portfolio-content h5 a{ font-size: 15px; line-height: 1.25; display: inline-block; text-align: center; }
         .pq-portfolio-content span a{ font-size: 12px; }
         .pq-portfolio-content h5 a{ font-size: 16px; }
         .pq-blog-title a{ font-size: 16px; }
