@@ -113,6 +113,23 @@
         object-fit: cover;
    }
 
+   .pq-image-box-img{
+        aspect-ratio: 1 / 1;
+        width: 100%;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+   }
+
+   .pq-image-box-img .pellete-img,
+   .pq-image-box-img img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+   }
+
    @media (max-width: 576px){
         .headline-intro{ font-size: 22px; line-height: 30px; }
         .pq-section-title .pq-section-main-title{ font-size: 22px; line-height: 30px; }
@@ -132,6 +149,8 @@
         .pq-grid-item .pq-portfolio-content span a{ font-size: 12px; line-height: 1.2; display: inline-block; margin-bottom: 2px; }
         .pq-grid-item .pq-portfolio-content h5{ margin-top: 2px; margin-bottom: 0; }
         .pq-grid-item .pq-portfolio-content h5 a{ font-size: 15px; line-height: 1.25; display: inline-block; text-align: center; }
+        .pq-image-box-img{ aspect-ratio: 1 / 1; }
+        .pq-image-box-img img{ object-fit: cover; }
         .pq-portfolio-content span a{ font-size: 12px; }
         .pq-portfolio-content h5 a{ font-size: 16px; }
         .pq-blog-title a{ font-size: 16px; }
