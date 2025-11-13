@@ -320,8 +320,8 @@
                                 </a>
                             </div>
                             <div class="pq-portfolio-info">
-                                <div class="pq-portfolio-content">
-                                    <span><a href="{{url('/')}}/portfolio/{{$Portfolio->slung}}">Laminate</a></span>
+                                <div class="pq-portfolio-content text-center">
+                                   
                                     <h5><a href="{{url('/')}}/portfolio/{{$Portfolio->slung}}">{{$Portfolio->name}}</a></h5>
                                 </div>
                             </div>
