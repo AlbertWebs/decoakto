@@ -319,7 +319,7 @@
                                     <img class="img-fluid" style="border-radius:10px" decoding="async" src="{{url('/')}}/uploads/portfolios/{{$Portfolio->image_one}}" alt="{{$Portfolio->name}}">
                                 </a>
                             </div>
-                            <div class="pq-portfolio-info">
+                            <div class="pq-portfolio-infos">
                                 <div class="pq-portfolio-content text-center">
                                    
                                     <h5><a href="{{url('/')}}/portfolio/{{$Portfolio->slung}}">{{$Portfolio->name}}</a></h5>
