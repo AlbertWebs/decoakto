@@ -63,32 +63,47 @@
         }
         
         .pq-blog-title {
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
         
         .pq-blog-title a {
-            font-size: 14px;
-            line-height: 1.4;
+            font-size: 12px !important;
+            line-height: 1.3 !important;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
+            font-weight: 600;
         }
         
         .pq-post-meta {
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
         
         .pq-post-meta a {
-            font-size: 11px;
+            font-size: 10px !important;
         }
         
         .pq-btn-container {
-            margin-top: 10px;
+            margin-top: 8px;
+        }
+        
+        .pq-button {
+            padding: 6px 12px !important;
+            font-size: 11px !important;
         }
         
         .pq-button .pq-button-text {
-            font-size: 12px;
+            font-size: 11px !important;
+            line-height: 1.2;
+        }
+        
+        .pq-button-block {
+            padding: 0 !important;
+        }
+        
+        .pq-button i {
+            font-size: 12px !important;
         }
         
     }
