@@ -1,2 +1,37 @@
+# robots.txt for decomagna.com
+# Updated for optimal SEO
+
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /admin/
+Disallow: /admin-prev/
+Disallow: /dashboard/
+Disallow: /auth/
+Disallow: /*.json$
+Disallow: /*?*sort=
+Disallow: /*?*filter=
+Disallow: /search-product?*
+
+# Allow important pages
+Allow: /sitemap.xml
+Allow: /sitemap.html
+Allow: /robots.txt
+
+# Crawl-delay (optional, adjust if needed)
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://decomagna.com/sitemap.xml
+
+# Specific bot rules
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Googlebot-Image
+Allow: /uploads/
+Allow: /favicon/
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1

@@ -12,17 +12,26 @@
       <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon/favicon-16x16.png') }}">
       <link rel="shortcut icon" href="{{ asset('uploads/logo/favicon.png') }}">
       <link rel="manifest" href="{{ asset('favicon/site.webmanifest') }}">
-      <meta name="theme-color" content="#ffffff">
+      <meta name="theme-color" content="#1c186c">
+      <meta name="msapplication-TileColor" content="#1c186c">
 
-      <!-- Preconnect for Performance (Optional but Recommended) -->
-      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <!-- DNS Prefetch & Preconnect for Performance -->
+      <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+      <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+      <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+      <link rel="dns-prefetch" href="https://www.google-analytics.com">
+      <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-      <!-- Preload Critical CSS (If Any) -->
-      <link rel="preload" href="{{ asset('html/css/bootstrap.min.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-      <noscript><link rel="stylesheet" href="{{ asset('html/css/bootstrap.min.css') }}"></noscript>
+      <!-- Preload Critical Resources -->
+      <link rel="preload" href="{{ asset('html/css/bootstrap.min.css') }}" as="style">
+      <link rel="preload" href="{{ asset('html/css/style.css') }}" as="style">
+      <link rel="preload" href="{{ asset('uploads/logo/logo-clean.png') }}" as="image">
 
-      <!-- Core Stylesheets -->
+      <!-- Core Stylesheets - Loaded with proper attributes -->
+      <link rel="stylesheet" href="{{ asset('html/css/bootstrap.min.css') }}" media="print" onload="this.media='all'">
+      <noscript><link rel="stylesheet" href="{{ asset('html/css/bootstrap.min.css') }}"></noscript>
+      
       <link rel="stylesheet" href="{{ asset('html/css/simplebar.min.css') }}">
       <link rel="stylesheet" href="{{ asset('html/rev/css/rs6.css') }}">
       <link rel="stylesheet" href="{{ asset('html/rev/fonts/font-awesome/css/font-awesome.css') }}">
@@ -36,7 +45,6 @@
       <link rel="stylesheet" href="{{ asset('html/css/ionicons.min.css') }}">
       <link rel="stylesheet" href="{{ asset('html/fonts/themify-icons/themify-icons.css') }}">
       <link rel="stylesheet" href="{{ asset('html/fonts/flaticon/flaticon.css') }}">
-      <link rel="canonical" href="https://decomagna.com">
 
       <!-- Plugins -->
       <link rel="stylesheet" href="{{ asset('html/css/magnific-popup.min.css') }}">
@@ -45,42 +53,73 @@
       <link rel="stylesheet" href="{{ asset('html/css/style.css') }}">
       <link rel="stylesheet" href="{{ asset('html/css/responsive.css') }}">
 
-      {{-- SEO SKELETON STRUCTURE --}}
-      <title>Quick-Step Kenya - Laminate - Engineered wood - Vinyl flooring</title>
-      <meta name="robots" content="index,follow">
-      <meta name="googlebot" content="index,follow">
-      <!-- Google Specific -->
-      <meta name="subject" content="Quick-Step Kenya - Laminate - Engineered wood - Vinyl flooring">
-      <meta name="description" content="Discover our stories and blog-posts. Up to date advice on flooring colors, trends and more on our blog section. Get inspired by Quick-Step® flooring designers.">
-      <meta name="rating" content="General">
-      <meta name="google-site-verification" value="" content="verification_token">
-      <meta name="referrer" content="no-referrer">
-      {{-- OG --}}
-      <meta property="og:url" content="{{url('/')}}">
-      <meta property="og:type" content="website">
-      <meta property="og:title" content="Quick-Step Kenya - Laminate - Engineered wood - Vinyl flooring">
-      <meta property="og:image" content="{{url('/')}}/uploads/slider/download-slider-8.webp">
-      <meta property="og:description" content="Discover our stories and blog-posts. Up to date advice on flooring colors, trends and more on our blog section. Get inspired by Quick-Step® flooring designers.">
-      <meta property="og:site_name" content="DecoMagna">
-      <meta property="og:locale" content="en_US">
-      {{-- Twitter --}}
-      <meta name="twitter:card" content="summary">
-      <meta name="twitter:site" content="@Decomagna_Kenya">
-      <meta name="twitter:url" content="{{url('/')}}">
-      <meta name="twitter:title"
-         content="Quick-Step Kenya - Laminate - Engineered wood - Vinyl flooring">
-      <meta name="twitter:description"
-         content="Discover our stories and blog-posts. Up to date advice on flooring colors, trends and more on our blog section. Get inspired by Quick-Step® flooring designers.">
-      <meta name="twitter:image" content="{{url('/')}}/uploads/slider/download-slider-8.webp">
+      {{-- Enhanced SEO Meta Tags --}}
+      @php
+          $currentUrl = url()->current();
+          $siteName = 'Quick-Step Flooring Kenya - Decomagna Limited';
+          $defaultTitle = 'Quick-Step Kenya - Premium Laminate, Engineered Wood & Vinyl Flooring | Made in Belgium';
+          $defaultDescription = 'Official distributors of Quick-Step® flooring in Kenya. Premium laminate floors, engineered wood & vinyl flooring made in Belgium. Professional installation services across Kenya.';
+          $defaultImage = url('/') . '/uploads/slider/download-slider-8.webp';
+          $siteUrl = url('/');
+      @endphp
 
+      <title>{{ isset($pageTitle) ? $pageTitle . ' | ' . $siteName : $defaultTitle }}</title>
+      
+      <!-- Primary Meta Tags -->
+      <meta name="title" content="{{ isset($pageTitle) ? $pageTitle . ' | ' . $siteName : $defaultTitle }}">
+      <meta name="description" content="{{ isset($pageDescription) ? $pageDescription : $defaultDescription }}">
+      <meta name="keywords" content="Quick-Step flooring Kenya, laminate flooring, engineered wood flooring, vinyl flooring, flooring installation Kenya, Belgian flooring, premium flooring, Quick-Step distributor Kenya">
+      <meta name="author" content="Decomagna Limited">
+      <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+      <meta name="googlebot" content="index, follow">
+      <meta name="bingbot" content="index, follow">
+      <meta name="language" content="English">
+      <meta name="revisit-after" content="7 days">
+      <meta name="rating" content="General">
+      <meta name="geo.region" content="KE">
+      <meta name="geo.placename" content="Nairobi">
+      <meta name="geo.position" content="-1.2921;36.8219">
+      <meta name="ICBM" content="-1.2921, 36.8219">
+      <link rel="canonical" href="{{ $currentUrl }}">
+
+      <!-- Open Graph / Facebook -->
+      <meta property="og:type" content="website">
+      <meta property="og:url" content="{{ $currentUrl }}">
+      <meta property="og:title" content="{{ isset($pageTitle) ? $pageTitle . ' | ' . $siteName : $defaultTitle }}">
+      <meta property="og:description" content="{{ isset($pageDescription) ? $pageDescription : $defaultDescription }}">
+      <meta property="og:image" content="{{ isset($pageImage) ? $pageImage : $defaultImage }}">
+      <meta property="og:image:width" content="1200">
+      <meta property="og:image:height" content="630">
+      <meta property="og:image:alt" content="{{ isset($pageTitle) ? $pageTitle : 'Quick-Step Flooring Kenya' }}">
+      <meta property="og:site_name" content="Decomagna Limited">
+      <meta property="og:locale" content="en_US">
+      <meta property="og:locale:alternate" content="en_KE">
+
+      <!-- Twitter -->
+      <meta name="twitter:card" content="summary_large_image">
+      <meta name="twitter:url" content="{{ $currentUrl }}">
+      <meta name="twitter:title" content="{{ isset($pageTitle) ? $pageTitle . ' | ' . $siteName : $defaultTitle }}">
+      <meta name="twitter:description" content="{{ isset($pageDescription) ? $pageDescription : $defaultDescription }}">
+      <meta name="twitter:image" content="{{ isset($pageImage) ? $pageImage : $defaultImage }}">
+      <meta name="twitter:image:alt" content="{{ isset($pageTitle) ? $pageTitle : 'Quick-Step Flooring Kenya' }}">
+      <meta name="twitter:site" content="@Decomagna_Kenya">
+      <meta name="twitter:creator" content="@Decomagna_Kenya">
+
+      <!-- Additional SEO -->
       <meta name="google-site-verification" content="aPfWre_bGZ9l-YSyG_gYlHfEe3SHX5h3JVjqnNyD6-8" />
+      <meta name="format-detection" content="telephone=yes">
+      <meta name="mobile-web-app-capable" content="yes">
+      <meta name="apple-mobile-web-app-capable" content="yes">
+      <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+      <meta name="apple-mobile-web-app-title" content="Quick-Step Kenya">
       {{-- SEO --}}
-       <!--Start of Tawk.to Script-->
-    <script type="text/javascript">
+       <!--Start of Tawk.to Script - Deferred for Performance-->
+    <script type="text/javascript" defer>
         var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
         (function(){
         var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
         s1.async=true;
+        s1.defer=true;
         s1.src='https://embed.tawk.to/66224fea1ec1082f04e49347/1hrr0gc9c';
         s1.charset='UTF-8';
         s1.setAttribute('crossorigin','*');
@@ -89,16 +128,17 @@
         </script>
     <!--End of Tawk.to Script-->
 
-    <!-- Google tag (gtag.js) -->
+    <!-- Google tag (gtag.js) - Optimized Loading -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-EFZD63N5XN"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
-      gtag('config', 'G-EFZD63N5XN');
+      gtag('config', 'G-EFZD63N5XN', {
+        'send_page_view': true,
+        'anonymize_ip': true
+      });
     </script>
-
 
    <!-- Google tag (gtag.js) -->
    @include('front.google-tags')
@@ -168,6 +208,12 @@
             padding: 3px 15px 3px 15px !important;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             margin-top: 0 !important;
+        }
+        
+        @media (max-width: 767px) {
+            .pq-top-header {
+                padding: 2px 12px 2px 12px !important;
+            }
         }
         
         #pq-header {
@@ -407,17 +453,17 @@
         @media (max-width: 767px) {
             /* Mobile Logo Improvements - Make it Stand Out */
             .navbar-brand {
-                padding: 8px 12px !important;
+                padding: 6px 10px !important;
                 margin-right: auto !important;
                 margin-left: 0 !important;
                 background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 1) 100%) !important;
                 box-shadow: 0 4px 20px rgba(28, 24, 108, 0.2), 0 0 0 2px rgba(28, 24, 108, 0.15) !important;
-                border-radius: 10px !important;
+                border-radius: 8px !important;
                 flex: 0 0 auto;
             }
             
             .navbar-brand img.logo {
-                max-height: 50px !important;
+                max-height: 40px !important;
                 width: auto !important;
                 filter: drop-shadow(0 3px 10px rgba(28, 24, 108, 0.25)) !important;
             }
@@ -430,8 +476,8 @@
             /* Mobile Burger Menu Improvements */
             .navbar-toggler {
                 border: 2px solid #1c186c !important;
-                padding: 10px 14px !important;
-                border-radius: 8px !important;
+                padding: 8px 12px !important;
+                border-radius: 6px !important;
                 background: #fff !important;
                 box-shadow: 0 2px 8px rgba(28, 24, 108, 0.15) !important;
                 transition: all 0.3s ease !important;
@@ -458,7 +504,7 @@
             
             .navbar-toggler i {
                 color: #1c186c !important;
-                font-size: 22px !important;
+                font-size: 20px !important;
                 transition: all 0.3s ease !important;
                 display: block;
             }
@@ -471,18 +517,19 @@
             
             /* Mobile Navigation Container */
             .navbar {
-                padding: 10px 15px !important;
+                padding: 8px 12px !important;
                 align-items: center;
                 display: flex;
                 flex-wrap: wrap;
+                min-height: auto;
             }
             
             .pq-bottom-header {
-                padding: 10px 0 !important;
+                padding: 6px 0 !important;
             }
             
             .pq-header-social {
-                margin-top: 8px;
+                margin-top: 6px;
             }
             
             .pq-header-social ul {
@@ -491,9 +538,9 @@
             
             /* Mobile Menu Dropdown */
             .navbar-collapse {
-                margin-top: 15px;
+                margin-top: 12px;
                 border-top: 1px solid #e9ecef;
-                padding-top: 15px;
+                padding-top: 12px;
             }
             
             #pq-main-menu {
@@ -501,9 +548,9 @@
             }
             
             #pq-main-menu .menu-item a {
-                padding: 12px 20px !important;
+                padding: 10px 18px !important;
                 border-radius: 6px !important;
-                margin-bottom: 4px;
+                margin-bottom: 3px;
             }
             
             #pq-main-menu .menu-item a.active {
@@ -518,19 +565,27 @@
         
         @media (max-width: 576px) {
             .navbar-brand {
-                padding: 6px 10px !important;
+                padding: 5px 8px !important;
             }
             
             .navbar-brand img.logo {
-                max-height: 45px !important;
+                max-height: 35px !important;
             }
             
             .navbar-toggler {
-                padding: 8px 12px !important;
+                padding: 6px 10px !important;
             }
             
             .navbar-toggler i {
-                font-size: 20px !important;
+                font-size: 18px !important;
+            }
+            
+            .pq-bottom-header {
+                padding: 5px 0 !important;
+            }
+            
+            .navbar {
+                padding: 6px 10px !important;
             }
         }
         
@@ -571,7 +626,12 @@
       <!-- Loading -->
       <div id="pq-loading" style="display: none">
          <div id="pq-loading-center" class="pq-loading-center">
-            <img src="{{asset('uploads/logo/logo-clean.png')}}" alt="Loading">
+            <img src="{{asset('uploads/logo/logo-clean.png')}}" 
+                 alt="Loading" 
+                 loading="eager"
+                 width="120"
+                 height="120"
+                 fetchpriority="high">
             <div>
                 {{-- <img src="{{asset('uploads/logo/logo-clean.png')}}" alt="Loading"> --}}
                 <center>
@@ -645,7 +705,11 @@
                               <a class="navbar-brand" href="{{url('/')}}">
                               <img class="img-fluid logo"
                                  src="{{url('/')}}/uploads/logo/logo-clean.png"
-                                 alt="Decomagna Logo">
+                                 alt="Decomagna Logo - Quick-Step Flooring Kenya"
+                                 width="200"
+                                 height="60"
+                                 loading="eager"
+                                 fetchpriority="high">
                               </a>
                               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                  <div id="pq-menu-contain" class="pq-menu-contain">
@@ -689,11 +753,11 @@
          </a>
       </div>
       <!-- Back To Top -->
-<!-- Core Libraries -->
+<!-- Core Libraries - Optimized Loading -->
       <script src="{{ asset('html/js/jquery.min.js') }}" defer></script>
       <script src="{{ asset('html/js/bootstrap.min.js') }}" defer></script>
 
-      <!-- Plugins -->
+      <!-- Plugins - Deferred for Performance -->
       <script src="{{ asset('html/js/owl.carousel.min.js') }}" defer></script>
       <script src="{{ asset('html/js/isotope.pkgd.min.js') }}" defer></script>
       <script src="{{ asset('html/js/jquery.countTo.min.js') }}" defer></script>
@@ -701,14 +765,31 @@
       <script src="{{ asset('html/js/jquery.magnific-popup.min.js') }}" defer></script>
       <script src="{{ asset('html/js/simplebar.min.js') }}" defer></script>
 
-      <!-- Revolution Slider -->
+      <!-- Revolution Slider - Deferred -->
       <script src="{{ asset('html/rev/js/rbtools.min.js') }}" defer></script>
       <script src="{{ asset('html/rev/js/rs6.min.js') }}" defer></script>
       <script src="{{ asset('html/js/rev-custom.js') }}" defer></script>
 
-      <!-- Custom Scripts -->
+      <!-- Custom Scripts - Deferred -->
       <script src="{{ asset('html/js/load-more.js') }}" defer></script>
       <script src="{{ asset('html/js/custom.js') }}" defer></script>
+
+      <!-- Performance Optimization Script -->
+      <script>
+         // Load non-critical CSS asynchronously
+         if ('loading' in HTMLImageElement.prototype) {
+            // Native lazy loading supported
+            document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+               img.src = img.dataset.src || img.src;
+            });
+         } else {
+            // Fallback for browsers without native lazy loading
+            const script = document.createElement('script');
+            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js';
+            script.async = true;
+            document.body.appendChild(script);
+         }
+      </script>
 
 
       @include('front.schema')
@@ -717,7 +798,11 @@
         target="_blank"
         title="Chat with us on WhatsApp">
         <img src="https://img.icons8.com/color/48/000000/whatsapp--v1.png"
-                alt="WhatsApp Chat" />
+             alt="Chat with us on WhatsApp"
+             width="48"
+             height="48"
+             loading="lazy"
+             decoding="async">
         </a>
 
       {{--  --}}

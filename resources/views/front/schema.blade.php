@@ -1,28 +1,131 @@
 <script type='application/ld+json'>
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://www.decomagna.com/#organization",
+      "name": "Quick-Step Flooring Kenya - Decomagna Limited",
+      "alternateName": "Decomagna Limited",
+      "url": "https://www.decomagna.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{{url('/')}}/uploads/logo/logo-clean.png",
+        "width": 300,
+        "height": 100
+      },
+      "image": "{{url('/')}}/uploads/logo/logo-clean.png",
+      "description": "Official distributors of Quick-Step® flooring in Kenya. Premium laminate floors, engineered wood & vinyl flooring made in Belgium. Professional flooring installation services across Kenya.",
+      "priceRange": "$$",
+      "telephone": "+254796110511",
+      "email": "info@decomagna.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Tumbili rd. Karen Hardy near the Giraffe Centre off Tumbili rd Navy Blue gate written quick-step",
+        "addressLocality": "Nairobi",
+        "addressRegion": "Nairobi County",
+        "postalCode": "00100",
+        "addressCountry": "KE"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -1.2921,
+        "longitude": 36.8219
+      },
+      "openingHoursSpecification": [
         {
-          "@context": "http://www.schema.org",
-          "@type": "ProfessionalService",
-          "name": "Quick-Step flooring Kenya - Decomagna ltd",
-          "url": "https://www.decomagna.com/",
-          "logo": "{{url('/')}}/uploads/logo/logo-clean.png",
-          "sameAs": [
-            "https://www.facebook.com/decomagnaDev/",
-            "https://www.instagram.com/decomagna_kenya/",
-            "https://www.instagram.com/decomagna_kenya/",
-            "https://www.youtube.com/@DecomagnaltdKenya"
-          ],
-          "priceRange": "$$$$",
-          "image": "{{url('/')}}/uploads/logo/logo-clean.png",
-          "description": "Are you looking to replace or upgrade your car music system?We have what you need. From car stereo, mid range speakers, tweeters, sub woofers, amplifiers and other car accessories",
-          "address": {
-             "@type": "PostalAddress",
-             "streetAddress": " Tumbili rd. Karen Hardy near the Giraffe Centre off Tumbili rd Navy Blue gate written quick-step , Nairobi, Kenya",
-             "addressLocality": "Nairobi",
-             "addressRegion": "Kenya",
-             "postalCode": "00100",
-             "addressCountry": "Kenya"
-          },
-           "openingHours": "Mo 01:00-01:00 Tu 01:00-01:00 We 01:00-01:00 Th 01:00-01:00 Fr 01:00-01:00 Sa 01:00-01:00 Su 01:00-01:00",
-           "telephone": "+254 79 611 0511"
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "08:30",
+          "closes": "17:00"
         }
-    </script>
+      ],
+      "sameAs": [
+        "https://www.facebook.com/decomagnaDev/",
+        "https://www.instagram.com/decomagna_kenya/",
+        "https://twitter.com/decomagna_kenya",
+        "https://www.youtube.com/@DecomagnaltdKenya"
+      ],
+      "areaServed": {
+        "@type": "Country",
+        "name": "Kenya"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Quick-Step Flooring Products",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "Laminate Flooring"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "Engineered Wood Flooring"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "Vinyl Flooring"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.decomagna.com/#website",
+      "url": "https://www.decomagna.com/",
+      "name": "Quick-Step Flooring Kenya",
+      "description": "Official Quick-Step Flooring Distributor in Kenya",
+      "publisher": {
+        "@id": "https://www.decomagna.com/#organization"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://www.decomagna.com/search-product?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://www.decomagna.com/#webpage",
+      "url": "https://www.decomagna.com/",
+      "name": "Quick-Step Kenya - Premium Laminate, Engineered Wood & Vinyl Flooring",
+      "isPartOf": {
+        "@id": "https://www.decomagna.com/#website"
+      },
+      "about": {
+        "@id": "https://www.decomagna.com/#organization"
+      },
+      "description": "Official distributors of Quick-Step® flooring in Kenya. Premium laminate floors, engineered wood & vinyl flooring made in Belgium.",
+      "breadcrumb": {
+        "@id": "https://www.decomagna.com/#breadcrumb"
+      },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.decomagna.com/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.decomagna.com/"
+        }
+      ]
+    }
+  ]
+}
+</script>

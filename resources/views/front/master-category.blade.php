@@ -369,19 +369,23 @@
         }
         
         @media (max-width: 767px) {
+            .pq-top-header {
+                padding: 2px 12px 2px 12px !important;
+            }
+            
             /* Mobile Logo Improvements - Make it Stand Out */
             .navbar-brand {
-                padding: 8px 12px !important;
+                padding: 6px 10px !important;
                 margin-right: auto !important;
                 margin-left: 0 !important;
                 background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 1) 100%) !important;
                 box-shadow: 0 4px 20px rgba(28, 24, 108, 0.2), 0 0 0 2px rgba(28, 24, 108, 0.15) !important;
-                border-radius: 10px !important;
+                border-radius: 8px !important;
                 flex: 0 0 auto;
             }
             
             .navbar-brand img.logo {
-                max-height: 50px !important;
+                max-height: 40px !important;
                 width: auto !important;
                 filter: drop-shadow(0 3px 10px rgba(28, 24, 108, 0.25)) !important;
             }
@@ -394,8 +398,8 @@
             /* Mobile Burger Menu Improvements */
             .navbar-toggler {
                 border: 2px solid #1c186c !important;
-                padding: 10px 14px !important;
-                border-radius: 8px !important;
+                padding: 8px 12px !important;
+                border-radius: 6px !important;
                 background: #fff !important;
                 box-shadow: 0 2px 8px rgba(28, 24, 108, 0.15) !important;
                 transition: all 0.3s ease !important;
@@ -422,7 +426,7 @@
             
             .navbar-toggler i {
                 color: #1c186c !important;
-                font-size: 22px !important;
+                font-size: 20px !important;
                 transition: all 0.3s ease !important;
                 display: block;
             }
@@ -435,18 +439,19 @@
             
             /* Mobile Navigation Container */
             .navbar {
-                padding: 10px 15px !important;
+                padding: 8px 12px !important;
                 align-items: center;
                 display: flex;
                 flex-wrap: wrap;
+                min-height: auto;
             }
             
             .pq-bottom-header {
-                padding: 10px 0 !important;
+                padding: 6px 0 !important;
             }
             
             .pq-header-social {
-                margin-top: 8px;
+                margin-top: 6px;
             }
             
             .pq-header-social ul {
@@ -455,9 +460,9 @@
             
             /* Mobile Menu Dropdown */
             .navbar-collapse {
-                margin-top: 15px;
+                margin-top: 12px;
                 border-top: 1px solid #e9ecef;
-                padding-top: 15px;
+                padding-top: 12px;
             }
             
             #pq-main-menu {
@@ -465,9 +470,9 @@
             }
             
             #pq-main-menu .menu-item a {
-                padding: 12px 20px !important;
+                padding: 10px 18px !important;
                 border-radius: 6px !important;
-                margin-bottom: 4px;
+                margin-bottom: 3px;
             }
             
             #pq-main-menu .menu-item a.active {
@@ -481,20 +486,32 @@
         }
         
         @media (max-width: 576px) {
+            .pq-top-header {
+                padding: 2px 10px 2px 10px !important;
+            }
+            
             .navbar-brand {
-                padding: 6px 10px !important;
+                padding: 5px 8px !important;
             }
             
             .navbar-brand img.logo {
-                max-height: 45px !important;
+                max-height: 35px !important;
             }
             
             .navbar-toggler {
-                padding: 8px 12px !important;
+                padding: 6px 10px !important;
             }
             
             .navbar-toggler i {
-                font-size: 20px !important;
+                font-size: 18px !important;
+            }
+            
+            .pq-bottom-header {
+                padding: 5px 0 !important;
+            }
+            
+            .navbar {
+                padding: 6px 10px !important;
             }
         }
         

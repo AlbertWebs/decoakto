@@ -223,7 +223,14 @@
              <div class="pq-service-box pq-style-3 text-center">
                 <div class="pq-service-media">
                    <div class="pq-service-img">
-                      <img class="ser-img img-fluid w-100" decoding="async" src="{{url('/')}}/uploads/categories/{{$cat->image}}" alt="{{$cat->title}}">
+                      <img class="ser-img img-fluid w-100" 
+                           src="{{url('/')}}/uploads/categories/{{$cat->image}}" 
+                           alt="{{$cat->title}}"
+                           loading="lazy"
+                           decoding="async"
+                           width="400"
+                           height="400"
+                           fetchpriority="low">
                    </div>
                 </div>
                 @if($cat->has_products == 1)
@@ -256,12 +263,22 @@
     <section class="about-us pq-bg-img-1 py-xl-0 pb-10">
         <div class="container">
             <div class="floating-image floating-image-right floating-image-5 d-none d-md-block">
-                <img src="{{url('/')}}/uploads/sections/Laminate.png" alt="{{$sectionhome->name}}">
+                <img src="{{url('/')}}/uploads/sections/Laminate.png" 
+                     alt="{{$sectionhome->name}}"
+                     loading="lazy"
+                     decoding="async"
+                     width="600"
+                     height="600">
             </div>
         <div class="row align-items-center">
             <div class="col-xl-6 wow animated fadeInLeft">
                 <div class="pq-about-us-img">
-                    <img src="{{url('/')}}/uploads/sections/{{$sectionhome->image}}" alt="{{$sectionhome->name}}">
+                    <img src="{{url('/')}}/uploads/sections/{{$sectionhome->image}}" 
+                         alt="{{$sectionhome->name}}"
+                         loading="lazy"
+                         decoding="async"
+                         width="800"
+                         height="600">
                 </div>
             </div>
             <div class="col-xl-6 mt-4 mt-xl-0 ps-xl-5 wow animated fadeInRight">
