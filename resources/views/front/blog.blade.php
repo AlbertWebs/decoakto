@@ -30,25 +30,29 @@
         
         .pq-post-media.blog-img {
             margin-bottom: 12px;
-            width: 100%;
+            width: 100% !important;
+            height: 0 !important;
             overflow: hidden;
             border-radius: 8px 8px 0 0;
             position: relative;
-            padding-top: 75%; /* 4:3 aspect ratio */
+            padding-top: 100% !important; /* 1:1 square aspect ratio */
+            aspect-ratio: 1 / 1 !important; /* Modern CSS for square */
             background: #f5f5f5;
             flex-shrink: 0;
         }
         
         .pq-post-media.blog-img img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            object-position: center !important;
             border-radius: 8px 8px 0 0;
             display: block;
+            max-width: 100% !important;
+            max-height: none !important;
         }
         
         .pq-blog-contain {
@@ -129,6 +133,19 @@
     .pq-post-media.blog-img img {
         max-width: 100%;
         display: block;
+    }
+    
+    /* Force square on mobile - override any other styles */
+    @media (max-width: 576px) {
+        .pq-post-media.blog-img::before {
+            content: '';
+            display: block;
+            padding-top: 100%;
+        }
+        
+        .pq-post-media.blog-img {
+            height: auto !important;
+        }
     }
     
     /* Desktop image styling */
