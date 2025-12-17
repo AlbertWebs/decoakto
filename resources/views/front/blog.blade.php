@@ -3,6 +3,151 @@
 
 @section('content')
 
+<style>
+    /* Mobile optimization for blog grid */
+    @media (max-width: 576px) {
+        .pq-blog .row {
+            margin-left: -8px;
+            margin-right: -8px;
+        }
+        
+        .pq-blog .col-6 {
+            padding-left: 8px;
+            padding-right: 8px;
+            margin-bottom: 16px;
+        }
+        
+        .pq-blog-post {
+            margin-bottom: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .pq-post-media.blog-img {
+            margin-bottom: 12px;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 8px 8px 0 0;
+            position: relative;
+            padding-top: 75%; /* 4:3 aspect ratio */
+            background: #f5f5f5;
+            flex-shrink: 0;
+        }
+        
+        .pq-post-media.blog-img img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 8px 8px 0 0;
+            display: block;
+        }
+        
+        .pq-blog-contain {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 0 12px 12px 12px;
+        }
+        
+        .pq-blog-title {
+            margin-bottom: 10px;
+        }
+        
+        .pq-blog-title a {
+            font-size: 14px;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .pq-post-meta {
+            margin-bottom: 8px;
+        }
+        
+        .pq-post-meta a {
+            font-size: 11px;
+        }
+        
+        .pq-btn-container {
+            margin-top: 10px;
+        }
+        
+        .pq-button .pq-button-text {
+            font-size: 12px;
+        }
+        
+    }
+    
+    @media (min-width: 577px) and (max-width: 767.98px) {
+        .pq-blog .col-md-6 {
+            margin-bottom: 24px;
+        }
+        
+        .pq-post-media.blog-img {
+            padding-top: 75%; /* 4:3 aspect ratio */
+            overflow: hidden;
+            border-radius: 8px;
+        }
+        
+        .pq-post-media.blog-img img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+    
+    /* Ensure blog post container maintains structure */
+    .pq-blog-post {
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+    
+    .pq-post-media.blog-img {
+        position: relative;
+        overflow: hidden;
+        flex-shrink: 0;
+    }
+    
+    /* Fix for all screen sizes */
+    .pq-post-media.blog-img img {
+        max-width: 100%;
+        display: block;
+    }
+    
+    /* Desktop image styling */
+    @media (min-width: 992px) {
+        .pq-post-media.blog-img {
+            padding-top: 0;
+            height: auto;
+        }
+        
+        .pq-post-media.blog-img img {
+            position: static;
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            max-height: 250px;
+        }
+    }
+</style>
+
 
  <!-- Breadcrumb -->
  <div class="pq-breadcrumb">
@@ -36,7 +181,7 @@
                 <div class="pq-blog pq-blog-col-3">
                     <div class="row">
                         @foreach ($Blog as $blog)
-                            <div class="col-lg-4">
+                            <div class="col-6 col-md-6 col-lg-4">
                                 <div class="pq-blog-post">
                                     <div class="pq-post-media blog-img">
                                         <img decoding="async" src="{{url('/')}}/uploads/blogs/{{$blog->image_one}}" alt="blog-image">
