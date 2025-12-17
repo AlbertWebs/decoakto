@@ -78,10 +78,24 @@
         
         .pq-post-meta {
             margin-bottom: 6px;
+            padding: 0 !important;
+        }
+        
+        .pq-post-meta ul {
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        
+        .pq-post-meta li {
+            margin: 0 !important;
+            padding: 0 !important;
+            list-style: none;
         }
         
         .pq-post-meta a {
             font-size: 10px !important;
+            padding: 0 !important;
+            margin: 0 !important;
         }
         
         .pq-btn-container {
