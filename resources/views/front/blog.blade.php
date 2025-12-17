@@ -77,25 +77,37 @@
         }
         
         .pq-post-meta {
-            margin-bottom: 6px;
+            margin-top: 0 !important;
+            margin-bottom: 6px !important;
             padding: 0 !important;
+            padding-top: 0 !important;
         }
         
         .pq-post-meta ul {
             margin: 0 !important;
+            margin-top: 0 !important;
             padding: 0 !important;
+            padding-top: 0 !important;
         }
         
         .pq-post-meta li {
             margin: 0 !important;
+            margin-top: 0 !important;
             padding: 0 !important;
+            padding-top: 0 !important;
             list-style: none;
         }
         
         .pq-post-meta a {
             font-size: 10px !important;
             padding: 0 !important;
+            padding-top: 0 !important;
             margin: 0 !important;
+            margin-top: 0 !important;
+        }
+        
+        .pq-blog-contain {
+            padding-top: 8px !important;
         }
         
         .pq-btn-container {
