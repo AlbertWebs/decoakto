@@ -66,14 +66,91 @@
 
     <style>
     /* Responsive typography and spacing for mobile/tablet */
-    @media (max-width: 576px){
+   .pq-service-img{
+        aspect-ratio: 1 / 1;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+   }
+
+   .pq-service-img .ser-img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+   }
+
+   .pq-grid{
+        display: flex;
+        flex-wrap: wrap;
+        margin: -12px;
+   }
+
+   .pq-grid .pq-grid-item{
+        flex: 0 0 33.333%;
+        max-width: 33.333%;
+        padding: 12px;
+        box-sizing: border-box;
+        display: flex;
+   }
+
+   .pq-grid .pq-portfoliobox-3{
+        width: 100%;
+        height: 100%;
+   }
+
+   .pq-grid .pq-portfolio-img{
+        aspect-ratio: 1 / 1;
+        width: 100%;
+        overflow: hidden;
+        border-radius: 10px;
+   }
+
+   .pq-grid .pq-portfolio-img img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+   }
+
+   .pq-image-box-img{
+        aspect-ratio: 1 / 1;
+        width: 100%;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+   }
+
+   .pq-image-box-img .pellete-img,
+   .pq-image-box-img img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+   }
+
+   @media (max-width: 576px){
         .headline-intro{ font-size: 22px; line-height: 30px; }
         .pq-section-title .pq-section-main-title{ font-size: 22px; line-height: 30px; }
         .pq-section-main-titles{ font-size: 20px !important; line-height: 28px !important; }
         .pq-section-sub-title{ font-size: 12px; letter-spacing: .02em; }
         .pq-section-description, .pq-section-title p, .pq-blog-contain p{ font-size: 14px; line-height: 22px; }
         .pq-button .pq-button-text{ font-size: 14px; }
-        .pq-service-title a{ font-size: 16px; }
+        .pq-service-title a{ font-size: 15px; line-height: 20px; }
+        .pq-service-title .category-title{ line-height: 1.3; display: inline-block; margin-bottom: 0; }
+        .pq-grid{ margin: -6px; }
+        .pq-grid .pq-grid-item{
+            flex: 0 0 50%;
+            max-width: 50%;
+            padding: 6px;
+        }
+        .pq-grid-item .pq-portfolio-content{ text-align: center; display: flex; flex-direction: column; align-items: center; }
+        .pq-grid-item .pq-portfolio-content span a{ font-size: 12px; line-height: 1.2; display: inline-block; margin-bottom: 2px; }
+        .pq-grid-item .pq-portfolio-content h5{ margin-top: 2px; margin-bottom: 0; }
+        .pq-grid-item .pq-portfolio-content h5 a{ font-size: 15px; line-height: 1.25; display: inline-block; text-align: center; }
+        .pq-image-box-img{ aspect-ratio: 1 / 1; }
+        .pq-image-box-img img{ object-fit: cover; }
         .pq-portfolio-content span a{ font-size: 12px; }
         .pq-portfolio-content h5 a{ font-size: 16px; }
         .pq-blog-title a{ font-size: 16px; }
@@ -82,6 +159,7 @@
         .pq-my-30{ margin-top: 15px !important; margin-bottom: 15px !important; }
         /* Revolution slider title */
         .rs-title-font{ font-size: 22px !important; line-height: 30px !important; padding: 6px !important; border-width: 3px !important; }
+        .pq-popup-video-block.pq-popup-style-2{ display: none !important; }
     }
 
     @media (min-width: 577px) and (max-width: 991.98px){
@@ -141,7 +219,7 @@
           {{--  --}}
           <?php $Categories = DB::table("categories")->get(); ?>
           @foreach ($Categories as $cat)
-          <div class="col-lg-4 col-md-6 wow animated fadeInUp" style="margin-bottom:20px;">
+          <div class="col-lg-4 col-md-6 col-sm-6 col-6 wow animated fadeInUp" style="margin-bottom:20px;">
              <div class="pq-service-box pq-style-3 text-center">
                 <div class="pq-service-media">
                    <div class="pq-service-img">
@@ -253,16 +331,16 @@
                     $Portfolio = DB::table('portfolios')->where('home','1')->where('big','0')->limit('6')->get();
                     ?>
                     @foreach ($Portfolio as $Portfolio)
-                    <div class="pq-grid-item pq-filter-items pq-col-6 59">
+                    <div class="pq-grid-item pq-filter-items pq-col-6 col-6 col-md-4">
                         <div class="pq-portfoliobox-3">
                             <div class="pq-portfolio-img">
                                 <a href="{{url('/')}}/portfolio/{{$Portfolio->slung}}">
                                     <img class="img-fluid" style="border-radius:10px" decoding="async" src="{{url('/')}}/uploads/portfolios/{{$Portfolio->image_one}}" alt="{{$Portfolio->name}}">
                                 </a>
                             </div>
-                            <div class="pq-portfolio-info">
-                                <div class="pq-portfolio-content">
-                                    <span><a href="{{url('/')}}/portfolio/{{$Portfolio->slung}}">Laminate</a></span>
+                            <div class="pq-portfolio-infos">
+                                <div class="pq-portfolio-content text-center">
+                                   
                                     <h5><a href="{{url('/')}}/portfolio/{{$Portfolio->slung}}">{{$Portfolio->name}}</a></h5>
                                 </div>
                             </div>
@@ -354,11 +432,53 @@
 
 <!-- Award -->
 <style>
-.partner-logo{ height: 120px; width: auto; object-fit: contain; }
+.partner-grid{
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
+    align-items: stretch;
+}
+.partner-carousel-slide{
+    padding: 8px 0;
+}
+.partner-grid-item{
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.partner-grid-item .pq-awardbox-1{
+    text-align: center;
+}
+.partner-logo{
+    height: 120px;
+    width: auto;
+    object-fit: contain;
+}
+@media (max-width: 991.98px){
+    .partner-grid{
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+    }
+    .partner-grid-item:nth-child(n+7){
+        display: none;
+    }
+    .partner-logo{
+        height: 100px;
+    }
+}
 @media (max-width: 576px){
-    .partner-logo{ height: 80px; }
-    .award .pq-award-title{ display:none !important; }
-    .award .owl-dots{ display:none !important; }
+    .partner-grid-item{
+        padding: 16px 12px;
+    }
+    .partner-logo{
+        height: 80px;
+    }
+    .award .pq-award-title{
+        display:none !important;
+    }
 }
 </style>
  <section class="award pq-bg-img-1">
@@ -385,20 +505,24 @@
                 <div class="divider pq-right-border pq-45"></div>
             </div>
             <div class="col-lg-12 wow animated fadeInLeft">
-                <div class="pq-awardbox-1-slider pq-awardbox-1">
-                    <div class="owl-carousel owl-loaded owl-drag" data-dots="true" data-nav="false" data-desk_num="4" data-lap_num="3" data-tab_num="2" data-mob_num="3" data-mob_sm="3" data-autoplay="true" data-loop="true" data-margin="30">
-                        <?php $Partners = DB::table("partners")->get(); ?>
-                        @foreach ($Partners as $partners)
-                        <div class="item" style="background-color:#ffffff">
-                            <div class="pq-awardbox-1 ">
-                                <a>
-                                    <img class="img-fluid partner-logo d-block mx-auto" decoding="async" src="{{url('/')}}/uploads/partners/{{$partners->image}}" alt="{{$partners->name}}">
-                                    <span class="pq-award-title">{{$partners->name}}</span>
-                                </a>
+                <?php $Partners = DB::table("partners")->get(); ?>
+                <div class="pq-awardbox-1-slider partner-carousel owl-carousel owl-loaded owl-drag" data-dots="true" data-nav="false" data-desk_num="1" data-lap_num="1" data-tab_num="1" data-mob_num="1" data-mob_sm="1" data-autoplay="true" data-loop="true" data-margin="0">
+                    @foreach ($Partners->chunk(8) as $partnerChunk)
+                    <div class="partner-carousel-slide">
+                        <div class="partner-grid">
+                            @foreach ($partnerChunk as $partners)
+                            <div class="partner-grid-item">
+                                <div class="pq-awardbox-1">
+                                    <a>
+                                        <img class="img-fluid partner-logo d-block mx-auto" decoding="async" src="{{url('/')}}/uploads/partners/{{$partners->image}}" alt="{{$partners->name}}">
+                                        <span class="pq-award-title">{{$partners->name}}</span>
+                                    </a>
+                                </div>
                             </div>
+                            @endforeach
                         </div>
-                        @endforeach
                     </div>
+                    @endforeach
                 </div>
             </div>
         </div>
